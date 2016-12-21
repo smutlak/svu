@@ -11,10 +11,10 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Iterator;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,6 +31,7 @@ public class mainBean implements Serializable {
     private String newPassword;
     private String confirmNewPassword;
     private String role;
+    private String fullUserName;
 
     @EJB
     private com.svu.nems.sessionBeans.UsersFacade usersFacade;
@@ -82,19 +83,20 @@ public class mainBean implements Serializable {
     }
 
     public String loginProject() {
-        Users user= usersFacade.login(uname, password);
-        
+        Users user = usersFacade.login(uname, password);
+
         //boolean result = true;//UserDAO.login(uname, password);
         if (user != null) {
+            fullUserName = user.getFName() + ' ' + user.getMName() + ' ' + user.getLName();
             Collection<UserRoles> userRoles = user.getUserRolesCollection();
-            
-            if(userRoles.isEmpty()){
+
+            if (userRoles.isEmpty()) {
                 FacesContext.getCurrentInstance().addMessage(
-                    null,
-                    new FacesMessage(FacesMessage.SEVERITY_WARN,
-                            "Invalid Role!",
-                            "Contact administrator."));
-            return "index";
+                        null,
+                        new FacesMessage(FacesMessage.SEVERITY_WARN,
+                                "Invalid Role!",
+                                "Contact administrator."));
+                return "index";
             }
             UserRoles userRole = userRoles.iterator().next();
             role = userRole.getRoleId().getRoleName();
@@ -115,5 +117,23 @@ public class mainBean implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getFullUserName() {
+        return fullUserName;
+    }
+
+    public void setFullUserName(String fullUserName) {
+        this.fullUserName = fullUserName;
+    }
+
+    public String getFooterLoggedInUserInfo() {
+        return this.fullUserName + " (" + this.uname + ") AS " + this.role;
+    }
+
+    public String logout() {
+        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+                .getExternalContext().getSession(false);
+        return "/index.xhtml?faces-redirect=true";
     }
 }
