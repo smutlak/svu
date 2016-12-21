@@ -22,6 +22,33 @@ public class mainBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private String uname;
     private String password;
+    private boolean changePsw; 
+    private String newPassword;
+    private String confirmNewPassword;
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getConfirmNewPassword() {
+        return confirmNewPassword;
+    }
+
+    public void setConfirmNewPassword(String confirmNewPassword) {
+        this.confirmNewPassword = confirmNewPassword;
+    }
+
+    public boolean isChangePsw() {
+        return changePsw;
+    }
+
+    public void setChangePsw(boolean changePsw) {
+        this.changePsw = changePsw;
+    }
 
     /**
      * Creates a new instance of mainBean

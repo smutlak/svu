@@ -7,8 +7,10 @@
     <h:head>
         <title>National Education Management System (NEMS) Login</title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="login.css"/>
+        <h:outputScript library="js" name="login.js"/>
     </h:head>
-    <h:body>
+    <h:body onload="changePassword(false)">
         <h:form id="loginForm">
 
 
@@ -19,23 +21,40 @@
                 </h:panelGrid>
                 <h:graphicImage library="images" alt="National Education Management System" width="500"   name="arabicNems.png"></h:graphicImage>
                 <h:graphicImage library="images" alt="National Education Management System" width="500"  name="englishNEMS.png"></h:graphicImage>
-                
+
             </h:panelGrid>
             <p:spacer></p:spacer>
-           <!-- <h:panelGroup layout="block" style=" background: red; width: 100%; text-align: center;">-->
-           <p:panel header="Login" style="width: 430px;  margin: 0 auto;">
-                <h:panelGrid style="margin: 0 auto;" width="400" id="loginPanel" columns="3">
-                        <h:outputText value="Username" />
-                        <p:inputText id="username" value="#{mainBean.uname}" ></p:inputText>
-                        <p:message for="username" ></p:message>
-                        <h:outputText value="Password" />
-                        <p:password id="password" value="#{mainBean.password}" feedback="false"></p:password>
-                        <p:message for="password"></p:message>
-                        <p:spacer></p:spacer>
-                        <p:spacer></p:spacer>
-                        <p:commandButton action="#{mainBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
-                    </h:panelGrid>
-               </p:panel>
+            <!-- <h:panelGroup layout="block" style=" background: red; width: 100%; text-align: center;">-->
+            <p:panel header="Login" style="width: 430px;  margin: 0 auto;">
+                <h:panelGrid style="margin: 0 auto;" width="400" id="loginPanel" columns="3"
+                             rowClasses="row1,row2,row3,row4,row5"
+                             columnClasses="col1,col2,col3">
+                    <h:outputText value="#{bundle.UserName}" />
+                    <p:inputText id="username" value="#{mainBean.uname}" ></p:inputText>
+                    <p:message for="username" ></p:message>
+
+                    <h:outputText value="#{bundle.Password}" />
+                    <p:password id="password" value="#{mainBean.password}" feedback="false"></p:password>
+                    <p:message for="password"></p:message>
+
+                    <p:selectBooleanCheckbox value="#{mainBean.changePsw}" 
+                                             onchange="changePassword(this.checked)" />
+                    <h:outputText value="#{bundle.ChangePassword}" />
+                    <p:spacer></p:spacer>
+
+                    <h:outputText   value="#{bundle.NewPassword}" />
+                    <p:password widgetVar="newPassword" id="newPassword" value="#{mainBean.newPassword}" feedback="false"></p:password>
+                    <p:message for="newPassword"></p:message>
+
+                    <h:outputText value="#{bundle.ConfirmNewPassword}" />
+                    <p:password id="confirmNewPassword" value="#{mainBean.confirmNewPassword}" feedback="false"></p:password>
+                    <p:message for="confirmNewPassword"></p:message>
+
+                    <p:spacer></p:spacer>
+                    <p:spacer></p:spacer>
+                    <p:commandButton action="#{mainBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+                </h:panelGrid>
+            </p:panel>
         </h:form>
     </h:body>
 </html>
