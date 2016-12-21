@@ -58,9 +58,9 @@ public class Users implements Serializable {
     private String userName;
     @Basic(optional = false)
     @NotNull
-    @Lob
-    @Column(name = "encryptedPaw")
-    private byte[] encryptedPaw;
+    @Size(min = 1, max = 256)
+    @Column(name = "encryptedPsw")
+    private String encryptedPsw;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
@@ -138,10 +138,10 @@ public class Users implements Serializable {
         this.id = id;
     }
 
-    public Users(Integer id, String userName, byte[] encryptedPaw, String fName, String mName, String lName, String email, String mobilePhone, boolean forcePswChange, boolean active) {
+    public Users(Integer id, String userName, String encryptedPsw, String fName, String mName, String lName, String email, String mobilePhone, boolean forcePswChange, boolean active) {
         this.id = id;
         this.userName = userName;
-        this.encryptedPaw = encryptedPaw;
+        this.encryptedPsw = encryptedPsw;
         this.fName = fName;
         this.mName = mName;
         this.lName = lName;
@@ -167,12 +167,12 @@ public class Users implements Serializable {
         this.userName = userName;
     }
 
-    public byte[] getEncryptedPaw() {
-        return encryptedPaw;
+    public String getEncryptedPsw() {
+        return encryptedPsw;
     }
 
-    public void setEncryptedPaw(byte[] encryptedPaw) {
-        this.encryptedPaw = encryptedPaw;
+    public void setEncryptedPsw(String encryptedPsw) {
+        this.encryptedPsw = encryptedPsw;
     }
 
     public String getFName() {

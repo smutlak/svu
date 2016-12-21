@@ -9,6 +9,7 @@ import com.svu.nems.entities.Users;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +29,26 @@ public class UsersFacade extends AbstractFacade<Users> {
     public UsersFacade() {
         super(Users.class);
     }
-    
+
+    public Users login(String userName, String psw) {
+        /*javax.persistence.criteria.CriteriaQuery q = getEntityManager().getCriteriaBuilder().createQuery(Users.class);
+        Root<Users> c = q.from(Users.class);
+        q.select(c);
+        ParameterExpression<String> u = cb.parameter(String.class);
+        ParameterExpression<String> p = cb.parameter(String.class);
+        q.where(
+                cb.gt(c.get("userName"), p),
+                cb.lt(c.get("encryptedPaw"), u)
+        );
+        q.getSelection();*/
+        try {
+            TypedQuery<Users> q = em.createQuery("SELECT u FROM Users u WHERE u.userName = :userName and u.encryptedPsw = :encryptedPsw", Users.class);
+            q.setParameter("userName", userName);
+            q.setParameter("encryptedPsw", psw);
+            return q.getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            return null;
+        }
+    }
+
 }

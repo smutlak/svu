@@ -5,9 +5,13 @@
  */
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.UserRoles;
+import com.svu.nems.entities.Users;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Collection;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -22,9 +26,12 @@ public class mainBean implements Serializable {
     private static final long serialVersionUID = 1L;
     private String uname;
     private String password;
-    private boolean changePsw; 
+    private boolean changePsw;
     private String newPassword;
     private String confirmNewPassword;
+
+    @EJB
+    private com.svu.nems.sessionBeans.UsersFacade usersFacade;
 
     public String getNewPassword() {
         return newPassword;
@@ -56,7 +63,7 @@ public class mainBean implements Serializable {
     public mainBean() {
     }
 
-     public String getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -73,15 +80,18 @@ public class mainBean implements Serializable {
     }
 
     public String loginProject() {
-        boolean result = true;//UserDAO.login(uname, password);
-        if (result) {
+        Users user= usersFacade.login(uname, password);
+        
+        //boolean result = true;//UserDAO.login(uname, password);
+        if (user != null) {
+            Collection<UserRoles> userRoles = user.getUserRolesCollection();
             return "home";
         } else {
             FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                    "Invalid Login!",
-                    "Please Try Again!"));
+                            "Invalid Login!",
+                            "Please Try Again!"));
             return "index";
         }
     }
