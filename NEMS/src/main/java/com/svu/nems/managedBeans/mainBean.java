@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,6 +30,7 @@ public class mainBean implements Serializable {
     private boolean changePsw;
     private String newPassword;
     private String confirmNewPassword;
+    private String role;
 
     @EJB
     private com.svu.nems.sessionBeans.UsersFacade usersFacade;
@@ -85,6 +87,17 @@ public class mainBean implements Serializable {
         //boolean result = true;//UserDAO.login(uname, password);
         if (user != null) {
             Collection<UserRoles> userRoles = user.getUserRolesCollection();
+            
+            if(userRoles.isEmpty()){
+                FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_WARN,
+                            "Invalid Role!",
+                            "Contact administrator."));
+            return "index";
+            }
+            UserRoles userRole = userRoles.iterator().next();
+            role = userRole.getRoleId().getRoleName();
             return "home";
         } else {
             FacesContext.getCurrentInstance().addMessage(
@@ -94,5 +107,13 @@ public class mainBean implements Serializable {
                             "Please Try Again!"));
             return "index";
         }
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
