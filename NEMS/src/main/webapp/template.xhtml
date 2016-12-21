@@ -8,6 +8,7 @@
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputStylesheet library="css" name="template.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
 
@@ -16,7 +17,14 @@
         <p:growl id="growl" life="3000" />
 
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
+            <p:layoutUnit position="north" >
+                <h:panelGrid bgcolor="red" width="100%" columns="5" columnClasses="headerCol1,headerCol2,headerCol3,headerCol4,headerCol5" >
+                    <h:graphicImage width="100" value="resources/images/svu.png"></h:graphicImage>
+                    <h:outputLabel value="NEMS"></h:outputLabel>
+                    <h:outputLabel value="NEMS"></h:outputLabel>
+                    <h:outputLabel value="NEMS"></h:outputLabel>
+                    <h:outputLabel value="NEMS"></h:outputLabel>
+                </h:panelGrid>
                 <h:form id="menuForm">
                     <p:menubar>
                         <p:menuitem value="#{bundle.Home}" outcome="/index" icon="ui-icon-home"/>
