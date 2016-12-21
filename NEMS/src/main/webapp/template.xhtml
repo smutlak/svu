@@ -65,7 +65,8 @@
                     <h:panelGrid columns="5">
                         <h:outputLabel value="#{mainBean.footerLoggedInUserInfo}"></h:outputLabel>
                         <p:commandLink id="nonAjax" action="#{mainBean.logout}" ajax="false">
-                            <h:outputText value="Logout" />
+                            <p:spacer></p:spacer>
+                            <h:outputText style=" color: blue;" value="[Logout]" />
                         </p:commandLink>
                     </h:panelGrid>
                 </h:form>
