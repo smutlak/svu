@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SchoolClassViewDlg" widgetVar="SchoolClassViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSchoolClassTitle}">
+            <h:form id="SchoolClassViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{schoolClassController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_id}"/>
+                        <h:outputText value="#{schoolClassController.selected.id}" title="#{bundle.ViewSchoolClassTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_name}"/>
+                        <h:outputText value="#{schoolClassController.selected.name}" title="#{bundle.ViewSchoolClassTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_order}"/>
+                        <h:outputText value="#{schoolClassController.selected.order}" title="#{bundle.ViewSchoolClassTitle_order}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_acaemicYear}"/>
+                        <h:outputText value="#{schoolClassController.selected.acaemicYear}" title="#{bundle.ViewSchoolClassTitle_acaemicYear}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_semester}"/>
+                        <h:outputText value="#{schoolClassController.selected.semester}" title="#{bundle.ViewSchoolClassTitle_semester}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{schoolClassController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_gradeId}"/>
+                        <h:outputText value="#{schoolClassController.selected.gradeId}" title="#{bundle.ViewSchoolClassTitle_gradeId}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_schoolId}"/>
+                        <h:outputText value="#{schoolClassController.selected.schoolId}" title="#{bundle.ViewSchoolClassTitle_schoolId}"/>
+                        <h:outputText value="#{bundle.ViewSchoolClassLabel_teacherId}"/>
+                        <h:outputText value="#{schoolClassController.selected.teacherId}" title="#{bundle.ViewSchoolClassTitle_teacherId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SchoolClassViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

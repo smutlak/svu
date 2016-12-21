@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionsViewDlg" widgetVar="SessionsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSessionsTitle}">
+            <h:form id="SessionsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSessionsLabel_id}"/>
+                        <h:outputText value="#{sessionsController.selected.id}" title="#{bundle.ViewSessionsTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_description}"/>
+                        <h:outputText value="#{sessionsController.selected.description}" title="#{bundle.ViewSessionsTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_note}"/>
+                        <h:outputText value="#{sessionsController.selected.note}" title="#{bundle.ViewSessionsTitle_note}"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{sessionsController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_plannedSessionId}"/>
+                        <h:outputText value="#{sessionsController.selected.plannedSessionId}" title="#{bundle.ViewSessionsTitle_plannedSessionId}"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_classId}"/>
+                        <h:outputText value="#{sessionsController.selected.classId}" title="#{bundle.ViewSessionsTitle_classId}"/>
+                        <h:outputText value="#{bundle.ViewSessionsLabel_subjectId}"/>
+                        <h:outputText value="#{sessionsController.selected.subjectId}" title="#{bundle.ViewSessionsTitle_subjectId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SessionsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

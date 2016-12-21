@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AssignmentCreateDlg" widgetVar="AssignmentCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAssignmentTitle}">
+            <h:form id="AssignmentCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{assignmentController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{assignmentController.selected.id}" title="#{bundle.CreateAssignmentTitle_id}" required="true" requiredMessage="#{bundle.CreateAssignmentRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_order}" for="order" />
+                        <p:inputText id="order" value="#{assignmentController.selected.order}" title="#{bundle.CreateAssignmentTitle_order}" required="true" requiredMessage="#{bundle.CreateAssignmentRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_content}" for="content" />
+                        <p:inputTextarea rows="4" cols="30" id="content" value="#{assignmentController.selected.content}" title="#{bundle.CreateAssignmentTitle_content}" />
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_contentType}" for="contentType" />
+                        <p:inputText id="contentType" value="#{assignmentController.selected.contentType}" title="#{bundle.CreateAssignmentTitle_contentType}" required="true" requiredMessage="#{bundle.CreateAssignmentRequiredMessage_contentType}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_contentMetaData}" for="contentMetaData" />
+                        <p:inputText id="contentMetaData" value="#{assignmentController.selected.contentMetaData}" title="#{bundle.CreateAssignmentTitle_contentMetaData}" required="true" requiredMessage="#{bundle.CreateAssignmentRequiredMessage_contentMetaData}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{assignmentController.selected.path}" title="#{bundle.CreateAssignmentTitle_path}" required="true" requiredMessage="#{bundle.CreateAssignmentRequiredMessage_path}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{assignmentController.selected.active}" required="true" requiredMessage="#{bundle.EditAssignmentRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.CreateAssignmentLabel_sessionId}" for="sessionId" />
+                        <p:selectOneMenu id="sessionId" value="#{assignmentController.selected.sessionId}" required="true" requiredMessage="#{bundle.EditAssignmentRequiredMessage_sessionId}">
+                            <f:selectItems value="#{sessionsController.itemsAvailableSelectOne}"
+                                           var="sessionIdItem"
+                                           itemValue="#{sessionIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{assignmentController.create}" value="#{bundle.Save}" update="display,:AssignmentListForm:datalist,:growl" oncomplete="handleSubmit(args,'AssignmentCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AssignmentCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

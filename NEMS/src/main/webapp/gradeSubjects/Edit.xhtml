@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GradeSubjectsEditDlg" widgetVar="GradeSubjectsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditGradeSubjectsTitle}">
+            <h:form id="GradeSubjectsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gradeSubjectsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditGradeSubjectsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{gradeSubjectsController.selected.id}" title="#{bundle.EditGradeSubjectsTitle_id}" required="true" requiredMessage="#{bundle.EditGradeSubjectsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditGradeSubjectsLabel_gradeId}" for="gradeId" />
+                        <p:selectOneMenu id="gradeId" value="#{gradeSubjectsController.selected.gradeId}" required="true" requiredMessage="#{bundle.EditGradeSubjectsRequiredMessage_gradeId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
+                                           var="gradeIdItem"
+                                           itemValue="#{gradeIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditGradeSubjectsLabel_subjectId}" for="subjectId" />
+                        <p:selectOneMenu id="subjectId" value="#{gradeSubjectsController.selected.subjectId}" required="true" requiredMessage="#{bundle.EditGradeSubjectsRequiredMessage_subjectId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{subjectController.itemsAvailableSelectOne}"
+                                           var="subjectIdItem"
+                                           itemValue="#{subjectIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{gradeSubjectsController.update}" value="#{bundle.Save}" update="display,:GradeSubjectsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GradeSubjectsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GradeSubjectsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

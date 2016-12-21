@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CommentViewDlg" widgetVar="CommentViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCommentTitle}">
+            <h:form id="CommentViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{commentController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCommentLabel_id}"/>
+                        <h:outputText value="#{commentController.selected.id}" title="#{bundle.ViewCommentTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_type}"/>
+                        <h:outputText value="#{commentController.selected.type}" title="#{bundle.ViewCommentTitle_type}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_text}"/>
+                        <h:outputText value="#{commentController.selected.text}" title="#{bundle.ViewCommentTitle_text}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{commentController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_parentCommentId}"/>
+                        <h:outputText value="#{commentController.selected.parentCommentId}" title="#{bundle.ViewCommentTitle_parentCommentId}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_sessionMediaId}"/>
+                        <h:outputText value="#{commentController.selected.sessionMediaId}" title="#{bundle.ViewCommentTitle_sessionMediaId}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_sessionId}"/>
+                        <h:outputText value="#{commentController.selected.sessionId}" title="#{bundle.ViewCommentTitle_sessionId}"/>
+                        <h:outputText value="#{bundle.ViewCommentLabel_userId}"/>
+                        <h:outputText value="#{commentController.selected.userId}" title="#{bundle.ViewCommentTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="CommentViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

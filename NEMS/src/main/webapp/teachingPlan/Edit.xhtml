@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TeachingPlanEditDlg" widgetVar="TeachingPlanEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTeachingPlanTitle}">
+            <h:form id="TeachingPlanEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{teachingPlanController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{teachingPlanController.selected.id}" title="#{bundle.EditTeachingPlanTitle_id}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{teachingPlanController.selected.name}" title="#{bundle.EditTeachingPlanTitle_name}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_academicYear}" for="academicYear" />
+                        <p:inputText id="academicYear" value="#{teachingPlanController.selected.academicYear}" title="#{bundle.EditTeachingPlanTitle_academicYear}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_academicYear}"/>
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_semester}" for="semester" />
+                        <p:inputText id="semester" value="#{teachingPlanController.selected.semester}" title="#{bundle.EditTeachingPlanTitle_semester}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_semester}"/>
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{teachingPlanController.selected.active}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.EditTeachingPlanLabel_subjectId}" for="subjectId" />
+                        <p:selectOneMenu id="subjectId" value="#{teachingPlanController.selected.subjectId}" required="true" requiredMessage="#{bundle.EditTeachingPlanRequiredMessage_subjectId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{subjectController.itemsAvailableSelectOne}"
+                                           var="subjectIdItem"
+                                           itemValue="#{subjectIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{teachingPlanController.update}" value="#{bundle.Save}" update="display,:TeachingPlanListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TeachingPlanEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TeachingPlanEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

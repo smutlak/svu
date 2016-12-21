@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsersViewDlg" widgetVar="UsersViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUsersTitle}">
+            <h:form id="UsersViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUsersLabel_id}"/>
+                        <h:outputText value="#{usersController.selected.id}" title="#{bundle.ViewUsersTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_userName}"/>
+                        <h:outputText value="#{usersController.selected.userName}" title="#{bundle.ViewUsersTitle_userName}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_encryptedPaw}"/>
+                        <h:outputText value="#{usersController.selected.encryptedPaw}" title="#{bundle.ViewUsersTitle_encryptedPaw}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_FName}"/>
+                        <h:outputText value="#{usersController.selected.FName}" title="#{bundle.ViewUsersTitle_FName}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_MName}"/>
+                        <h:outputText value="#{usersController.selected.MName}" title="#{bundle.ViewUsersTitle_MName}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_LName}"/>
+                        <h:outputText value="#{usersController.selected.LName}" title="#{bundle.ViewUsersTitle_LName}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_address}"/>
+                        <h:outputText value="#{usersController.selected.address}" title="#{bundle.ViewUsersTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_email}"/>
+                        <h:outputText value="#{usersController.selected.email}" title="#{bundle.ViewUsersTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_job}"/>
+                        <h:outputText value="#{usersController.selected.job}" title="#{bundle.ViewUsersTitle_job}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_phone}"/>
+                        <h:outputText value="#{usersController.selected.phone}" title="#{bundle.ViewUsersTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_mobilePhone}"/>
+                        <h:outputText value="#{usersController.selected.mobilePhone}" title="#{bundle.ViewUsersTitle_mobilePhone}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_photo}"/>
+                        <h:outputText value="#{usersController.selected.photo}" title="#{bundle.ViewUsersTitle_photo}"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_forcePswChange}"/>
+                        <p:selectBooleanCheckbox value="#{usersController.selected.forcePswChange}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewUsersLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{usersController.selected.active}" disabled="true"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UsersViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

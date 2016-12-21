@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AssignmentViewDlg" widgetVar="AssignmentViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewAssignmentTitle}">
+            <h:form id="AssignmentViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{assignmentController.selected != null}">
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_id}"/>
+                        <h:outputText value="#{assignmentController.selected.id}" title="#{bundle.ViewAssignmentTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_order}"/>
+                        <h:outputText value="#{assignmentController.selected.order}" title="#{bundle.ViewAssignmentTitle_order}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_content}"/>
+                        <h:outputText value="#{assignmentController.selected.content}" title="#{bundle.ViewAssignmentTitle_content}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_contentType}"/>
+                        <h:outputText value="#{assignmentController.selected.contentType}" title="#{bundle.ViewAssignmentTitle_contentType}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_contentMetaData}"/>
+                        <h:outputText value="#{assignmentController.selected.contentMetaData}" title="#{bundle.ViewAssignmentTitle_contentMetaData}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_path}"/>
+                        <h:outputText value="#{assignmentController.selected.path}" title="#{bundle.ViewAssignmentTitle_path}"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{assignmentController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewAssignmentLabel_sessionId}"/>
+                        <h:outputText value="#{assignmentController.selected.sessionId}" title="#{bundle.ViewAssignmentTitle_sessionId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="AssignmentViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

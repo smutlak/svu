@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParentInfoEditDlg" widgetVar="ParentInfoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditParentInfoTitle}">
+            <h:form id="ParentInfoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{parentInfoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{parentInfoController.selected.id}" title="#{bundle.EditParentInfoTitle_id}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_FName}" for="FName" />
+                        <p:inputText id="FName" value="#{parentInfoController.selected.FName}" title="#{bundle.EditParentInfoTitle_FName}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_FName}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_MName}" for="MName" />
+                        <p:inputText id="MName" value="#{parentInfoController.selected.MName}" title="#{bundle.EditParentInfoTitle_MName}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_MName}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_LName}" for="LName" />
+                        <p:inputText id="LName" value="#{parentInfoController.selected.LName}" title="#{bundle.EditParentInfoTitle_LName}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_LName}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_address}" for="address" />
+                        <p:inputText id="address" value="#{parentInfoController.selected.address}" title="#{bundle.EditParentInfoTitle_address}" />
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{parentInfoController.selected.email}" title="#{bundle.EditParentInfoTitle_email}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_job}" for="job" />
+                        <p:inputText id="job" value="#{parentInfoController.selected.job}" title="#{bundle.EditParentInfoTitle_job}" />
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{parentInfoController.selected.phone}" title="#{bundle.EditParentInfoTitle_phone}" />
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_mobilePhone}" for="mobilePhone" />
+                        <p:inputText id="mobilePhone" value="#{parentInfoController.selected.mobilePhone}" title="#{bundle.EditParentInfoTitle_mobilePhone}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_mobilePhone}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{parentInfoController.selected.active}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.EditParentInfoLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{parentInfoController.selected.userId}" required="true" requiredMessage="#{bundle.EditParentInfoRequiredMessage_userId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{parentInfoController.update}" value="#{bundle.Save}" update="display,:ParentInfoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ParentInfoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ParentInfoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

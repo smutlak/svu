@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionMediaCreateDlg" widgetVar="SessionMediaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSessionMediaTitle}">
+            <h:form id="SessionMediaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionMediaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sessionMediaController.selected.id}" title="#{bundle.CreateSessionMediaTitle_id}" required="true" requiredMessage="#{bundle.CreateSessionMediaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_order}" for="order" />
+                        <p:inputText id="order" value="#{sessionMediaController.selected.order}" title="#{bundle.CreateSessionMediaTitle_order}" required="true" requiredMessage="#{bundle.CreateSessionMediaRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_content}" for="content" />
+                        <p:inputTextarea rows="4" cols="30" id="content" value="#{sessionMediaController.selected.content}" title="#{bundle.CreateSessionMediaTitle_content}" />
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_contentType}" for="contentType" />
+                        <p:inputText id="contentType" value="#{sessionMediaController.selected.contentType}" title="#{bundle.CreateSessionMediaTitle_contentType}" />
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_contentMetaData}" for="contentMetaData" />
+                        <p:inputText id="contentMetaData" value="#{sessionMediaController.selected.contentMetaData}" title="#{bundle.CreateSessionMediaTitle_contentMetaData}" />
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{sessionMediaController.selected.path}" title="#{bundle.CreateSessionMediaTitle_path}" />
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{sessionMediaController.selected.active}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionMediaLabel_sessionId}" for="sessionId" />
+                        <p:selectOneMenu id="sessionId" value="#{sessionMediaController.selected.sessionId}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_sessionId}">
+                            <f:selectItems value="#{sessionsController.itemsAvailableSelectOne}"
+                                           var="sessionIdItem"
+                                           itemValue="#{sessionIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sessionMediaController.create}" value="#{bundle.Save}" update="display,:SessionMediaListForm:datalist,:growl" oncomplete="handleSubmit(args,'SessionMediaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SessionMediaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

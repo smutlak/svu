@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionMediaEditDlg" widgetVar="SessionMediaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSessionMediaTitle}">
+            <h:form id="SessionMediaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionMediaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sessionMediaController.selected.id}" title="#{bundle.EditSessionMediaTitle_id}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_order}" for="order" />
+                        <p:inputText id="order" value="#{sessionMediaController.selected.order}" title="#{bundle.EditSessionMediaTitle_order}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_content}" for="content" />
+                        <p:inputTextarea rows="4" cols="30" id="content" value="#{sessionMediaController.selected.content}" title="#{bundle.EditSessionMediaTitle_content}" />
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_contentType}" for="contentType" />
+                        <p:inputText id="contentType" value="#{sessionMediaController.selected.contentType}" title="#{bundle.EditSessionMediaTitle_contentType}" />
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_contentMetaData}" for="contentMetaData" />
+                        <p:inputText id="contentMetaData" value="#{sessionMediaController.selected.contentMetaData}" title="#{bundle.EditSessionMediaTitle_contentMetaData}" />
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_path}" for="path" />
+                        <p:inputText id="path" value="#{sessionMediaController.selected.path}" title="#{bundle.EditSessionMediaTitle_path}" />
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{sessionMediaController.selected.active}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_sessionId}" for="sessionId" />
+                        <p:selectOneMenu id="sessionId" value="#{sessionMediaController.selected.sessionId}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_sessionId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sessionsController.itemsAvailableSelectOne}"
+                                           var="sessionIdItem"
+                                           itemValue="#{sessionIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sessionMediaController.update}" value="#{bundle.Save}" update="display,:SessionMediaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SessionMediaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SessionMediaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

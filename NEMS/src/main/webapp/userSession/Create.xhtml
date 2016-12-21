@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserSessionCreateDlg" widgetVar="UserSessionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUserSessionTitle}">
+            <h:form id="UserSessionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userSessionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUserSessionLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{userSessionController.selected.id}" title="#{bundle.CreateUserSessionTitle_id}" required="true" requiredMessage="#{bundle.CreateUserSessionRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateUserSessionLabel_startDateTime}" for="startDateTime" />
+                        <p:calendar id="startDateTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{userSessionController.selected.startDateTime}" title="#{bundle.EditUserSessionTitle_startDateTime}" required="true" requiredMessage="#{bundle.EditUserSessionRequiredMessage_startDateTime}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUserSessionLabel_endDateTime}" for="endDateTime" />
+                        <p:calendar id="endDateTime" pattern="MM/dd/yyyy HH:mm:ss" value="#{userSessionController.selected.endDateTime}" title="#{bundle.EditUserSessionTitle_endDateTime}" required="true" requiredMessage="#{bundle.EditUserSessionRequiredMessage_endDateTime}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUserSessionLabel_loggedInFrom}" for="loggedInFrom" />
+                        <p:inputText id="loggedInFrom" value="#{userSessionController.selected.loggedInFrom}" title="#{bundle.CreateUserSessionTitle_loggedInFrom}" required="true" requiredMessage="#{bundle.CreateUserSessionRequiredMessage_loggedInFrom}"/>
+                        <p:outputLabel value="#{bundle.CreateUserSessionLabel_userId}" for="userId" />
+                        <p:selectOneMenu id="userId" value="#{userSessionController.selected.userId}" required="true" requiredMessage="#{bundle.EditUserSessionRequiredMessage_userId}">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="userIdItem"
+                                           itemValue="#{userIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{userSessionController.create}" value="#{bundle.Save}" update="display,:UserSessionListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserSessionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserSessionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

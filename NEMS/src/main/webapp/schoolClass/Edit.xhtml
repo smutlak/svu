@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SchoolClassEditDlg" widgetVar="SchoolClassEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSchoolClassTitle}">
+            <h:form id="SchoolClassEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{schoolClassController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{schoolClassController.selected.id}" title="#{bundle.EditSchoolClassTitle_id}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{schoolClassController.selected.name}" title="#{bundle.EditSchoolClassTitle_name}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_order}" for="order" />
+                        <p:inputText id="order" value="#{schoolClassController.selected.order}" title="#{bundle.EditSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_acaemicYear}" for="acaemicYear" />
+                        <p:inputText id="acaemicYear" value="#{schoolClassController.selected.acaemicYear}" title="#{bundle.EditSchoolClassTitle_acaemicYear}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_acaemicYear}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_semester}" for="semester" />
+                        <p:inputText id="semester" value="#{schoolClassController.selected.semester}" title="#{bundle.EditSchoolClassTitle_semester}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_semester}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{schoolClassController.selected.active}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_gradeId}" for="gradeId" />
+                        <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
+                                           var="gradeIdItem"
+                                           itemValue="#{gradeIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_schoolId}" for="schoolId" />
+                        <p:selectOneMenu id="schoolId" value="#{schoolClassController.selected.schoolId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_schoolId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{schoolController.itemsAvailableSelectOne}"
+                                           var="schoolIdItem"
+                                           itemValue="#{schoolIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_teacherId}" for="teacherId" />
+                        <p:selectOneMenu id="teacherId" value="#{schoolClassController.selected.teacherId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_teacherId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="teacherIdItem"
+                                           itemValue="#{teacherIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{schoolClassController.update}" value="#{bundle.Save}" update="display,:SchoolClassListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchoolClassEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

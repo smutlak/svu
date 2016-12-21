@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SchoolEditDlg" widgetVar="SchoolEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSchoolTitle}">
+            <h:form id="SchoolEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{schoolController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{schoolController.selected.id}" title="#{bundle.EditSchoolTitle_id}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_abbreviation}" for="abbreviation" />
+                        <p:inputText id="abbreviation" value="#{schoolController.selected.abbreviation}" title="#{bundle.EditSchoolTitle_abbreviation}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_abbreviation}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{schoolController.selected.active}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_districtId}" for="districtId" />
+                        <p:selectOneMenu id="districtId" value="#{schoolController.selected.districtId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_districtId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{districtController.itemsAvailableSelectOne}"
+                                           var="districtIdItem"
+                                           itemValue="#{districtIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_typeId}" for="typeId" />
+                        <p:selectOneMenu id="typeId" value="#{schoolController.selected.typeId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_typeId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{schoolTypesController.itemsAvailableSelectOne}"
+                                           var="typeIdItem"
+                                           itemValue="#{typeIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSchoolLabel_principalId}" for="principalId" />
+                        <p:selectOneMenu id="principalId" value="#{schoolController.selected.principalId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_principalId}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="principalIdItem"
+                                           itemValue="#{principalIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{schoolController.update}" value="#{bundle.Save}" update="display,:SchoolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchoolEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

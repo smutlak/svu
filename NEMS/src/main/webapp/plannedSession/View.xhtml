@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PlannedSessionViewDlg" widgetVar="PlannedSessionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPlannedSessionTitle}">
+            <h:form id="PlannedSessionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{plannedSessionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_id}"/>
+                        <h:outputText value="#{plannedSessionController.selected.id}" title="#{bundle.ViewPlannedSessionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_name}"/>
+                        <h:outputText value="#{plannedSessionController.selected.name}" title="#{bundle.ViewPlannedSessionTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_order}"/>
+                        <h:outputText value="#{plannedSessionController.selected.order}" title="#{bundle.ViewPlannedSessionTitle_order}"/>
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_description}"/>
+                        <h:outputText value="#{plannedSessionController.selected.description}" title="#{bundle.ViewPlannedSessionTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_weekNo}"/>
+                        <h:outputText value="#{plannedSessionController.selected.weekNo}" title="#{bundle.ViewPlannedSessionTitle_weekNo}"/>
+                        <h:outputText value="#{bundle.ViewPlannedSessionLabel_teachingPlanId}"/>
+                        <h:outputText value="#{plannedSessionController.selected.teachingPlanId}" title="#{bundle.ViewPlannedSessionTitle_teachingPlanId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PlannedSessionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionsCreateDlg" widgetVar="SessionsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSessionsTitle}">
+            <h:form id="SessionsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{sessionsController.selected.id}" title="#{bundle.CreateSessionsTitle_id}" required="true" requiredMessage="#{bundle.CreateSessionsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_description}" for="description" />
+                        <p:inputText id="description" value="#{sessionsController.selected.description}" title="#{bundle.CreateSessionsTitle_description}" required="true" requiredMessage="#{bundle.CreateSessionsRequiredMessage_description}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{sessionsController.selected.note}" title="#{bundle.CreateSessionsTitle_note}" required="true" requiredMessage="#{bundle.CreateSessionsRequiredMessage_note}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{sessionsController.selected.active}" required="true" requiredMessage="#{bundle.EditSessionsRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_plannedSessionId}" for="plannedSessionId" />
+                        <p:selectOneMenu id="plannedSessionId" value="#{sessionsController.selected.plannedSessionId}" required="true" requiredMessage="#{bundle.EditSessionsRequiredMessage_plannedSessionId}">
+                            <f:selectItems value="#{plannedSessionController.itemsAvailableSelectOne}"
+                                           var="plannedSessionIdItem"
+                                           itemValue="#{plannedSessionIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_classId}" for="classId" />
+                        <p:selectOneMenu id="classId" value="#{sessionsController.selected.classId}" required="true" requiredMessage="#{bundle.EditSessionsRequiredMessage_classId}">
+                            <f:selectItems value="#{schoolClassController.itemsAvailableSelectOne}"
+                                           var="classIdItem"
+                                           itemValue="#{classIdItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSessionsLabel_subjectId}" for="subjectId" />
+                        <p:selectOneMenu id="subjectId" value="#{sessionsController.selected.subjectId}" required="true" requiredMessage="#{bundle.EditSessionsRequiredMessage_subjectId}">
+                            <f:selectItems value="#{subjectController.itemsAvailableSelectOne}"
+                                           var="subjectIdItem"
+                                           itemValue="#{subjectIdItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{sessionsController.create}" value="#{bundle.Save}" update="display,:SessionsListForm:datalist,:growl" oncomplete="handleSubmit(args,'SessionsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SessionsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

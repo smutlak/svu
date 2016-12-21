@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ParentInfoViewDlg" widgetVar="ParentInfoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewParentInfoTitle}">
+            <h:form id="ParentInfoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{parentInfoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_id}"/>
+                        <h:outputText value="#{parentInfoController.selected.id}" title="#{bundle.ViewParentInfoTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_FName}"/>
+                        <h:outputText value="#{parentInfoController.selected.FName}" title="#{bundle.ViewParentInfoTitle_FName}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_MName}"/>
+                        <h:outputText value="#{parentInfoController.selected.MName}" title="#{bundle.ViewParentInfoTitle_MName}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_LName}"/>
+                        <h:outputText value="#{parentInfoController.selected.LName}" title="#{bundle.ViewParentInfoTitle_LName}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_address}"/>
+                        <h:outputText value="#{parentInfoController.selected.address}" title="#{bundle.ViewParentInfoTitle_address}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_email}"/>
+                        <h:outputText value="#{parentInfoController.selected.email}" title="#{bundle.ViewParentInfoTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_job}"/>
+                        <h:outputText value="#{parentInfoController.selected.job}" title="#{bundle.ViewParentInfoTitle_job}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_phone}"/>
+                        <h:outputText value="#{parentInfoController.selected.phone}" title="#{bundle.ViewParentInfoTitle_phone}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_mobilePhone}"/>
+                        <h:outputText value="#{parentInfoController.selected.mobilePhone}" title="#{bundle.ViewParentInfoTitle_mobilePhone}"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{parentInfoController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewParentInfoLabel_userId}"/>
+                        <h:outputText value="#{parentInfoController.selected.userId}" title="#{bundle.ViewParentInfoTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ParentInfoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GradeSubjectsViewDlg" widgetVar="GradeSubjectsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewGradeSubjectsTitle}">
+            <h:form id="GradeSubjectsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gradeSubjectsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewGradeSubjectsLabel_id}"/>
+                        <h:outputText value="#{gradeSubjectsController.selected.id}" title="#{bundle.ViewGradeSubjectsTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewGradeSubjectsLabel_gradeId}"/>
+                        <h:outputText value="#{gradeSubjectsController.selected.gradeId}" title="#{bundle.ViewGradeSubjectsTitle_gradeId}"/>
+                        <h:outputText value="#{bundle.ViewGradeSubjectsLabel_subjectId}"/>
+                        <h:outputText value="#{gradeSubjectsController.selected.subjectId}" title="#{bundle.ViewGradeSubjectsTitle_subjectId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="GradeSubjectsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

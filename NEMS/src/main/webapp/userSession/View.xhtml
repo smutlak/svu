@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UserSessionViewDlg" widgetVar="UserSessionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewUserSessionTitle}">
+            <h:form id="UserSessionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{userSessionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewUserSessionLabel_id}"/>
+                        <h:outputText value="#{userSessionController.selected.id}" title="#{bundle.ViewUserSessionTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewUserSessionLabel_startDateTime}"/>
+                        <h:outputText value="#{userSessionController.selected.startDateTime}" title="#{bundle.ViewUserSessionTitle_startDateTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserSessionLabel_endDateTime}"/>
+                        <h:outputText value="#{userSessionController.selected.endDateTime}" title="#{bundle.ViewUserSessionTitle_endDateTime}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewUserSessionLabel_loggedInFrom}"/>
+                        <h:outputText value="#{userSessionController.selected.loggedInFrom}" title="#{bundle.ViewUserSessionTitle_loggedInFrom}"/>
+                        <h:outputText value="#{bundle.ViewUserSessionLabel_userId}"/>
+                        <h:outputText value="#{userSessionController.selected.userId}" title="#{bundle.ViewUserSessionTitle_userId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="UserSessionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

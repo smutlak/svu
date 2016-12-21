@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="GradesCreateDlg" widgetVar="GradesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateGradesTitle}">
+            <h:form id="GradesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{gradesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateGradesLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{gradesController.selected.id}" title="#{bundle.CreateGradesTitle_id}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateGradesLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{gradesController.selected.name}" title="#{bundle.CreateGradesTitle_name}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_name}"/>
+                        <p:outputLabel value="#{bundle.CreateGradesLabel_order}" for="order" />
+                        <p:inputText id="order" value="#{gradesController.selected.order}" title="#{bundle.CreateGradesTitle_order}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.CreateGradesLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{gradesController.selected.active}" required="true" requiredMessage="#{bundle.EditGradesRequiredMessage_active}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{gradesController.create}" value="#{bundle.Save}" update="display,:GradesListForm:datalist,:growl" oncomplete="handleSubmit(args,'GradesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="GradesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

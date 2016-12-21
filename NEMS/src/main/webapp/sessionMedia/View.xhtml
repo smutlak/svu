@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionMediaViewDlg" widgetVar="SessionMediaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSessionMediaTitle}">
+            <h:form id="SessionMediaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionMediaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_id}"/>
+                        <h:outputText value="#{sessionMediaController.selected.id}" title="#{bundle.ViewSessionMediaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_order}"/>
+                        <h:outputText value="#{sessionMediaController.selected.order}" title="#{bundle.ViewSessionMediaTitle_order}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_content}"/>
+                        <h:outputText value="#{sessionMediaController.selected.content}" title="#{bundle.ViewSessionMediaTitle_content}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_contentType}"/>
+                        <h:outputText value="#{sessionMediaController.selected.contentType}" title="#{bundle.ViewSessionMediaTitle_contentType}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_contentMetaData}"/>
+                        <h:outputText value="#{sessionMediaController.selected.contentMetaData}" title="#{bundle.ViewSessionMediaTitle_contentMetaData}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_path}"/>
+                        <h:outputText value="#{sessionMediaController.selected.path}" title="#{bundle.ViewSessionMediaTitle_path}"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{sessionMediaController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewSessionMediaLabel_sessionId}"/>
+                        <h:outputText value="#{sessionMediaController.selected.sessionId}" title="#{bundle.ViewSessionMediaTitle_sessionId}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SessionMediaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
