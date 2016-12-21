@@ -1,25 +1,46 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>National Education Management System (NEMS) Login</title>
+    </h:head>
+    <h:body>
+        <h:form id="loginForm">
 
-    <ui:composition template="/template.xhtml">
 
+            <p:growl id="msg" showDetail="true" life="3000" />
+            <p:panel header="Login" style="width: 360px;">
 
-        <ui:define name="title">
-            <h:outputText value="#{bundle.ListUsersTitle}"></h:outputText>
-        </ui:define>
+                <h:panelGrid id="loginPanel" columns="2">
 
-        <ui:define name="body">
-            <h:form id="mainScreen">
-                
-            </h:form>
+                    <h:outputText value="Username" />
 
-           
-        </ui:define>
-    </ui:composition>
+                    <p:inputText id="username" value="#{mainBean.uname}" ></p:inputText>
 
+                    <p:spacer></p:spacer>
+
+                    <p:message for="username" ></p:message>
+
+                    <h:outputText value="Password" />
+
+                    <p:password id="password" value="#{mainBean.password}"  feedback="false"></p:password>
+
+                    <p:spacer></p:spacer>
+
+                    <p:message for="password"></p:message>
+
+                    <p:spacer></p:spacer>
+
+                    <p:commandButton action="#{mainBean.loginProject}" value="Login" update="loginForm" ajax="true"></p:commandButton>
+
+                </h:panelGrid>
+
+            </p:panel>
+
+        </h:form>
+    </h:body>
 </html>
+
