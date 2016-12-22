@@ -7,40 +7,60 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-
-        <p:dialog id="UsersCreateDlg" widgetVar="UsersCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsersTitle}">
-            <h:form id="UsersCreateForm">
+        <style>
+            .fileupload-simple > .ui-fileupload-content {
+                display: none;
+            }
+            .fileupload-simple > .ui-fileupload-buttonbar {
+                -moz-border-radius: 4px;
+                -webkit-border-radius: 4px;
+                border-radius: 4px;
+            }
+        </style>
+        <p:dialog id="UsersCreateDlg" widgetVar="UsersCreateDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateUsersTitle}" >
+            <h:form id="UsersCreateForm" enctype="multipart/form-data">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateUsersLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.CreateUsersTitle_id}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_id}"/>
+                    <p:panelGrid columns="3" rendered="#{usersController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUsersLabel_userName}" for="userName" />
                         <p:inputText id="userName" value="#{usersController.selected.userName}" title="#{bundle.CreateUsersTitle_userName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_userName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_encryptedPsw}" for="encryptedPsw" />
-                        <p:inputTextarea rows="4" cols="30" id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.CreateUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_encryptedPsw}"/>
+                        <p:inputText id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.CreateUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_encryptedPsw}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_FName}" for="FName" />
                         <p:inputText id="FName" value="#{usersController.selected.FName}" title="#{bundle.CreateUsersTitle_FName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_FName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_MName}" for="MName" />
                         <p:inputText id="MName" value="#{usersController.selected.MName}" title="#{bundle.CreateUsersTitle_MName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_MName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_LName}" for="LName" />
                         <p:inputText id="LName" value="#{usersController.selected.LName}" title="#{bundle.CreateUsersTitle_LName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_LName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_address}" for="address" />
                         <p:inputText id="address" value="#{usersController.selected.address}" title="#{bundle.CreateUsersTitle_address}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_email}" for="email" />
                         <p:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.CreateUsersTitle_email}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_email}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_job}" for="job" />
                         <p:inputText id="job" value="#{usersController.selected.job}" title="#{bundle.CreateUsersTitle_job}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_phone}" for="phone" />
                         <p:inputText id="phone" value="#{usersController.selected.phone}" title="#{bundle.CreateUsersTitle_phone}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_mobilePhone}" for="mobilePhone" />
                         <p:inputText id="mobilePhone" value="#{usersController.selected.mobilePhone}" title="#{bundle.CreateUsersTitle_mobilePhone}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_mobilePhone}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_photo}" for="photo" />
-                        <p:inputTextarea rows="4" cols="30" id="photo" value="#{usersController.selected.photo}" title="#{bundle.CreateUsersTitle_photo}" />
-                        <p:outputLabel value="#{bundle.CreateUsersLabel_forcePswChange}" for="forcePswChange" />
-                        <p:selectBooleanCheckbox id="forcePswChange" value="#{usersController.selected.forcePswChange}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_forcePswChange}"/>
-                        <p:outputLabel value="#{bundle.CreateUsersLabel_active}" for="active" />
-                        <p:selectBooleanCheckbox id="active" value="#{usersController.selected.active}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_active}"/>
+                        <p:fileUpload style="display: block;"  id="photo"  fileUploadListener="#{usersController.handleFileUpload}" 
+                                      mode="advanced" dragDropSupport="false" auto="true" 
+                                      update="growl photoImage" sizeLimit="200000"  
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" styleClass="fileupload-simple" />
+                        <p:graphicImage id="photoImage" value="#{usersController.image}" cache="false" width="100" height="100">
+                        </p:graphicImage>
                     </p:panelGrid>
+                    <p:growl id="growl" life="3000" />
                     <p:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsersCreateDialog.hide()"/>
                 </h:panelGroup>
@@ -49,3 +69,11 @@
 
     </ui:composition>
 </html>
+
+<!-- <p:outputLabel value="#{bundle.CreateUsersLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.CreateUsersTitle_id}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_id}"/>-->
+                    <!--<p:outputLabel value="#{bundle.CreateUsersLabel_forcePswChange}" for="forcePswChange" />
+                        <p:selectBooleanCheckbox id="forcePswChange" value="#{usersController.selected.forcePswChange}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_forcePswChange}"/>-->
+                    <!--<p:outputLabel value="#{bundle.CreateUsersLabel_active}" for="active" />
+                        <p:selectBooleanCheckbox id="active" value="#{usersController.selected.active}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_active}"/>
+                    <p:inputTextarea rows="4" cols="30" id="photo" value="#{usersController.selected.photo}" title="#{bundle.CreateUsersTitle_photo}" />-->

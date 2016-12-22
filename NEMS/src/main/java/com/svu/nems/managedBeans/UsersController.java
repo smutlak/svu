@@ -4,6 +4,7 @@ import com.svu.nems.entities.Users;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.sessionBeans.UsersFacade;
+import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -14,10 +15,15 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
+import org.primefaces.model.UploadedFile;
 
 @Named("usersController")
 @SessionScoped
@@ -27,6 +33,7 @@ public class UsersController implements Serializable {
     private com.svu.nems.sessionBeans.UsersFacade ejbFacade;
     private List<Users> items = null;
     private Users selected;
+    private UploadedFile photo;
 
     public UsersController() {
     }
@@ -162,4 +169,26 @@ public class UsersController implements Serializable {
 
     }
 
+    public UploadedFile getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(UploadedFile photo) {
+        this.photo = photo;
+    }
+
+    public void handleFileUpload(FileUploadEvent event) throws IOException{
+        photo = event.getFile();
+
+        /*FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);*/
+    }
+
+    public StreamedContent getImage() throws IOException{
+        if (photo != null) {
+            return new DefaultStreamedContent(photo.getInputstream(), "image/jpg");
+        } else {
+            return null;
+        }
+    }
 }
