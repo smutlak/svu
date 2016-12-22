@@ -11,35 +11,46 @@
         <p:dialog id="UsersEditDlg" widgetVar="UsersEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsersTitle}">
             <h:form id="UsersEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditUsersLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{usersController.selected.id}" title="#{bundle.EditUsersTitle_id}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_id}"/>
+                    <p:panelGrid columns="3" rendered="#{usersController.selected != null}">
                         <p:outputLabel value="#{bundle.EditUsersLabel_userName}" for="userName" />
                         <p:inputText id="userName" value="#{usersController.selected.userName}" title="#{bundle.EditUsersTitle_userName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_userName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_encryptedPsw}" for="encryptedPsw" />
                         <p:inputTextarea rows="4" cols="30" id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.EditUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_encryptedPsw}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_FName}" for="FName" />
                         <p:inputText id="FName" value="#{usersController.selected.FName}" title="#{bundle.EditUsersTitle_FName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_FName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_MName}" for="MName" />
                         <p:inputText id="MName" value="#{usersController.selected.MName}" title="#{bundle.EditUsersTitle_MName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_MName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_LName}" for="LName" />
                         <p:inputText id="LName" value="#{usersController.selected.LName}" title="#{bundle.EditUsersTitle_LName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_LName}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_address}" for="address" />
                         <p:inputText id="address" value="#{usersController.selected.address}" title="#{bundle.EditUsersTitle_address}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_email}" for="email" />
                         <p:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.EditUsersTitle_email}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_email}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_job}" for="job" />
                         <p:inputText id="job" value="#{usersController.selected.job}" title="#{bundle.EditUsersTitle_job}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_phone}" for="phone" />
                         <p:inputText id="phone" value="#{usersController.selected.phone}" title="#{bundle.EditUsersTitle_phone}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_mobilePhone}" for="mobilePhone" />
                         <p:inputText id="mobilePhone" value="#{usersController.selected.mobilePhone}" title="#{bundle.EditUsersTitle_mobilePhone}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_mobilePhone}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_photo}" for="photo" />
                         <p:inputTextarea rows="4" cols="30" id="photo" value="#{usersController.selected.photo}" title="#{bundle.EditUsersTitle_photo}" />
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_forcePswChange}" for="forcePswChange" />
                         <p:selectBooleanCheckbox id="forcePswChange" value="#{usersController.selected.forcePswChange}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_forcePswChange}"/>
+                        <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_active}" for="active" />
                         <p:selectBooleanCheckbox id="active" value="#{usersController.selected.active}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_active}"/>
+                        <p:spacer></p:spacer>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{usersController.update}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsersEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsersEditDialog.hide()"/>
