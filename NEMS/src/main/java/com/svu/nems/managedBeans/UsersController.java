@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -22,6 +23,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -84,8 +87,7 @@ public class UsersController implements Serializable {
         selected.setUserRolesCollection(userRoles);
         selected.setForcePswChange(true);
         selected.setActive(true);
-        
-        
+
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -115,13 +117,27 @@ public class UsersController implements Serializable {
         if (selected != null) {
             setEmbeddableKeys();
             try {
-                if (persistAction != PersistAction.DELETE) {
+                if (persistAction == PersistAction.CREATE) {
+                    getFacade().create(selected);
+                } else if (persistAction != PersistAction.DELETE) {
                     getFacade().edit(selected);
                 } else {
                     getFacade().remove(selected);
                 }
                 JsfUtil.addSuccessMessage(successMessage);
             } catch (EJBException ex) {
+                {
+                    Exception cause = ex.getCausedByException();
+                    if (cause instanceof ConstraintViolationException) {
+                        @SuppressWarnings("ThrowableResultIgnored")
+                        ConstraintViolationException cve = (ConstraintViolationException) ex.getCausedByException();
+                        for (Iterator<ConstraintViolation<?>> it = cve.getConstraintViolations().iterator(); it.hasNext();) {
+                            ConstraintViolation<? extends Object> v = it.next();
+                            System.err.println(v);
+                            System.err.println("==>>" + v.getMessage());
+                        }
+                    }
+                }
                 String msg = "";
                 Throwable cause = ex.getCause();
                 if (cause != null) {
@@ -200,23 +216,23 @@ public class UsersController implements Serializable {
         this.photo = photo;
     }
 
-    public void handleFileUpload(FileUploadEvent event) throws IOException{
+    public void handleFileUpload(FileUploadEvent event) throws IOException {
         photo = event.getFile();
         //selected.setPhoto(photo.getContents());
-        
+
         /*FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);*/
     }
 
-    public StreamedContent getImage() throws IOException{
+    public StreamedContent getImage() throws IOException {
         if (photo != null) {
             return new DefaultStreamedContent(photo.getInputstream(), "image/jpg");
         } else {
             return null;
         }
     }
-    public List<Role> getRoles()
-    {
+
+    public List<Role> getRoles() {
         List<Role> roles = roleFacade.findAll();
         return roles;
     }
