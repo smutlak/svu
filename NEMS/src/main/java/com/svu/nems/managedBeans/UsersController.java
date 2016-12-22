@@ -7,8 +7,10 @@ import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.sessionBeans.UsersFacade;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.io.Serializable;
+import static java.nio.file.Files.size;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -78,7 +80,7 @@ public class UsersController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public void create() throws IOException {
         UserRoles r = new UserRoles();
         r.setRoleId(selectedRole);
         r.setUserId(selected);
@@ -87,6 +89,13 @@ public class UsersController implements Serializable {
         selected.setUserRolesCollection(userRoles);
         selected.setForcePswChange(true);
         selected.setActive(true);
+        
+        long size = photo.getSize();
+        InputStream stream = photo.getInputstream();
+        byte[] buffer = new byte[(int) size]; 
+        stream.read(buffer, 0, (int) size); 
+        stream.close();  
+        selected.setPhoto(buffer);
 
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
         if (!JsfUtil.isValidationFailed()) {
