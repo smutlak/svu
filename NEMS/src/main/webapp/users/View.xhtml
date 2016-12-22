@@ -12,12 +12,8 @@
             <h:form id="UsersViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usersController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUsersLabel_id}"/>
-                        <h:outputText value="#{usersController.selected.id}" title="#{bundle.ViewUsersTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUsersLabel_userName}"/>
                         <h:outputText value="#{usersController.selected.userName}" title="#{bundle.ViewUsersTitle_userName}"/>
-                        <h:outputText value="#{bundle.ViewUsersLabel_encryptedPsw}"/>
-                        <h:outputText value="#{usersController.selected.encryptedPsw}" title="#{bundle.ViewUsersTitle_encryptedPsw}"/>
                         <h:outputText value="#{bundle.ViewUsersLabel_FName}"/>
                         <h:outputText value="#{usersController.selected.FName}" title="#{bundle.ViewUsersTitle_FName}"/>
                         <h:outputText value="#{bundle.ViewUsersLabel_MName}"/>
@@ -35,7 +31,8 @@
                         <h:outputText value="#{bundle.ViewUsersLabel_mobilePhone}"/>
                         <h:outputText value="#{usersController.selected.mobilePhone}" title="#{bundle.ViewUsersTitle_mobilePhone}"/>
                         <h:outputText value="#{bundle.ViewUsersLabel_photo}"/>
-                        <h:outputText value="#{usersController.selected.photo}" title="#{bundle.ViewUsersTitle_photo}"/>
+                        <p:graphicImage id="photoImage" value="#{usersController.selectedImage}" cache="false" width="100" height="100">
+                        </p:graphicImage>
                         <h:outputText value="#{bundle.ViewUsersLabel_forcePswChange}"/>
                         <p:selectBooleanCheckbox value="#{usersController.selected.forcePswChange}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewUsersLabel_active}"/>

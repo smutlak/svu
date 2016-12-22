@@ -9,14 +9,23 @@
     <ui:composition>
 
         <p:dialog id="UsersEditDlg" widgetVar="UsersEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditUsersTitle}">
-            <h:form id="UsersEditForm">
+            <h:form id="UsersEditForm"  enctype="multipart/form-data">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="3" rendered="#{usersController.selected != null}">
                         <p:outputLabel value="#{bundle.EditUsersLabel_userName}" for="userName" />
                         <p:inputText id="userName" value="#{usersController.selected.userName}" title="#{bundle.EditUsersTitle_userName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_userName}"/>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_encryptedPsw}" for="encryptedPsw" />
-                        <p:inputTextarea rows="4" cols="30" id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.EditUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_encryptedPsw}"/>
+                        <p:password id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.CreateUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_encryptedPsw}"/>
+                        <p:spacer></p:spacer>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_role}" for="role" />
+                        <p:selectOneMenu id="role"  value="#{(usersController.selected.userRolesCollection.size() gt 0)?
+                                                             usersController.selected.userRolesCollection[0].roleId:null}"
+                                         required="true" label="Text 3" >
+                            <f:selectItems value="#{usersController.roles}"  var="role"
+                                           itemLabel="#{role.roleName}" itemValue="#{role}"></f:selectItems>
+                            
+                        </p:selectOneMenu>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_FName}" for="FName" />
                         <p:inputText id="FName" value="#{usersController.selected.FName}" title="#{bundle.EditUsersTitle_FName}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_FName}"/>
@@ -43,8 +52,12 @@
                         <p:inputText id="mobilePhone" value="#{usersController.selected.mobilePhone}" title="#{bundle.EditUsersTitle_mobilePhone}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_mobilePhone}"/>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.EditUsersLabel_photo}" for="photo" />
-                        <p:inputTextarea rows="4" cols="30" id="photo" value="#{usersController.selected.photo}" title="#{bundle.EditUsersTitle_photo}" />
-                        <p:spacer></p:spacer>
+                        <p:fileUpload style="display: block;"  id="photo"  fileUploadListener="#{usersController.handleFileUpload}" 
+                                      mode="advanced" dragDropSupport="false" auto="true" 
+                                      update="growl photoImage" sizeLimit="200000"  
+                                      allowTypes="/(\.|\/)(gif|jpe?g|png)$/" styleClass="fileupload-simple" />
+                        <p:graphicImage id="photoImage" value="#{usersController.selectedImage}" cache="false" width="100" height="100">
+                        </p:graphicImage>
                         <p:outputLabel value="#{bundle.EditUsersLabel_forcePswChange}" for="forcePswChange" />
                         <p:selectBooleanCheckbox id="forcePswChange" value="#{usersController.selected.forcePswChange}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_forcePswChange}"/>
                         <p:spacer></p:spacer>
@@ -52,8 +65,9 @@
                         <p:selectBooleanCheckbox id="active" value="#{usersController.selected.active}" required="true" requiredMessage="#{bundle.EditUsersRequiredMessage_active}"/>
                         <p:spacer></p:spacer>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{usersController.update}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsersEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UsersEditDialog.hide()"/>
+                    <p:growl id="growl" life="3000" />
+                    <h:commandButton actionListener="#{usersController.update}" value="#{bundle.Save}" /> <!--update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsersEditDialog');"/>-->
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsersEditDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

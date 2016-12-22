@@ -102,10 +102,28 @@ public class UsersController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+        photo = null;
     }
 
-    public void update() {
+    public void update() throws IOException {
+        /*UserRoles r = new UserRoles();
+        r.setRoleId(selectedRole);
+        r.setUserId(selected);
+        ArrayList<UserRoles> userRoles = new ArrayList();
+        userRoles.add(r);
+        selected.setUserRolesCollection(userRoles);*/
+
+        if (photo != null) {
+            long size = photo.getSize();
+            InputStream stream = photo.getInputstream();
+            byte[] buffer = new byte[(int) size];
+            stream.read(buffer, 0, (int) size);
+            stream.close();
+            selected.setPhoto(buffer);
+        }
+        
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
+        photo = null;
     }
 
     public void destroy() {
@@ -237,6 +255,9 @@ public class UsersController implements Serializable {
     public StreamedContent getSelectedImage() throws IOException {
         if (photo != null) {
             return new DefaultStreamedContent(photo.getInputstream(), "image/jpg");
+        }
+        if (selected.getPhoto() != null) {
+            return new DefaultStreamedContent(new ByteArrayInputStream(selected.getPhoto()));
         } else {
             return null;
         }
@@ -261,7 +282,7 @@ public class UsersController implements Serializable {
             if (userPhoto != null) {
                 return new DefaultStreamedContent(new ByteArrayInputStream(userPhoto));
             }
-            
+
             return new DefaultStreamedContent();
         }
     }

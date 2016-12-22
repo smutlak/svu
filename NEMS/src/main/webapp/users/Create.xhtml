@@ -26,7 +26,7 @@
                         <p:inputText id="userName" value="#{usersController.selected.userName}" title="#{bundle.CreateUsersTitle_userName}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_userName}"/>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_encryptedPsw}" for="encryptedPsw" />
-                        <p:inputText id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.CreateUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_encryptedPsw}"/>
+                        <p:password id="encryptedPsw" value="#{usersController.selected.encryptedPsw}" title="#{bundle.CreateUsersTitle_encryptedPsw}" required="true" requiredMessage="#{bundle.CreateUsersRequiredMessage_encryptedPsw}"/>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_role}" for="role" />
                         <p:selectOneMenu id="role"  value="#{usersController.selectedRole}"

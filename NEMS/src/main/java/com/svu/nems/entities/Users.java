@@ -393,5 +393,8 @@ public class Users implements Serializable {
     public String toString() {
         return "com.svu.nems.entities.Users[ id=" + id + " ]";
     }
-     
+
+    public String getFullName(){
+        return this.fName+" "+this.mName+" "+this.lName;
+    }
 }

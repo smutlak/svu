@@ -29,72 +29,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_userName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.userName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_encryptedPsw}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.encryptedPsw}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_FName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.FName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_MName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.MName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_LName}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.LName}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_address}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.address}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_email}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.email}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_job}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.job}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_phone}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.phone}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_mobilePhone}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.mobilePhone}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_photo}"/>
                             </f:facet>
 
@@ -104,10 +38,25 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsersTitle_forcePswChange}"/>
+                                <h:outputText value="#{bundle.ListUsersTitle_userName}"/>
                             </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.forcePswChange}" disabled="true"/>
+                            <h:outputText value="#{item.userName}"/>
                         </p:column>
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsersTitle_FullName}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fullName}"/>
+                        </p:column>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsersTitle_email}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsersTitle_active}"/>
