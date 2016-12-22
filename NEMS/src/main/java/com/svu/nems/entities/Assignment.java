@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Assignment.findAll", query = "SELECT a FROM Assignment a")
     , @NamedQuery(name = "Assignment.findById", query = "SELECT a FROM Assignment a WHERE a.id = :id")
-    , @NamedQuery(name = "Assignment.findByOrder", query = "SELECT a FROM Assignment a WHERE a.order = :order")
+    , @NamedQuery(name = "Assignment.findBySeq", query = "SELECT a FROM Assignment a WHERE a.seq = :seq")
     , @NamedQuery(name = "Assignment.findByContentType", query = "SELECT a FROM Assignment a WHERE a.contentType = :contentType")
     , @NamedQuery(name = "Assignment.findByContentMetaData", query = "SELECT a FROM Assignment a WHERE a.contentMetaData = :contentMetaData")
     , @NamedQuery(name = "Assignment.findByPath", query = "SELECT a FROM Assignment a WHERE a.path = :path")
@@ -49,8 +49,8 @@ public class Assignment implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "order")
-    private int order;
+    @Column(name = "seq")
+    private int seq;
     @Lob
     @Column(name = "content")
     private byte[] content;
@@ -86,9 +86,9 @@ public class Assignment implements Serializable {
         this.id = id;
     }
 
-    public Assignment(Integer id, int order, String contentType, String contentMetaData, String path, boolean active) {
+    public Assignment(Integer id, int seq, String contentType, String contentMetaData, String path, boolean active) {
         this.id = id;
-        this.order = order;
+        this.seq = seq;
         this.contentType = contentType;
         this.contentMetaData = contentMetaData;
         this.path = path;
@@ -103,12 +103,12 @@ public class Assignment implements Serializable {
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSeq() {
+        return seq;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public byte[] getContent() {

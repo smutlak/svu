@@ -16,8 +16,8 @@
                         <p:inputText id="id" value="#{gradesController.selected.id}" title="#{bundle.CreateGradesTitle_id}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateGradesLabel_name}" for="name" />
                         <p:inputText id="name" value="#{gradesController.selected.name}" title="#{bundle.CreateGradesTitle_name}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_name}"/>
-                        <p:outputLabel value="#{bundle.CreateGradesLabel_order}" for="order" />
-                        <p:inputText id="order" value="#{gradesController.selected.order}" title="#{bundle.CreateGradesTitle_order}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.CreateGradesLabel_order}" for="seq" />
+                        <p:inputText id="seq" value="#{gradesController.selected.seq}" title="#{bundle.CreateGradesTitle_order}" required="true" requiredMessage="#{bundle.CreateGradesRequiredMessage_order}"/>
                         <p:outputLabel value="#{bundle.CreateGradesLabel_active}" for="active" />
                         <p:selectBooleanCheckbox id="active" value="#{gradesController.selected.active}" required="true" requiredMessage="#{bundle.EditGradesRequiredMessage_active}"/>
                     </p:panelGrid>

@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SchoolClass.findAll", query = "SELECT s FROM SchoolClass s")
     , @NamedQuery(name = "SchoolClass.findById", query = "SELECT s FROM SchoolClass s WHERE s.id = :id")
     , @NamedQuery(name = "SchoolClass.findByName", query = "SELECT s FROM SchoolClass s WHERE s.name = :name")
-    , @NamedQuery(name = "SchoolClass.findByOrder", query = "SELECT s FROM SchoolClass s WHERE s.order = :order")
+    , @NamedQuery(name = "SchoolClass.findBySeq", query = "SELECT s FROM SchoolClass s WHERE s.seq = :seq")
     , @NamedQuery(name = "SchoolClass.findByAcaemicYear", query = "SELECT s FROM SchoolClass s WHERE s.acaemicYear = :acaemicYear")
     , @NamedQuery(name = "SchoolClass.findBySemester", query = "SELECT s FROM SchoolClass s WHERE s.semester = :semester")
     , @NamedQuery(name = "SchoolClass.findByActive", query = "SELECT s FROM SchoolClass s WHERE s.active = :active")})
@@ -53,8 +53,8 @@ public class SchoolClass implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "order")
-    private int order;
+    @Column(name = "seq")
+    private int seq;
     @Basic(optional = false)
     @NotNull
     @Column(name = "acaemicYear")
@@ -88,10 +88,10 @@ public class SchoolClass implements Serializable {
         this.id = id;
     }
 
-    public SchoolClass(Integer id, String name, int order, int acaemicYear, int semester, boolean active) {
+    public SchoolClass(Integer id, String name, int seq, int acaemicYear, int semester, boolean active) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.seq = seq;
         this.acaemicYear = acaemicYear;
         this.semester = semester;
         this.active = active;
@@ -113,12 +113,12 @@ public class SchoolClass implements Serializable {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSeq() {
+        return seq;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public int getAcaemicYear() {

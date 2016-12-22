@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SessionMedia.findAll", query = "SELECT s FROM SessionMedia s")
     , @NamedQuery(name = "SessionMedia.findById", query = "SELECT s FROM SessionMedia s WHERE s.id = :id")
-    , @NamedQuery(name = "SessionMedia.findByOrder", query = "SELECT s FROM SessionMedia s WHERE s.order = :order")
+    , @NamedQuery(name = "SessionMedia.findBySeq", query = "SELECT s FROM SessionMedia s WHERE s.seq = :seq")
     , @NamedQuery(name = "SessionMedia.findByContentType", query = "SELECT s FROM SessionMedia s WHERE s.contentType = :contentType")
     , @NamedQuery(name = "SessionMedia.findByContentMetaData", query = "SELECT s FROM SessionMedia s WHERE s.contentMetaData = :contentMetaData")
     , @NamedQuery(name = "SessionMedia.findByPath", query = "SELECT s FROM SessionMedia s WHERE s.path = :path")
@@ -49,8 +49,8 @@ public class SessionMedia implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "order")
-    private int order;
+    @Column(name = "seq")
+    private int seq;
     @Lob
     @Column(name = "content")
     private byte[] content;
@@ -80,9 +80,9 @@ public class SessionMedia implements Serializable {
         this.id = id;
     }
 
-    public SessionMedia(Integer id, int order, boolean active) {
+    public SessionMedia(Integer id, int seq, boolean active) {
         this.id = id;
-        this.order = order;
+        this.seq = seq;
         this.active = active;
     }
 
@@ -94,12 +94,12 @@ public class SessionMedia implements Serializable {
         this.id = id;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSeq() {
+        return seq;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public byte[] getContent() {

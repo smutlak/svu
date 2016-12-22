@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Grades.findAll", query = "SELECT g FROM Grades g")
     , @NamedQuery(name = "Grades.findById", query = "SELECT g FROM Grades g WHERE g.id = :id")
     , @NamedQuery(name = "Grades.findByName", query = "SELECT g FROM Grades g WHERE g.name = :name")
-    , @NamedQuery(name = "Grades.findByOrder", query = "SELECT g FROM Grades g WHERE g.order = :order")
+    , @NamedQuery(name = "Grades.findBySeq", query = "SELECT g FROM Grades g WHERE g.seq = :seq")
     , @NamedQuery(name = "Grades.findByActive", query = "SELECT g FROM Grades g WHERE g.active = :active")})
 public class Grades implements Serializable {
 
@@ -49,8 +49,8 @@ public class Grades implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "order")
-    private int order;
+    @Column(name = "seq")
+    private int seq;
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -71,10 +71,10 @@ public class Grades implements Serializable {
         this.id = id;
     }
 
-    public Grades(Integer id, String name, int order, boolean active) {
+    public Grades(Integer id, String name, int seq, boolean active) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.seq = seq;
         this.active = active;
     }
 
@@ -94,12 +94,12 @@ public class Grades implements Serializable {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSeq() {
+        return seq;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public boolean getActive() {

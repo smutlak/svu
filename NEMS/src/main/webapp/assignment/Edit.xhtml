@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{assignmentController.selected != null}">
                         <p:outputLabel value="#{bundle.EditAssignmentLabel_id}" for="id" />
                         <p:inputText id="id" value="#{assignmentController.selected.id}" title="#{bundle.EditAssignmentTitle_id}" required="true" requiredMessage="#{bundle.EditAssignmentRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditAssignmentLabel_order}" for="order" />
-                        <p:inputText id="order" value="#{assignmentController.selected.order}" title="#{bundle.EditAssignmentTitle_order}" required="true" requiredMessage="#{bundle.EditAssignmentRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.EditAssignmentLabel_order}" for="seq" />
+                        <p:inputText id="seq" value="#{assignmentController.selected.seq}" title="#{bundle.EditAssignmentTitle_order}" required="true" requiredMessage="#{bundle.EditAssignmentRequiredMessage_order}"/>
                         <p:outputLabel value="#{bundle.EditAssignmentLabel_content}" for="content" />
                         <p:inputTextarea rows="4" cols="30" id="content" value="#{assignmentController.selected.content}" title="#{bundle.EditAssignmentTitle_content}" />
                         <p:outputLabel value="#{bundle.EditAssignmentLabel_contentType}" for="contentType" />

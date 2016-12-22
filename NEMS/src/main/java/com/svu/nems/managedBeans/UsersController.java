@@ -6,11 +6,11 @@ import com.svu.nems.entities.Users;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.sessionBeans.UsersFacade;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
-import static java.nio.file.Files.size;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +25,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.PhaseId;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.primefaces.event.FileUploadEvent;
@@ -89,12 +90,12 @@ public class UsersController implements Serializable {
         selected.setUserRolesCollection(userRoles);
         selected.setForcePswChange(true);
         selected.setActive(true);
-        
+
         long size = photo.getSize();
         InputStream stream = photo.getInputstream();
-        byte[] buffer = new byte[(int) size]; 
-        stream.read(buffer, 0, (int) size); 
-        stream.close();  
+        byte[] buffer = new byte[(int) size];
+        stream.read(buffer, 0, (int) size);
+        stream.close();
         selected.setPhoto(buffer);
 
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
@@ -233,11 +234,35 @@ public class UsersController implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, message);*/
     }
 
-    public StreamedContent getImage() throws IOException {
+    public StreamedContent getSelectedImage() throws IOException {
         if (photo != null) {
             return new DefaultStreamedContent(photo.getInputstream(), "image/jpg");
         } else {
             return null;
+        }
+    }
+
+    public StreamedContent getUserImage() throws IOException {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the view. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        } else {
+            // So, browser is requesting the image. Return a real StreamedContent with the image bytes.
+            byte[] userPhoto = null;
+            Integer id = Integer.parseInt(context.getExternalContext().getRequestParameterMap().get("id"));
+            for (Users user : items) {
+                if (user.getId().equals(id)) {
+                    userPhoto = user.getPhoto();
+                    break;
+                }
+            }
+            if (userPhoto != null) {
+                return new DefaultStreamedContent(new ByteArrayInputStream(userPhoto));
+            }
+            
+            return new DefaultStreamedContent();
         }
     }
 

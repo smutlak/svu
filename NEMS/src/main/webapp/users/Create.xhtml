@@ -65,7 +65,7 @@
                                       mode="advanced" dragDropSupport="false" auto="true" 
                                       update="growl photoImage" sizeLimit="200000"  
                                       allowTypes="/(\.|\/)(gif|jpe?g|png)$/" styleClass="fileupload-simple" />
-                        <p:graphicImage id="photoImage" value="#{usersController.image}" cache="false" width="100" height="100">
+                        <p:graphicImage id="photoImage" value="#{usersController.selectedImage}" cache="false" width="100" height="100">
                         </p:graphicImage>
                     </p:panelGrid>
                     <p:growl id="growl" life="3000" />

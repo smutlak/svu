@@ -393,16 +393,5 @@ public class Users implements Serializable {
     public String toString() {
         return "com.svu.nems.entities.Users[ id=" + id + " ]";
     }
-     public StreamedContent getImage() throws IOException {
-        /*FacesContext context = FacesContext.getCurrentInstance();
-
-        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
-            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
-            return new DefaultStreamedContent();
-        }
-        else {*/
-            return new DefaultStreamedContent(new ByteArrayInputStream(photo));
-       // }
-    
-    }
+     
 }

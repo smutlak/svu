@@ -14,8 +14,8 @@
                     <p:panelGrid columns="2" rendered="#{sessionMediaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditSessionMediaLabel_id}" for="id" />
                         <p:inputText id="id" value="#{sessionMediaController.selected.id}" title="#{bundle.EditSessionMediaTitle_id}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_order}" for="order" />
-                        <p:inputText id="order" value="#{sessionMediaController.selected.order}" title="#{bundle.EditSessionMediaTitle_order}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_order}"/>
+                        <p:outputLabel value="#{bundle.EditSessionMediaLabel_order}" for="seq" />
+                        <p:inputText id="seq" value="#{sessionMediaController.selected.seq}" title="#{bundle.EditSessionMediaTitle_order}" required="true" requiredMessage="#{bundle.EditSessionMediaRequiredMessage_order}"/>
                         <p:outputLabel value="#{bundle.EditSessionMediaLabel_content}" for="content" />
                         <p:inputTextarea rows="4" cols="30" id="content" value="#{sessionMediaController.selected.content}" title="#{bundle.EditSessionMediaTitle_content}" />
                         <p:outputLabel value="#{bundle.EditSessionMediaLabel_contentType}" for="contentType" />

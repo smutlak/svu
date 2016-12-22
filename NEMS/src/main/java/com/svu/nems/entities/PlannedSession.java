@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "PlannedSession.findAll", query = "SELECT p FROM PlannedSession p")
     , @NamedQuery(name = "PlannedSession.findById", query = "SELECT p FROM PlannedSession p WHERE p.id = :id")
     , @NamedQuery(name = "PlannedSession.findByName", query = "SELECT p FROM PlannedSession p WHERE p.name = :name")
-    , @NamedQuery(name = "PlannedSession.findByOrder", query = "SELECT p FROM PlannedSession p WHERE p.order = :order")
+    , @NamedQuery(name = "PlannedSession.findBySeq", query = "SELECT p FROM PlannedSession p WHERE p.seq = :seq")
     , @NamedQuery(name = "PlannedSession.findByDescription", query = "SELECT p FROM PlannedSession p WHERE p.description = :description")
     , @NamedQuery(name = "PlannedSession.findByWeekNo", query = "SELECT p FROM PlannedSession p WHERE p.weekNo = :weekNo")})
 public class PlannedSession implements Serializable {
@@ -52,8 +52,8 @@ public class PlannedSession implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "order")
-    private int order;
+    @Column(name = "seq")
+    private int seq;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
@@ -76,10 +76,10 @@ public class PlannedSession implements Serializable {
         this.id = id;
     }
 
-    public PlannedSession(Integer id, String name, int order, String description, int weekNo) {
+    public PlannedSession(Integer id, String name, int seq, String description, int weekNo) {
         this.id = id;
         this.name = name;
-        this.order = order;
+        this.seq = seq;
         this.description = description;
         this.weekNo = weekNo;
     }
@@ -100,12 +100,12 @@ public class PlannedSession implements Serializable {
         this.name = name;
     }
 
-    public int getOrder() {
-        return order;
+    public int getSeq() {
+        return seq;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setSeq(int seq) {
+        this.seq = seq;
     }
 
     public String getDescription() {
