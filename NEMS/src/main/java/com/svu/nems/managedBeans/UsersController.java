@@ -9,6 +9,7 @@ import com.svu.nems.sessionBeans.UsersFacade;
 import java.io.IOException;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -78,7 +79,12 @@ public class UsersController implements Serializable {
         UserRoles r = new UserRoles();
         r.setRoleId(selectedRole);
         r.setUserId(selected);
-        selected.getUserRolesCollection().add(r);
+        ArrayList<UserRoles> userRoles = new ArrayList();
+        userRoles.add(r);
+        selected.setUserRolesCollection(userRoles);
+        selected.setForcePswChange(true);
+        selected.setActive(true);
+        
         
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
         if (!JsfUtil.isValidationFailed()) {

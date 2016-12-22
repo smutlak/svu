@@ -69,7 +69,7 @@
                         </p:graphicImage>
                     </p:panelGrid>
                     <p:growl id="growl" life="3000" />
-                    <p:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>
+                    <h:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}"></h:commandButton> <!--update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>-->
                     <p:commandButton value="#{bundle.Cancel}" onclick="UsersCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
