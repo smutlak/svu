@@ -1,5 +1,7 @@
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.Role;
+import com.svu.nems.entities.UserRoles;
 import com.svu.nems.entities.Users;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
@@ -15,7 +17,6 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -31,9 +32,20 @@ public class UsersController implements Serializable {
 
     @EJB
     private com.svu.nems.sessionBeans.UsersFacade ejbFacade;
+    @EJB
+    private com.svu.nems.sessionBeans.RoleFacade roleFacade;
     private List<Users> items = null;
     private Users selected;
     private UploadedFile photo;
+    private Role selectedRole;
+
+    public Role getSelectedRole() {
+        return selectedRole;
+    }
+
+    public void setSelectedRole(Role selectedRole) {
+        this.selectedRole = selectedRole;
+    }
 
     public UsersController() {
     }
@@ -63,6 +75,11 @@ public class UsersController implements Serializable {
     }
 
     public void create() {
+        UserRoles r = new UserRoles();
+        r.setRoleId(selectedRole);
+        r.setUserId(selected);
+        selected.getUserRolesCollection().add(r);
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("UsersCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -179,7 +196,8 @@ public class UsersController implements Serializable {
 
     public void handleFileUpload(FileUploadEvent event) throws IOException{
         photo = event.getFile();
-
+        //selected.setPhoto(photo.getContents());
+        
         /*FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, message);*/
     }
@@ -190,5 +208,10 @@ public class UsersController implements Serializable {
         } else {
             return null;
         }
+    }
+    public List<Role> getRoles()
+    {
+        List<Role> roles = roleFacade.findAll();
+        return roles;
     }
 }
