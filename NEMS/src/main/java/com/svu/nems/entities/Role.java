@@ -48,6 +48,15 @@ public class Role implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
     private Collection<UserRoles> userRolesCollection;
 
+    public static final String ADMIN  = "admin";
+    public static final String DEPUTYMINISTEROFEDUCATION  = "Deputy Minister of Education";
+    public static final String SCHOOLDISTRICTMANAGER  = "School District Manager";
+    public static final String SUBJECTDIRECTOR  = "Subject Director";
+    public static final String SCHOOLPRINCIPAL  = "School Principal";
+    public static final String TEACHER  = "Teacher";
+    public static final String STUDENT  = "Student";
+    public static final String STUDENTPARENT  = "Student Parent";
+
     public Role() {
     }
 
@@ -109,5 +118,5 @@ public class Role implements Serializable {
     public String toString() {
         return "com.svu.nems.entities.Role[ id=" + id + " ]";
     }
-    
+
 }

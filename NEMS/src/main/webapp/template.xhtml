@@ -32,28 +32,50 @@
                     <p:menubar >
                         <p:menuitem value="#{bundle.Home}" outcome="/home" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Maintenance}">
-                            <p:menuitem value="Absence" outcome="/absence/List.xhtml" />
-                            <p:menuitem value="Assignment" outcome="/assignment/List.xhtml" />
-                            <p:menuitem value="AssignmentMark" outcome="/assignmentMark/List.xhtml" />
-                            <p:menuitem value="Comment" outcome="/comment/List.xhtml" />
-                            <p:menuitem value="District" outcome="/district/List.xhtml" />
-                            <p:menuitem value="GradeSubjects" outcome="/gradeSubjects/List.xhtml" />
-                            <p:menuitem value="Grades" outcome="/grades/List.xhtml" />
-                            <p:menuitem value="ParentInfo" outcome="/parentInfo/List.xhtml" />
-                            <p:menuitem value="PlannedSession" outcome="/plannedSession/List.xhtml" />
-                            <p:menuitem value="Role" outcome="/role/List.xhtml" />
-                            <p:menuitem value="School" outcome="/school/List.xhtml" />
-                            <p:menuitem value="SchoolClass" outcome="/schoolClass/List.xhtml" />
-                            <p:menuitem value="SchoolTypeGrades" outcome="/schoolTypeGrades/List.xhtml" />
-                            <p:menuitem value="SchoolTypes" outcome="/schoolTypes/List.xhtml" />
-                            <p:menuitem value="SessionMedia" outcome="/sessionMedia/List.xhtml" />
-                            <p:menuitem value="Sessions" outcome="/sessions/List.xhtml" />
-                            <p:menuitem value="Subject" outcome="/subject/List.xhtml" />
-                            <p:menuitem value="TeachingPlan" outcome="/teachingPlan/List.xhtml" />
-                            <p:menuitem value="UserClasses" outcome="/userClasses/List.xhtml" />
-                            <p:menuitem value="UserRoles" outcome="/userRoles/List.xhtml" />
-                            <p:menuitem value="UserSession" outcome="/userSession/List.xhtml" />
-                            <p:menuitem value="Users" outcome="/users/List.xhtml" />
+                            <p:menuitem value="Absence" outcome="/absence/List.xhtml" 
+                                        rendered="#{mainBean.can('Absence')}" />
+                            <p:menuitem value="Assignment" outcome="/assignment/List.xhtml" 
+                                        rendered="#{mainBean.can('Assignment')}" />
+                            <p:menuitem value="Assignment Marks" outcome="/assignmentMark/List.xhtml" 
+                                        rendered="#{mainBean.can('AssignmentMark')}" />
+                            <p:menuitem value="Comment" outcome="/comment/List.xhtml" 
+                                        rendered="#{mainBean.can('Comment')}" />
+                            <p:menuitem value="District" outcome="/district/List.xhtml" 
+                                        rendered="#{mainBean.can('District')}" />
+                            <p:menuitem value="Grade Subjects" outcome="/gradeSubjects/List.xhtml" 
+                                        rendered="#{mainBean.can('GradeSubjects')}" />
+                            <p:menuitem value="Grades" outcome="/grades/List.xhtml" 
+                                        rendered="#{mainBean.can('Grades')}" />
+                            <p:menuitem value="ParentInfo" outcome="/parentInfo/List.xhtml" 
+                                        rendered="#{mainBean.can('ParentInfo')}" />
+                            <p:menuitem value="Planned Session" outcome="/plannedSession/List.xhtml" 
+                                        rendered="#{mainBean.can('PlannedSession')}" />
+                            <p:menuitem value="Role" outcome="/role/List.xhtml" 
+                                        rendered="#{mainBean.can('Role')}" />
+                            <p:menuitem value="School" outcome="/school/List.xhtml" 
+                                        rendered="#{mainBean.can('School')}" />
+                            <p:menuitem value="School Class" outcome="/schoolClass/List.xhtml" 
+                                        rendered="#{mainBean.can('SchoolClass')}" />
+                            <p:menuitem value="School Type Grades" outcome="/schoolTypeGrades/List.xhtml" 
+                                        rendered="#{mainBean.can('SchoolTypeGrades')}" />
+                            <p:menuitem value="School Types" outcome="/schoolTypes/List.xhtml" 
+                                        rendered="#{mainBean.can('SchoolTypes')}" />
+                            <p:menuitem value="Session Media" outcome="/sessionMedia/List.xhtml" 
+                                        rendered="#{mainBean.can('SessionMedia')}" />
+                            <p:menuitem value="Sessions" outcome="/sessions/List.xhtml" 
+                                        rendered="#{mainBean.can('Sessions')}" />
+                            <p:menuitem value="Subject" outcome="/subject/List.xhtml" 
+                                        rendered="#{mainBean.can('Subject')}" />
+                            <p:menuitem value="Teaching Plan" outcome="/teachingPlan/List.xhtml" 
+                                        rendered="#{mainBean.can('TeachingPlan')}" />
+                            <p:menuitem value="User Classes" outcome="/userClasses/List.xhtml" 
+                                        rendered="#{mainBean.can('UserClasses')}" />
+                            <p:menuitem value="User Roles" outcome="/userRoles/List.xhtml" 
+                                        rendered="#{mainBean.can('UserRoles')}" />
+                            <p:menuitem value="User Session" outcome="/userSession/List.xhtml" 
+                                        rendered="#{mainBean.can('UserSession')}" />
+                            <p:menuitem value="Users" outcome="/users/List.xhtml" 
+                                        rendered="#{mainBean.can('Users')}" />
                         </p:submenu>
                     </p:menubar>
                 </h:form>

@@ -5,6 +5,7 @@
  */
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.Role;
 import com.svu.nems.entities.UserRoles;
 import com.svu.nems.entities.Users;
 import javax.inject.Named;
@@ -135,5 +136,22 @@ public class mainBean implements Serializable {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
         return "/index.xhtml?faces-redirect=true";
+    }
+
+    public boolean can(String type) {
+        if (role.equals(Role.ADMIN)) {
+            return true;
+        }
+        switch (type) {
+            case "District":
+                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
+                    return true;
+                }
+            case "SchoolTypes":
+                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
+                    return true;
+                }
+        }
+        return false;
     }
 }
