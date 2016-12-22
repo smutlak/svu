@@ -5,8 +5,12 @@
  */
 package com.svu.nems.entities;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
+import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +27,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -387,5 +393,16 @@ public class Users implements Serializable {
     public String toString() {
         return "com.svu.nems.entities.Users[ id=" + id + " ]";
     }
+     public StreamedContent getImage() throws IOException {
+        /*FacesContext context = FacesContext.getCurrentInstance();
+
+        if (context.getCurrentPhaseId() == PhaseId.RENDER_RESPONSE) {
+            // So, we're rendering the HTML. Return a stub StreamedContent so that it will generate right URL.
+            return new DefaultStreamedContent();
+        }
+        else {*/
+            return new DefaultStreamedContent(new ByteArrayInputStream(photo));
+       // }
     
+    }
 }
