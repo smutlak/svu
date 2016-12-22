@@ -26,3 +26,8 @@ and open the template in the editor.
     width: 15%;
     text-align: right;
 }
+
+.ListPanel{
+    margin: 50px; 
+    margin-top: 10px;
+}
