@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="DistrictListForm">
-                <p:panel header="#{bundle.ListDistrictTitle}">
+                <p:panel header="#{bundle.ListDistrictTitle}" styleClass="ListPanel">
                     <p:dataTable id="datalist" value="#{districtController.items}" var="item"
                                  selectionMode="single" selection="#{districtController.selected}"
                                  paginator="true"
@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListDistrictTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDistrictTitle_name}"/>
@@ -55,7 +50,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListDistrictTitle_managerId}"/>
                             </f:facet>
-                            <h:outputText value="#{item.managerId}"/>
+                            <h:outputText value="#{item.managerId.fullName}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{districtController.prepareCreate}" update=":DistrictCreateForm" oncomplete="PF('DistrictCreateDialog').show()"/>

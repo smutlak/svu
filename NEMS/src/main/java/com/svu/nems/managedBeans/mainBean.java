@@ -151,6 +151,10 @@ public class mainBean implements Serializable {
                 if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
                     return true;
                 }
+                case "Users":
+                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
+                    return true;
+                }
         }
         return false;
     }

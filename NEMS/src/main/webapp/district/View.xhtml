@@ -12,8 +12,6 @@
             <h:form id="DistrictViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{districtController.selected != null}">
-                        <h:outputText value="#{bundle.ViewDistrictLabel_id}"/>
-                        <h:outputText value="#{districtController.selected.id}" title="#{bundle.ViewDistrictTitle_id}"/>
                         <h:outputText value="#{bundle.ViewDistrictLabel_name}"/>
                         <h:outputText value="#{districtController.selected.name}" title="#{bundle.ViewDistrictTitle_name}"/>
                         <h:outputText value="#{bundle.ViewDistrictLabel_abbreviation}"/>
@@ -21,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewDistrictLabel_active}"/>
                         <p:selectBooleanCheckbox value="#{districtController.selected.active}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewDistrictLabel_managerId}"/>
-                        <h:outputText value="#{districtController.selected.managerId}" title="#{bundle.ViewDistrictTitle_managerId}"/>
+                        <h:outputText value="#{districtController.selected.managerId.fullName}" title="#{bundle.ViewDistrictTitle_managerId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="DistrictViewDialog.hide()"/>
                 </h:panelGroup>

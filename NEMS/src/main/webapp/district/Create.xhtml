@@ -12,8 +12,6 @@
             <h:form id="DistrictCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{districtController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateDistrictLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{districtController.selected.id}" title="#{bundle.CreateDistrictTitle_id}" required="true" requiredMessage="#{bundle.CreateDistrictRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateDistrictLabel_name}" for="name" />
                         <p:inputText id="name" value="#{districtController.selected.name}" title="#{bundle.CreateDistrictTitle_name}" required="true" requiredMessage="#{bundle.CreateDistrictRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundle.CreateDistrictLabel_abbreviation}" for="abbreviation" />
@@ -24,11 +22,12 @@
                         <p:selectOneMenu id="managerId" value="#{districtController.selected.managerId}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="managerIdItem"
-                                           itemValue="#{managerIdItem}"/>
+                                           itemValue="#{managerIdItem}"
+                                           itemLabel="#{managerIdItem.fullName}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{districtController.create}" value="#{bundle.Save}" update="display,:DistrictListForm:datalist,:growl" oncomplete="handleSubmit(args,'DistrictCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="DistrictCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DistrictCreateDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

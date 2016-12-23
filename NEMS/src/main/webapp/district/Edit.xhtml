@@ -12,8 +12,6 @@
             <h:form id="DistrictEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{districtController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditDistrictLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{districtController.selected.id}" title="#{bundle.EditDistrictTitle_id}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditDistrictLabel_name}" for="name" />
                         <p:inputText id="name" value="#{districtController.selected.name}" title="#{bundle.EditDistrictTitle_name}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundle.EditDistrictLabel_abbreviation}" for="abbreviation" />
@@ -25,11 +23,12 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="managerIdItem"
-                                           itemValue="#{managerIdItem}"/>
+                                           itemValue="#{managerIdItem}"
+                                           itemLabel="#{managerIdItem.fullName}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{districtController.update}" value="#{bundle.Save}" update="display,:DistrictListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DistrictEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="DistrictEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="DistrictEditDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
