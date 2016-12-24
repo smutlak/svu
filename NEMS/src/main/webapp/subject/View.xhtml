@@ -12,14 +12,12 @@
             <h:form id="SubjectViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{subjectController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSubjectLabel_id}"/>
-                        <h:outputText value="#{subjectController.selected.id}" title="#{bundle.ViewSubjectTitle_id}"/>
+                        
                         <h:outputText value="#{bundle.ViewSubjectLabel_name}"/>
                         <h:outputText value="#{subjectController.selected.name}" title="#{bundle.ViewSubjectTitle_name}"/>
                         <h:outputText value="#{bundle.ViewSubjectLabel_active}"/>
                         <p:selectBooleanCheckbox value="#{subjectController.selected.active}" disabled="true"/>
-                        <h:outputText value="#{bundle.ViewSubjectLabel_dirictorId}"/>
-                        <h:outputText value="#{subjectController.selected.dirictorId}" title="#{bundle.ViewSubjectTitle_dirictorId}"/>
+                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SubjectViewDialog.hide()"/>
                 </h:panelGroup>

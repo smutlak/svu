@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="GradesListForm">
-                <p:panel header="#{bundle.ListGradesTitle}">
+                <p:panel header="#{bundle.ListGradesTitle}"  styleClass="ListPanel" >
                     <p:dataTable id="datalist" value="#{gradesController.items}" var="item"
                                  selectionMode="single" selection="#{gradesController.selected}"
                                  paginator="true"
@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListGradesTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListGradesTitle_name}"/>
@@ -45,12 +40,7 @@
                             </f:facet>
                             <h:outputText value="#{item.seq}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListGradesTitle_active}"/>
-                            </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{gradesController.prepareCreate}" update=":GradesCreateForm" oncomplete="PF('GradesCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":GradesViewForm" oncomplete="PF('GradesViewDialog').show()" disabled="#{empty gradesController.selected}"/>

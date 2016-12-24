@@ -12,19 +12,10 @@
             <h:form id="SubjectEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{subjectController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSubjectLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{subjectController.selected.id}" title="#{bundle.EditSubjectTitle_id}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditSubjectLabel_name}" for="name" />
                         <p:inputText id="name" value="#{subjectController.selected.name}" title="#{bundle.EditSubjectTitle_name}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_name}"/>
                         <p:outputLabel value="#{bundle.EditSubjectLabel_active}" for="active" />
                         <p:selectBooleanCheckbox id="active" value="#{subjectController.selected.active}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_active}"/>
-                        <p:outputLabel value="#{bundle.EditSubjectLabel_dirictorId}" for="dirictorId" />
-                        <p:selectOneMenu id="dirictorId" value="#{subjectController.selected.dirictorId}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_dirictorId}">
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
-                                           var="dirictorIdItem"
-                                           itemValue="#{dirictorIdItem}"/>
-                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{subjectController.update}" value="#{bundle.Save}" update="display,:SubjectListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SubjectEditDialog.hide()"/>

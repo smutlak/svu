@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="SubjectListForm">
-                <p:panel header="#{bundle.ListSubjectTitle}">
+                <p:panel header="#{bundle.ListSubjectTitle}" styleClass="ListPanel">
                     <p:dataTable id="datalist" value="#{subjectController.items}" var="item"
                                  selectionMode="single" selection="#{subjectController.selected}"
                                  paginator="true"
@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSubjectTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSubjectTitle_name}"/>
@@ -45,12 +40,7 @@
                             </f:facet>
                             <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSubjectTitle_dirictorId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.dirictorId}"/>
-                        </p:column>
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{subjectController.prepareCreate}" update=":SubjectCreateForm" oncomplete="PF('SubjectCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SubjectViewForm" oncomplete="PF('SubjectViewDialog').show()" disabled="#{empty subjectController.selected}"/>

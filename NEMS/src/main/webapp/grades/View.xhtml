@@ -12,14 +12,10 @@
             <h:form id="GradesViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{gradesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewGradesLabel_id}"/>
-                        <h:outputText value="#{gradesController.selected.id}" title="#{bundle.ViewGradesTitle_id}"/>
                         <h:outputText value="#{bundle.ViewGradesLabel_name}"/>
                         <h:outputText value="#{gradesController.selected.name}" title="#{bundle.ViewGradesTitle_name}"/>
                         <h:outputText value="#{bundle.ViewGradesLabel_order}"/>
                         <h:outputText value="#{gradesController.selected.seq}" title="#{bundle.ViewGradesTitle_order}"/>
-                        <h:outputText value="#{bundle.ViewGradesLabel_active}"/>
-                        <p:selectBooleanCheckbox value="#{gradesController.selected.active}" disabled="true"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="GradesViewDialog.hide()"/>
                 </h:panelGroup>

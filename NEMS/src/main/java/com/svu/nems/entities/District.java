@@ -40,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "District.findByActive", query = "SELECT d FROM District d WHERE d.active = :active")})
 public class District implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -64,6 +66,8 @@ public class District implements Serializable {
     @JoinColumn(name = "managerId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users managerId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "districtId")
+    private Collection<SubjectDirector> subjectDirectorCollection;
 
     public District() {
     }
@@ -151,6 +155,15 @@ public class District implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.District[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<SubjectDirector> getSubjectDirectorCollection() {
+        return subjectDirectorCollection;
+    }
+
+    public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
+        this.subjectDirectorCollection = subjectDirectorCollection;
     }
     
 }

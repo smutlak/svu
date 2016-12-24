@@ -15,7 +15,7 @@
 
         <ui:define name="body">
             <h:form id="SchoolTypesListForm">
-                <p:panel header="#{bundle.ListSchoolTypesTitle}">
+                <p:panel header="#{bundle.ListSchoolTypesTitle}"  styleClass="ListPanel">
                     <p:dataTable id="datalist" value="#{schoolTypesController.items}" var="item"
                                  selectionMode="single" selection="#{schoolTypesController.selected}"
                                  paginator="true"
@@ -27,12 +27,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolTypesTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                       
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSchoolTypesTitle_name}"/>

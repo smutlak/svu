@@ -11,9 +11,9 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,9 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Subject implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -52,15 +51,22 @@ public class Subject implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<Sessions> sessionsCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<TeachingPlan> teachingPlanCollection;
-    @JoinColumn(name = "dirictorId", referencedColumnName = "id")
+    
+   /* @JoinColumn(name = "dirictorId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users dirictorId;
+    */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<GradeSubjects> gradeSubjectsCollection;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
+    private Collection<SubjectDirector> subjectDirectorCollection;
 
     public Subject() {
     }
@@ -116,7 +122,7 @@ public class Subject implements Serializable {
     public void setTeachingPlanCollection(Collection<TeachingPlan> teachingPlanCollection) {
         this.teachingPlanCollection = teachingPlanCollection;
     }
-
+/*
     public Users getDirictorId() {
         return dirictorId;
     }
@@ -124,7 +130,7 @@ public class Subject implements Serializable {
     public void setDirictorId(Users dirictorId) {
         this.dirictorId = dirictorId;
     }
-
+*/
     @XmlTransient
     public Collection<GradeSubjects> getGradeSubjectsCollection() {
         return gradeSubjectsCollection;
@@ -158,5 +164,14 @@ public class Subject implements Serializable {
     public String toString() {
         return "com.svu.nems.entities.Subject[ id=" + id + " ]";
     }
-    
+
+    @XmlTransient
+    public Collection<SubjectDirector> getSubjectDirectorCollection() {
+        return subjectDirectorCollection;
+    }
+
+    public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
+        this.subjectDirectorCollection = subjectDirectorCollection;
+    }
+
 }

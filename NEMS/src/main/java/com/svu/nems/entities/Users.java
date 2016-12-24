@@ -7,6 +7,7 @@ package com.svu.nems.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -48,7 +51,8 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -98,9 +102,6 @@ public class Users implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "mobilePhone")
     private String mobilePhone;
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
     @Basic(optional = false)
     @NotNull
     @Column(name = "forcePswChange")
@@ -111,8 +112,10 @@ public class Users implements Serializable {
     private boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
     private Collection<Absence> absenceCollection;
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dirictorId")
     private Collection<Subject> subjectCollection;
+*/
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
     private Collection<SchoolClass> schoolClassCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -131,6 +134,16 @@ public class Users implements Serializable {
     private Collection<ParentInfo> parentInfoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
     private Collection<AssignmentMark> assignmentMarkCollection;
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+    @Column(name = "mustChangePsw")
+    private Boolean mustChangePsw;
+    @Column(name = "temporaryInactive")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date temporaryInactive;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "directorId")
+    private Collection<SubjectDirector> subjectDirectorCollection;
 
     public Users() {
     }
@@ -240,14 +253,6 @@ public class Users implements Serializable {
         this.mobilePhone = mobilePhone;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public boolean getForcePswChange() {
         return forcePswChange;
     }
@@ -272,7 +277,7 @@ public class Users implements Serializable {
     public void setAbsenceCollection(Collection<Absence> absenceCollection) {
         this.absenceCollection = absenceCollection;
     }
-
+/*
     @XmlTransient
     public Collection<Subject> getSubjectCollection() {
         return subjectCollection;
@@ -281,7 +286,7 @@ public class Users implements Serializable {
     public void setSubjectCollection(Collection<Subject> subjectCollection) {
         this.subjectCollection = subjectCollection;
     }
-
+*/
     @XmlTransient
     public Collection<SchoolClass> getSchoolClassCollection() {
         return schoolClassCollection;
@@ -388,7 +393,40 @@ public class Users implements Serializable {
         return "com.svu.nems.entities.Users[ id=" + id + " ]";
     }
 
-    public String getFullName(){
-        return this.fName+" "+this.mName+" "+this.lName;
+    public String getFullName() {
+        return this.fName + " " + this.mName + " " + this.lName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
+    }
+
+    public Boolean getMustChangePsw() {
+        return mustChangePsw;
+    }
+
+    public void setMustChangePsw(Boolean mustChangePsw) {
+        this.mustChangePsw = mustChangePsw;
+    }
+
+    public Date getTemporaryInactive() {
+        return temporaryInactive;
+    }
+
+    public void setTemporaryInactive(Date temporaryInactive) {
+        this.temporaryInactive = temporaryInactive;
+    }
+
+    @XmlTransient
+    public Collection<SubjectDirector> getSubjectDirectorCollection() {
+        return subjectDirectorCollection;
+    }
+
+    public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
+        this.subjectDirectorCollection = subjectDirectorCollection;
     }
 }
