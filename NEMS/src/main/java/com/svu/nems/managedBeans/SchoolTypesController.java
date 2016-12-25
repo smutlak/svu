@@ -1,16 +1,14 @@
 package com.svu.nems.managedBeans;
 
-import com.svu.nems.entities.Grades;
-import com.svu.nems.entities.SchoolTypeGrades;
 import com.svu.nems.entities.SchoolTypes;
-import com.svu.nems.entities.Subject;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
+import com.svu.nems.managedBeans.util.XGrade;
+import com.svu.nems.managedBeans.util.XSubject;
 import com.svu.nems.sessionBeans.SchoolTypesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -23,6 +21,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
 
 @Named("schoolTypesController")
 @SessionScoped
@@ -30,15 +29,14 @@ public class SchoolTypesController implements Serializable {
 
     @EJB
     private com.svu.nems.sessionBeans.SchoolTypesFacade ejbFacade;
+    
     private List<SchoolTypes> items = null;
     private SchoolTypes selected;
-    private  Hashtable<String,List<String>> schoolTypeGrades; 
-   // private List<SchoolTypeGrades> schoolTypeGrades;
-    private SchoolTypeGrades selectedSchoolTypeGrade;
-    private Subject selctedSubject;
+    private List<XGrade> xgrades;
+    private XGrade selectedXGrade;
+    private XSubject selctedXSubject;
     private String newGradeName;
-    private static Integer new_schoolTypeGradesIds = 0;
-    private static Integer new_gradesIds = 0;
+    
 
     public String getNewGradeName() {
         return newGradeName;
@@ -48,15 +46,9 @@ public class SchoolTypesController implements Serializable {
         this.newGradeName = newGradeName;
     }
 
-    public SchoolTypeGrades getSelectedSchoolTypeGrade() {
-            return selectedSchoolTypeGrade;
-    }
+    
 
-    public void setSelectedSchoolTypeGrade(SchoolTypeGrades selectedSchoolTypeGrade) {
-        this.selectedSchoolTypeGrade = selectedSchoolTypeGrade;
-    }
-
-    @FacesConverter(value="SchoolTypeControllerConverterXForGrades")
+    @FacesConverter(forClass=XGrade.class)
     public static class SchoolTypeGradesControllerConverterX implements Converter {
 
         @Override
@@ -66,9 +58,9 @@ public class SchoolTypesController implements Serializable {
             }
             SchoolTypesController controller = (SchoolTypesController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "schoolTypesController");
-            List<SchoolTypeGrades> sGrades= controller.getSchoolTypeGrades();
-            for(SchoolTypeGrades sGrade:sGrades){
-                if(sGrade.getId()==Integer.parseInt(value)){
+            List<XGrade> sGrades= controller.getXgrades();
+            for(XGrade sGrade:sGrades){
+                if(sGrade.getName().equals(value)){
                     return sGrade;
                 }
             }
@@ -81,43 +73,27 @@ public class SchoolTypesController implements Serializable {
             return key;
         }
 
-        String getStringKey(java.lang.Integer value) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(value);
-            return sb.toString();
-        }
+        
 
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
             if (object == null) {
                 return null;
             }
-            if (object instanceof SchoolTypeGrades) {
-                SchoolTypeGrades o = (SchoolTypeGrades) object;
-                return getStringKey(o.getId());
+            if (object instanceof XGrade) {
+                XGrade o = (XGrade) object;
+                return o.getName();
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), SchoolTypeGrades.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), XGrade.class.getName()});
                 return null;
             }
         }
 
     }
 
-    public Subject getSelctedSubject() {
-        return selctedSubject;
-    }
+    
 
-    public void setSelctedSubject(Subject selctedSubject) {
-        this.selctedSubject = selctedSubject;
-    }
-
-    public List<SchoolTypeGrades> getSchoolTypeGrades() {
-        return schoolTypeGrades;
-    }
-
-    public void setSchoolTypeGrades(List<SchoolTypeGrades> schoolTypeGrades) {
-        this.schoolTypeGrades = schoolTypeGrades;
-    }
+    
 
     public SchoolTypesController() {
     }
@@ -129,6 +105,8 @@ public class SchoolTypesController implements Serializable {
     public void setSelected(SchoolTypes selected) {
         this.selected = selected;
     }
+
+    
 
     protected void setEmbeddableKeys() {
     }
@@ -254,31 +232,55 @@ public class SchoolTypesController implements Serializable {
     }
 
     public void addSchoolTypeGrade() {
-        if (schoolTypeGrades == null) {
-            schoolTypeGrades = new ArrayList();
+        if (xgrades == null) {
+            xgrades = new ArrayList();
         }
-        SchoolTypeGrades sGrade = new SchoolTypeGrades();
-        sGrade.setId(--new_schoolTypeGradesIds);
-
-        Grades grade = new Grades();
-        grade.setId(--new_gradesIds);
-
+        XGrade grade = new XGrade();
         grade.setName(newGradeName);
-        sGrade.setGradeId(grade);
-
-        schoolTypeGrades.add(sGrade);
+        xgrades.add(grade);
+    }
+    
+    public void prepareAddSchoolTypeGrade(){
+        this.newGradeName ="";
     }
 
     public void deleteSchoolTypeGrade() {
-        if (this.selectedSchoolTypeGrade != null) {
-            for (int i = 0; i < schoolTypeGrades.size(); i++) {
-                SchoolTypeGrades sGrade = schoolTypeGrades.get(i);
-                if (sGrade.getGradeId().getName().equalsIgnoreCase(
-                        selectedSchoolTypeGrade.getGradeId().getName())) {
-                    schoolTypeGrades.remove(i);
+        if (this.selectedXGrade != null) {
+            for (int i = 0; i < xgrades.size(); i++) {
+                XGrade tGrade = xgrades.get(i);
+                if (tGrade.getName().equalsIgnoreCase(
+                        selectedXGrade.getName())) {
+                    xgrades.remove(i);
                     break;
                 }
             }
         }
     }
+
+    public List<XGrade> getXgrades() {
+        return xgrades;
+    }
+
+    public void setXgrades(List<XGrade> xgrades) {
+        this.xgrades = xgrades;
+    }
+
+    
+
+    public XGrade getSelectedXGrade() {
+        return selectedXGrade;
+    }
+
+    public void setSelectedXGrade(XGrade selectedXGrade) {
+        this.selectedXGrade = selectedXGrade;
+    }
+
+    public XSubject getSelctedXSubject() {
+        return selctedXSubject;
+    }
+
+    public void setSelctedXSubject(XSubject selctedXSubject) {
+        this.selctedXSubject = selctedXSubject;
+    }
+
 }
