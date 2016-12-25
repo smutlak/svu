@@ -10,6 +10,7 @@ import com.svu.nems.sessionBeans.SchoolTypesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -31,7 +32,8 @@ public class SchoolTypesController implements Serializable {
     private com.svu.nems.sessionBeans.SchoolTypesFacade ejbFacade;
     private List<SchoolTypes> items = null;
     private SchoolTypes selected;
-    private List<SchoolTypeGrades> schoolTypeGrades;
+    private  Hashtable<String,List<String>> schoolTypeGrades; 
+   // private List<SchoolTypeGrades> schoolTypeGrades;
     private SchoolTypeGrades selectedSchoolTypeGrade;
     private Subject selctedSubject;
     private String newGradeName;
@@ -54,8 +56,8 @@ public class SchoolTypesController implements Serializable {
         this.selectedSchoolTypeGrade = selectedSchoolTypeGrade;
     }
 
-    @FacesConverter("SchoolTypeControllerConverterForGrades")
-    public static class SchoolTypeGradesControllerConverter implements Converter {
+    @FacesConverter(value="SchoolTypeControllerConverterXForGrades")
+    public static class SchoolTypeGradesControllerConverterX implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {

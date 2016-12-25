@@ -41,7 +41,7 @@
                         <p:panel header="Grades">
 
                             <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedSchoolTypeGrade}" 
-                                                style=" height: 200px;" converter="SchoolTypeControllerConverterForGrades">
+                                                style=" height: 200px;" converter="SchoolTypeControllerConverterXForGrades">
                                 <f:selectItems  value="#{schoolTypesController.schoolTypeGrades}"
                                                 var="gradeItem"
                                                 itemValue="#{gradeItem}"
@@ -49,7 +49,7 @@
                             </p:selectOneListbox>
                             <p:commandButton value="Add" onclick="PF('SchoolTypeGradeCreateDlgDialog').show()" 
                                              update=":SchoolTypeGradeCreateDlgForm"  />
-                            <p:commandButton value="Delete" process="@form"  
+                            <p:commandButton value="Delete"   
                                              actionListener="#{schoolTypesController.deleteSchoolTypeGrade}"
                                              update=":SchoolTypesCreateForm:gradesListBox"
                                              />
