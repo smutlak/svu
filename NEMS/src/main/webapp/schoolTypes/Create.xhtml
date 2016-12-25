@@ -19,7 +19,7 @@
                 <p:commandButton actionListener="#{schoolTypesController.addSchoolTypeGrade}" value="OK" 
                                  update=":SchoolTypesCreateForm:gradesListBox"
                                  oncomplete="PF('SchoolTypeGradeCreateDlgDialog').hide()"/>
-                
+
                 <p:commandButton value="#{bundle.Cancel}" onclick="PF('SchoolTypeGradeCreateDlgDialog').hide()" immediate="true"/>
             </h:form>
         </p:dialog>
@@ -34,23 +34,25 @@
                         <p:inputText id="name" value="#{schoolTypesController.selected.name}" 
                                      title="#{bundle.CreateSchoolTypesTitle_name}" required="true" 
                                      requiredMessage="#{bundle.CreateSchoolTypesRequiredMessage_name}" size="30"/>
-                        
+
                         <p:spacer/>
                         <p:spacer/>
                         <p:spacer/>
                         <p:panel header="Grades">
-                           
+
                             <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedSchoolTypeGrade}" 
-                                                 style=" height: 200px;">
+                                                style=" height: 200px;" converter="SchoolTypeControllerConverterForGrades">
                                 <f:selectItems  value="#{schoolTypesController.schoolTypeGrades}"
                                                 var="gradeItem"
                                                 itemValue="#{gradeItem}"
                                                 itemLabel="#{gradeItem.gradeId.name}"/>
                             </p:selectOneListbox>
-                             <p:commandButton value="Add" onclick="PF('SchoolTypeGradeCreateDlgDialog').show()" 
+                            <p:commandButton value="Add" onclick="PF('SchoolTypeGradeCreateDlgDialog').show()" 
                                              update=":SchoolTypeGradeCreateDlgForm"  />
-                            <p:commandButton value="Delete" 
-                                               />
+                            <p:commandButton value="Delete" process="@form"  
+                                             actionListener="#{schoolTypesController.deleteSchoolTypeGrade}"
+                                             update=":SchoolTypesCreateForm:gradesListBox"
+                                             />
                         </p:panel>
                         <p:spacer/>
                         <p:panel header="Subjects">
@@ -60,10 +62,10 @@
                                 <f:selectItem itemLabel="Option 2" itemValue="2" />
                                 <f:selectItem itemLabel="Option 3" itemValue="3" />
                             </p:selectOneListbox>
-                             <p:commandButton value="Add" onclick="PF('SchoolTypeGradeCreateDlgDialog').show()" 
+                            <p:commandButton value="Add" onclick="PF('SchoolTypeGradeCreateDlgDialog').show()" 
                                              update=":SchoolTypeGradeCreateDlgForm"  />
                             <p:commandButton value="Delete" 
-                                               />
+                                             />
                         </p:panel>
                     </h:panelGrid>
                     <p:commandButton actionListener="#{schoolTypesController.create}" value="#{bundle.Save}" update="display,:SchoolTypesListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolTypesCreateDialog');"/>

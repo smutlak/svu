@@ -34,7 +34,9 @@ public class SchoolTypesController implements Serializable {
     private List<SchoolTypeGrades> schoolTypeGrades;
     private SchoolTypeGrades selectedSchoolTypeGrade;
     private Subject selctedSubject;
-    private String newGradeName; 
+    private String newGradeName;
+    private static Integer new_schoolTypeGradesIds = 0;
+    private static Integer new_gradesIds = 0;
 
     public String getNewGradeName() {
         return newGradeName;
@@ -44,16 +46,60 @@ public class SchoolTypesController implements Serializable {
         this.newGradeName = newGradeName;
     }
 
-    
     public SchoolTypeGrades getSelectedSchoolTypeGrade() {
-        return selectedSchoolTypeGrade;
+            return selectedSchoolTypeGrade;
     }
 
     public void setSelectedSchoolTypeGrade(SchoolTypeGrades selectedSchoolTypeGrade) {
         this.selectedSchoolTypeGrade = selectedSchoolTypeGrade;
     }
 
-   
+    @FacesConverter("SchoolTypeControllerConverterForGrades")
+    public static class SchoolTypeGradesControllerConverter implements Converter {
+
+        @Override
+        public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
+            if (value == null || value.length() == 0) {
+                return null;
+            }
+            SchoolTypesController controller = (SchoolTypesController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "schoolTypesController");
+            List<SchoolTypeGrades> sGrades= controller.getSchoolTypeGrades();
+            for(SchoolTypeGrades sGrade:sGrades){
+                if(sGrade.getId()==Integer.parseInt(value)){
+                    return sGrade;
+                }
+            }
+            return null;
+        }
+
+        java.lang.Integer getKey(String value) {
+            java.lang.Integer key;
+            key = Integer.valueOf(value);
+            return key;
+        }
+
+        String getStringKey(java.lang.Integer value) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(value);
+            return sb.toString();
+        }
+
+        @Override
+        public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
+            if (object == null) {
+                return null;
+            }
+            if (object instanceof SchoolTypeGrades) {
+                SchoolTypeGrades o = (SchoolTypeGrades) object;
+                return getStringKey(o.getId());
+            } else {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), SchoolTypeGrades.class.getName()});
+                return null;
+            }
+        }
+
+    }
 
     public Subject getSelctedSubject() {
         return selctedSubject;
@@ -70,10 +116,6 @@ public class SchoolTypesController implements Serializable {
     public void setSchoolTypeGrades(List<SchoolTypeGrades> schoolTypeGrades) {
         this.schoolTypeGrades = schoolTypeGrades;
     }
-    
-            
-            
-   
 
     public SchoolTypesController() {
     }
@@ -209,14 +251,32 @@ public class SchoolTypesController implements Serializable {
 
     }
 
-    public void addSchoolTypeGrade(){
-        if(schoolTypeGrades == null){
+    public void addSchoolTypeGrade() {
+        if (schoolTypeGrades == null) {
             schoolTypeGrades = new ArrayList();
         }
         SchoolTypeGrades sGrade = new SchoolTypeGrades();
+        sGrade.setId(--new_schoolTypeGradesIds);
+
         Grades grade = new Grades();
+        grade.setId(--new_gradesIds);
+
         grade.setName(newGradeName);
         sGrade.setGradeId(grade);
+
         schoolTypeGrades.add(sGrade);
+    }
+
+    public void deleteSchoolTypeGrade() {
+        if (this.selectedSchoolTypeGrade != null) {
+            for (int i = 0; i < schoolTypeGrades.size(); i++) {
+                SchoolTypeGrades sGrade = schoolTypeGrades.get(i);
+                if (sGrade.getGradeId().getName().equalsIgnoreCase(
+                        selectedSchoolTypeGrade.getGradeId().getName())) {
+                    schoolTypeGrades.remove(i);
+                    break;
+                }
+            }
+        }
     }
 }
