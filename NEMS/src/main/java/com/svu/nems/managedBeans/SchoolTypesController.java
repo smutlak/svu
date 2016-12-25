@@ -21,7 +21,6 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.faces.event.ActionEvent;
 
 @Named("schoolTypesController")
 @SessionScoped
@@ -36,6 +35,7 @@ public class SchoolTypesController implements Serializable {
     private XGrade selectedXGrade;
     private XSubject selctedXSubject;
     private String newGradeName;
+    private String newSchoolTypeName;
     
 
     public String getNewGradeName() {
@@ -281,6 +281,14 @@ public class SchoolTypesController implements Serializable {
 
     public void setSelctedXSubject(XSubject selctedXSubject) {
         this.selctedXSubject = selctedXSubject;
+    }
+
+    public String getNewSchoolTypeName() {
+        return newSchoolTypeName;
+    }
+
+    public void setNewSchoolTypeName(String newSchoolTypeName) {
+        this.newSchoolTypeName = newSchoolTypeName;
     }
 
 }
