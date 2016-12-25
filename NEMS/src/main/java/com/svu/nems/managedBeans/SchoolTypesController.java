@@ -251,6 +251,7 @@ public class SchoolTypesController implements Serializable {
                 if (tGrade.getName().equalsIgnoreCase(
                         selectedXGrade.getName())) {
                     xgrades.remove(i);
+                    selectedXGrade = null;
                     break;
                 }
             }

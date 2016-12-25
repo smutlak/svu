@@ -37,7 +37,8 @@
                         <p:panel header="Grades">
 
                             <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedXGrade}" 
-                                                style=" height: 200px;" >
+                                                style=" height: 200px;"  >
+                                <f:ajax event="change" render="gradeDeleteButton"/>
                                 <f:selectItems  value="#{schoolTypesController.xgrades}"
                                                 var="gradeItem"
                                                 itemValue="#{gradeItem}"
@@ -47,9 +48,10 @@
                                              actionListener="#{schoolTypesController.prepareAddSchoolTypeGrade}"
                                              update=":SchoolTypesGradeCreateForm:newGradeName"
                                              />
-                            <p:commandButton value="Delete" ajax="true"
+                            <p:commandButton value="Delete" ajax="true" id="gradeDeleteButton"
                                              action="#{schoolTypesController.deleteSchoolTypeGrade}"
-                                             update=":SchoolTypesCreateForm:gradesListBox"/>
+                                             update=":SchoolTypesCreateForm:gradesListBox,@this" 
+                                             disabled="#{empty schoolTypesController.selectedXGrade}"/>
                         </p:panel>
                         <p:spacer/>
 
