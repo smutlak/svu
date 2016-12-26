@@ -1,6 +1,10 @@
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.GradeSubjects;
+import com.svu.nems.entities.Grades;
+import com.svu.nems.entities.SchoolTypeGrades;
 import com.svu.nems.entities.SchoolTypes;
+import com.svu.nems.entities.Subject;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.managedBeans.util.XGrade;
@@ -9,6 +13,7 @@ import com.svu.nems.sessionBeans.SchoolTypesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -115,6 +120,42 @@ public class SchoolTypesController implements Serializable {
     }
 
     public void create() {
+        this.selected.setName(newSchoolTypeName);
+        Collection<SchoolTypeGrades> schoolTypeGradesCollection = new ArrayList();
+        for (XGrade xgrade : xgrades) {
+            Grades grade = new Grades();
+            grade.setName(xgrade.getName());
+
+            SchoolTypeGrades schoolTypeGrades = new SchoolTypeGrades();
+            schoolTypeGrades.setGradeId(grade);
+            schoolTypeGrades.setTypeId(selected);
+
+            Collection<GradeSubjects> gradeSubjectsCollection = new ArrayList();
+            for (XSubject xSubject : xgrade.getSubject()) {
+                
+                Subject subject = new Subject();
+                subject.setName(xSubject.getName());
+                //subject.setGradeSubjectsCollection(gradeSubjectsCollection);
+                GradeSubjects gradeSubjects = new GradeSubjects();
+                gradeSubjects.setGradeId(grade);
+                gradeSubjects.setSubjectId(subjectId);
+                
+            }
+            if (!gradeSubjectsCollection.isEmpty()) {
+                grade.setGradeSubjectsCollection(gradeSubjectsCollection);
+            }
+
+            Collection<SchoolTypeGrades> arr2 = new ArrayList();
+            arr2.add(schoolTypeGrades);
+            grade.setSchoolTypeGradesCollection(arr2);
+
+            schoolTypeGradesCollection.add(schoolTypeGrades);
+
+        }
+        if (!schoolTypeGradesCollection.isEmpty()) {
+            this.selected.setSchoolTypeGradesCollection(schoolTypeGradesCollection);
+        }
+
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SchoolTypesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
