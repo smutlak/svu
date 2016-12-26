@@ -50,6 +50,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")})
 public class Users implements Serializable {
 
+    @Lob
+    @Column(name = "photo")
+    private byte[] photo;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -134,9 +138,6 @@ public class Users implements Serializable {
     private Collection<ParentInfo> parentInfoCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentId")
     private Collection<AssignmentMark> assignmentMarkCollection;
-    @Lob
-    @Column(name = "photo")
-    private byte[] photo;
     @Column(name = "mustChangePsw")
     private Boolean mustChangePsw;
     @Column(name = "temporaryInactive")
@@ -397,13 +398,6 @@ public class Users implements Serializable {
         return this.fName + " " + this.mName + " " + this.lName;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
 
     public Boolean getMustChangePsw() {
         return mustChangePsw;
@@ -428,5 +422,13 @@ public class Users implements Serializable {
 
     public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
         this.subjectDirectorCollection = subjectDirectorCollection;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 }

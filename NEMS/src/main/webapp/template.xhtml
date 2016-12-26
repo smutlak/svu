@@ -32,6 +32,14 @@
                     <p:menubar >
                         <p:menuitem value="#{bundle.Home}" outcome="/home" icon="ui-icon-home"/>
                         <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Users" outcome="/users/List.xhtml" 
+                                        rendered="#{mainBean.can('Users')}" />
+                            <p:menuitem value="School Types" outcome="/schoolTypes/List.xhtml" 
+                                        rendered="#{mainBean.can('SchoolTypes')}" />
+                            <p:menuitem value="District" outcome="/district/List.xhtml" 
+                                        rendered="#{mainBean.can('District')}" />
+                            <p:menuitem value="SubjectDirector" outcome="/SubjectDirector/List.xhtml" 
+                                        rendered="#{mainBean.can('SubjectDirector')}" />
                             <p:menuitem value="Absence" outcome="/absence/List.xhtml" 
                                         rendered="#{mainBean.can('Absence')}" />
                             <p:menuitem value="Assignment" outcome="/assignment/List.xhtml" 
@@ -40,10 +48,9 @@
                                         rendered="#{mainBean.can('AssignmentMark')}" />
                             <p:menuitem value="Comment" outcome="/comment/List.xhtml" 
                                         rendered="#{mainBean.can('Comment')}" />
-                            <p:menuitem value="District" outcome="/district/List.xhtml" 
-                                        rendered="#{mainBean.can('District')}" />
-                            <p:menuitem value="Grade Subjects" outcome="/gradeSubjects/List.xhtml" 
-                                        rendered="#{mainBean.can('GradeSubjects')}" />
+                            
+                            <!--<p:menuitem value="Grade Subjects" outcome="/gradeSubjects/List.xhtml" 
+                                        rendered="#{mainBean.can('GradeSubjects')}" />-->
                             <!--<p:menuitem value="Grades" outcome="/grades/List.xhtml" 
                                         rendered="#{mainBean.can('Grades')}" />-->
                             <p:menuitem value="ParentInfo" outcome="/parentInfo/List.xhtml" 
@@ -58,8 +65,7 @@
                                         rendered="#{mainBean.can('SchoolClass')}" />
                             <!--<p:menuitem value="School Type Grades" outcome="/schoolTypeGrades/List.xhtml" 
                                         rendered="#{mainBean.can('SchoolTypeGrades')}" />-->
-                            <p:menuitem value="School Types" outcome="/schoolTypes/List.xhtml" 
-                                        rendered="#{mainBean.can('SchoolTypes')}" />
+                            
                             <p:menuitem value="Session Media" outcome="/sessionMedia/List.xhtml" 
                                         rendered="#{mainBean.can('SessionMedia')}" />
                             <p:menuitem value="Sessions" outcome="/sessions/List.xhtml" 
@@ -74,8 +80,7 @@
                                         rendered="#{mainBean.can('UserRoles')}" />-->
                             <!--<p:menuitem value="User Session" outcome="/userSession/List.xhtml" 
                                         rendered="#{mainBean.can('UserSession')}" />-->
-                            <p:menuitem value="Users" outcome="/users/List.xhtml" 
-                                        rendered="#{mainBean.can('Users')}" />
+                            
                         </p:submenu>
                     </p:menubar>
                 </h:form>

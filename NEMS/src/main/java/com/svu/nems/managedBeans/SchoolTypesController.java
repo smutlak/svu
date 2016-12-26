@@ -125,17 +125,19 @@ public class SchoolTypesController implements Serializable {
             grade.setSchoolTypeId(selected);
             gradesCollection.add(grade);
 
-            List<Subject> subjectCollection = new ArrayList();
-            for (XSubject xSubject : xgrade.getSubject()) {
+            if (xgrade.getSubject() != null) {
+                List<Subject> subjectCollection = new ArrayList();
+                for (XSubject xSubject : xgrade.getSubject()) {
 
-                Subject subject = new Subject();
-                subject.setName(xSubject.getName());
-                subject.setGradeId(grade);
-                subjectCollection.add(subject);
+                    Subject subject = new Subject();
+                    subject.setName(xSubject.getName());
+                    subject.setGradeId(grade);
+                    subjectCollection.add(subject);
 
-            }
-            if (!subjectCollection.isEmpty()) {
-                grade.setSubjectCollection(subjectCollection);
+                }
+                if (!subjectCollection.isEmpty()) {
+                    grade.setSubjectCollection(subjectCollection);
+                }
             }
         }
         if (!gradesCollection.isEmpty()) {
