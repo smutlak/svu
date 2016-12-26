@@ -28,15 +28,15 @@ public class SchoolTypesController implements Serializable {
 
     @EJB
     private com.svu.nems.sessionBeans.SchoolTypesFacade ejbFacade;
-    
+
     private List<SchoolTypes> items = null;
     private SchoolTypes selected;
     private List<XGrade> xgrades;
     private XGrade selectedXGrade;
     private XSubject selctedXSubject;
     private String newGradeName;
+    private String newSubjectName;
     private String newSchoolTypeName;
-    
 
     public String getNewGradeName() {
         return newGradeName;
@@ -46,9 +46,7 @@ public class SchoolTypesController implements Serializable {
         this.newGradeName = newGradeName;
     }
 
-    
-
-    @FacesConverter(forClass=XGrade.class)
+    @FacesConverter(forClass = XGrade.class)
     public static class SchoolTypeGradesControllerConverterX implements Converter {
 
         @Override
@@ -58,9 +56,9 @@ public class SchoolTypesController implements Serializable {
             }
             SchoolTypesController controller = (SchoolTypesController) facesContext.getApplication().getELResolver().
                     getValue(facesContext.getELContext(), null, "schoolTypesController");
-            List<XGrade> sGrades= controller.getXgrades();
-            for(XGrade sGrade:sGrades){
-                if(sGrade.getName().equals(value)){
+            List<XGrade> sGrades = controller.getXgrades();
+            for (XGrade sGrade : sGrades) {
+                if (sGrade.getName().equals(value)) {
                     return sGrade;
                 }
             }
@@ -72,8 +70,6 @@ public class SchoolTypesController implements Serializable {
             key = Integer.valueOf(value);
             return key;
         }
-
-        
 
         @Override
         public String getAsString(FacesContext facesContext, UIComponent component, Object object) {
@@ -91,10 +87,6 @@ public class SchoolTypesController implements Serializable {
 
     }
 
-    
-
-    
-
     public SchoolTypesController() {
     }
 
@@ -105,8 +97,6 @@ public class SchoolTypesController implements Serializable {
     public void setSelected(SchoolTypes selected) {
         this.selected = selected;
     }
-
-    
 
     protected void setEmbeddableKeys() {
     }
@@ -239,9 +229,9 @@ public class SchoolTypesController implements Serializable {
         grade.setName(newGradeName);
         xgrades.add(grade);
     }
-    
-    public void prepareAddSchoolTypeGrade(){
-        this.newGradeName ="";
+
+    public void prepareAddSchoolTypeGrade() {
+        this.newGradeName = "";
     }
 
     public void deleteSchoolTypeGrade() {
@@ -265,8 +255,6 @@ public class SchoolTypesController implements Serializable {
     public void setXgrades(List<XGrade> xgrades) {
         this.xgrades = xgrades;
     }
-
-    
 
     public XGrade getSelectedXGrade() {
         return selectedXGrade;
@@ -292,4 +280,41 @@ public class SchoolTypesController implements Serializable {
         this.newSchoolTypeName = newSchoolTypeName;
     }
 
+    public String getNewSubjectName() {
+        return newSubjectName;
+    }
+
+    public void setNewSubjectName(String newSubjectName) {
+        this.newSubjectName = newSubjectName;
+    }
+
+    public void addSchoolTypeSubject() {
+        if (this.selectedXGrade != null) {
+            if (selectedXGrade.getSubject() == null) {
+                selectedXGrade.setSubject(new ArrayList());
+            }
+        }
+
+        XSubject subject = new XSubject();
+        subject.setName(newSubjectName);
+        selectedXGrade.getSubject().add(subject);
+    }
+
+    public void prepareAddSchoolTypeSubject() {
+        this.newSubjectName = "";
+    }
+
+    public void deleteSchoolTypeSubject() {
+        if (this.selectedXGrade != null && this.selctedXSubject != null && selectedXGrade.getSubject() != null) {
+            for (int i = 0; i < selectedXGrade.getSubject().size(); i++) {
+                XSubject tSubject = selectedXGrade.getSubject().get(i);
+                if (tSubject.getName().equalsIgnoreCase(
+                        selctedXSubject.getName())) {
+                    selectedXGrade.getSubject().remove(i);
+                    selctedXSubject = null;
+                    break;
+                }
+            }
+        }
+    }
 }

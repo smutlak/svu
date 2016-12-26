@@ -7,7 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="SchoolTypeGradeCreateDlg" widgetVar="SchoolTypeGradeCreateDlgDialog" modal="true" resizable="false" appendTo="@(body)" header="Add Grade">
+        <p:dialog id="SchoolTypeGradeCreateDlg" widgetVar="SchoolTypeGradeCreateDlgDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="Add Grade">
             <h:form id="SchoolTypesGradeCreateForm">
                 <p:panelGrid columns="2">
                     <p:outputLabel value="#{bundle.CreateGradesLabel_name}" for="newGradeName" />
@@ -21,6 +22,20 @@
                 <p:commandButton value="#{bundle.Cancel}" onclick="PF('SchoolTypeGradeCreateDlgDialog').hide()" immediate="true"/>
             </h:form>
         </p:dialog>
+        <p:dialog id="SchoolTypeSubjectCreateDlg" widgetVar="SchoolTypeSubjectCreateDlgDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="Add Subject">
+            <h:form id="SchoolTypesSubjectCreateForm">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.CreateSubjectLabel_name}" for="newSubjectName" />
+                    <p:inputText id="newSubjectName" value="#{schoolTypesController.newSubjectName}" />
+                </p:panelGrid>
+                <p:commandButton actionListener="#{schoolTypesController.addSchoolTypeSubject}" value="OK" 
+                                 update=":SchoolTypesCreateForm:subjectsListBox"
+                                 oncomplete="PF('SchoolTypeSubjectCreateDlgDialog').hide()"/>
+
+                <p:commandButton value="#{bundle.Cancel}" onclick="PF('SchoolTypeSubjectCreateDlgDialog').hide()" immediate="true"/>
+            </h:form>
+        </p:dialog>
         <p:dialog id="SchoolTypesCreateDlg" widgetVar="SchoolTypesCreateDialog" modal="true" resizable="false" 
                   appendTo="@(body)" header="#{bundle.CreateSchoolTypesTitle}">
             <h:form id="SchoolTypesCreateForm">
@@ -28,17 +43,15 @@
                     <h:panelGrid columns="3" rendered="#{schoolTypesController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateSchoolTypesLabel_name}" for="DDname" />
                         <p:spacer/>
-                        <p:inputText id="DDname" value="#{schoolTypesController.newSchoolTypeName}" 
-                                     />
+                        <p:inputText id="DDname" value="#{schoolTypesController.newSchoolTypeName}"/>
 
                         <p:spacer/>
                         <p:spacer/>
                         <p:spacer/>
                         <p:panel header="Grades">
-
                             <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedXGrade}" 
                                                 style=" height: 200px;"  >
-                                <f:ajax event="change" render="gradeDeleteButton"/>
+                                <p:ajax event="valueChange" process="@this" update="gradeDeleteButton,subjectsListBox,subjectAddButton,subjectDeleteButton"/>
                                 <f:selectItems  value="#{schoolTypesController.xgrades}"
                                                 var="gradeItem"
                                                 itemValue="#{gradeItem}"
@@ -54,12 +67,32 @@
                                              disabled="#{empty schoolTypesController.selectedXGrade}"/>
                         </p:panel>
                         <p:spacer/>
+                        <p:panel header="Subjects" id="subjectsPanel">
+                            <p:selectOneListbox id="subjectsListBox" value="#{schoolTypesController.selctedXSubject}" 
+                                                style=" height: 200px;"  >
+                                <f:ajax event="change" render="subjectDeleteButton"/>
+                                <f:selectItems  value="#{schoolTypesController.selectedXGrade.subject}"
+                                                var="subjectItem"
+                                                itemValue="#{subjectItem}"
+                                                itemLabel="#{subjectItem.name}"/>
+                            </p:selectOneListbox>
+                            <p:commandButton value="Add" id="subjectAddButton"
+                                             oncomplete="PF('SchoolTypeSubjectCreateDlgDialog').show()"
+                                             actionListener="#{schoolTypesController.prepareAddSchoolTypeSubject}"
+                                             update=":SchoolTypesSubjectCreateForm:newSubjectName"
+                                             disabled="#{empty schoolTypesController.selectedXGrade}"
+                                             />
+                            <p:commandButton value="Delete" ajax="true" id="subjectDeleteButton"
+                                             action="#{schoolTypesController.deleteSchoolTypeSubject}"
+                                             update=":SchoolTypesCreateForm:gradesListBox,@this" 
+                                             disabled="#{empty schoolTypesController.selctedXSubject}"/>
+                        </p:panel>
 
                     </h:panelGrid>
                     <p:commandButton actionListener="#{schoolTypesController.create}" value="#{bundle.Save}" 
                                      update="displayPanelGroup,:SchoolTypesListForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args,'SchoolTypesCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolTypesCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolTypesCreateDialog.hide()"  immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
