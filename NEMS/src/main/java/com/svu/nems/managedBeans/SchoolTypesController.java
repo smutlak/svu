@@ -1,8 +1,6 @@
 package com.svu.nems.managedBeans;
 
-import com.svu.nems.entities.GradeSubjects;
 import com.svu.nems.entities.Grades;
-import com.svu.nems.entities.SchoolTypeGrades;
 import com.svu.nems.entities.SchoolTypes;
 import com.svu.nems.entities.Subject;
 import com.svu.nems.managedBeans.util.JsfUtil;
@@ -13,7 +11,6 @@ import com.svu.nems.sessionBeans.SchoolTypesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -121,6 +118,31 @@ public class SchoolTypesController implements Serializable {
 
     public void create() {
         this.selected.setName(newSchoolTypeName);
+        List<Grades> gradesCollection = new ArrayList();
+        for (XGrade xgrade : xgrades) {
+            Grades grade = new Grades();
+            grade.setName(xgrade.getName());
+            grade.setSchoolTypeId(selected);
+            gradesCollection.add(grade);
+
+            List<Subject> subjectCollection = new ArrayList();
+            for (XSubject xSubject : xgrade.getSubject()) {
+
+                Subject subject = new Subject();
+                subject.setName(xSubject.getName());
+                subject.setGradeId(grade);
+                subjectCollection.add(subject);
+
+            }
+            if (!subjectCollection.isEmpty()) {
+                grade.setSubjectCollection(subjectCollection);
+            }
+        }
+        if (!gradesCollection.isEmpty()) {
+            this.selected.setGradesCollection(gradesCollection);
+        }
+
+        /* this.selected.setName(newSchoolTypeName);
         Collection<SchoolTypeGrades> schoolTypeGradesCollection = new ArrayList();
         for (XGrade xgrade : xgrades) {
             Grades grade = new Grades();
@@ -155,7 +177,7 @@ public class SchoolTypesController implements Serializable {
         if (!schoolTypeGradesCollection.isEmpty()) {
             this.selected.setSchoolTypeGradesCollection(schoolTypeGradesCollection);
         }
-
+         */
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SchoolTypesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

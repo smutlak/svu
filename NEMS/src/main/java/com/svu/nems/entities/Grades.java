@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,6 +40,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Grades.findByActive", query = "SELECT g FROM Grades g WHERE g.active = :active")})
 public class Grades implements Serializable {
 
+    @JoinColumn(name = "schoolTypeId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private SchoolTypes schoolTypeId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradeId")
+    private Collection<Subject> subjectCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,10 +69,8 @@ public class Grades implements Serializable {
     private Collection<SchoolClass> schoolClassCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradeId")
     private Collection<UserClasses> userClassesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradeId")
-    private Collection<SchoolTypeGrades> schoolTypeGradesCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gradeId")
-    private Collection<GradeSubjects> gradeSubjectsCollection;
+    
+    
 
     public Grades() {
     }
@@ -130,23 +136,7 @@ public class Grades implements Serializable {
         this.userClassesCollection = userClassesCollection;
     }
 
-    @XmlTransient
-    public Collection<SchoolTypeGrades> getSchoolTypeGradesCollection() {
-        return schoolTypeGradesCollection;
-    }
-
-    public void setSchoolTypeGradesCollection(Collection<SchoolTypeGrades> schoolTypeGradesCollection) {
-        this.schoolTypeGradesCollection = schoolTypeGradesCollection;
-    }
-
-    @XmlTransient
-    public Collection<GradeSubjects> getGradeSubjectsCollection() {
-        return gradeSubjectsCollection;
-    }
-
-    public void setGradeSubjectsCollection(Collection<GradeSubjects> gradeSubjectsCollection) {
-        this.gradeSubjectsCollection = gradeSubjectsCollection;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -171,6 +161,23 @@ public class Grades implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.Grades[ id=" + id + " ]";
+    }
+
+    public SchoolTypes getSchoolTypeId() {
+        return schoolTypeId;
+    }
+
+    public void setSchoolTypeId(SchoolTypes schoolTypeId) {
+        this.schoolTypeId = schoolTypeId;
+    }
+
+    @XmlTransient
+    public Collection<Subject> getSubjectCollection() {
+        return subjectCollection;
+    }
+
+    public void setSubjectCollection(Collection<Subject> subjectCollection) {
+        this.subjectCollection = subjectCollection;
     }
 
 }

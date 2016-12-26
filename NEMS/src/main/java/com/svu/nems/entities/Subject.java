@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -36,6 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Subject.findByName", query = "SELECT s FROM Subject s WHERE s.name = :name")
     , @NamedQuery(name = "Subject.findByActive", query = "SELECT s FROM Subject s WHERE s.active = :active")})
 public class Subject implements Serializable {
+
+    @JoinColumn(name = "gradeId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Grades gradeId;
 
     private static final long serialVersionUID = 1L;
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,8 +68,7 @@ public class Subject implements Serializable {
     @ManyToOne(optional = false)
     private Users dirictorId;
     */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
-    private Collection<GradeSubjects> gradeSubjectsCollection;
+    
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<SubjectDirector> subjectDirectorCollection;
@@ -131,14 +136,7 @@ public class Subject implements Serializable {
         this.dirictorId = dirictorId;
     }
 */
-    @XmlTransient
-    public Collection<GradeSubjects> getGradeSubjectsCollection() {
-        return gradeSubjectsCollection;
-    }
-
-    public void setGradeSubjectsCollection(Collection<GradeSubjects> gradeSubjectsCollection) {
-        this.gradeSubjectsCollection = gradeSubjectsCollection;
-    }
+   
 
     @Override
     public int hashCode() {
@@ -172,6 +170,14 @@ public class Subject implements Serializable {
 
     public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
         this.subjectDirectorCollection = subjectDirectorCollection;
+    }
+
+    public Grades getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(Grades gradeId) {
+        this.gradeId = gradeId;
     }
 
 }

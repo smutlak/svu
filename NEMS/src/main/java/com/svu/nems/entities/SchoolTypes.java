@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -35,10 +37,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SchoolTypes.findByActive", query = "SELECT s FROM SchoolTypes s WHERE s.active = :active")})
 public class SchoolTypes implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "schoolTypeId")
+    private Collection<Grades> gradesCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
@@ -52,8 +57,7 @@ public class SchoolTypes implements Serializable {
     private boolean active;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeId")
     private Collection<School> schoolCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeId")
-    private Collection<SchoolTypeGrades> schoolTypeGradesCollection;
+   
 
     public SchoolTypes() {
     }
@@ -101,14 +105,6 @@ public class SchoolTypes implements Serializable {
         this.schoolCollection = schoolCollection;
     }
 
-    @XmlTransient
-    public Collection<SchoolTypeGrades> getSchoolTypeGradesCollection() {
-        return schoolTypeGradesCollection;
-    }
-
-    public void setSchoolTypeGradesCollection(Collection<SchoolTypeGrades> schoolTypeGradesCollection) {
-        this.schoolTypeGradesCollection = schoolTypeGradesCollection;
-    }
 
     @Override
     public int hashCode() {
@@ -133,6 +129,15 @@ public class SchoolTypes implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.SchoolTypes[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Grades> getGradesCollection() {
+        return gradesCollection;
+    }
+
+    public void setGradesCollection(Collection<Grades> gradesCollection) {
+        this.gradesCollection = gradesCollection;
     }
     
 }
