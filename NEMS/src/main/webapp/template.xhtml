@@ -40,6 +40,15 @@
                                         rendered="#{mainBean.can('District')}" />
                             <p:menuitem value="Subject Director" outcome="/subjectDirector/List.xhtml" 
                                         rendered="#{mainBean.can('SubjectDirector')}" />
+                            <p:menuitem value="School" outcome="/school/List.xhtml" 
+                                        rendered="#{mainBean.can('School')}" />
+                            <p:menuitem value="Teaching Plan" outcome="/teachingPlan/List.xhtml" 
+                                        rendered="#{mainBean.can('TeachingPlan')}" />
+                            <!--<p:menuitem value="Planned Session" outcome="/plannedSession/List.xhtml" 
+                                        rendered="#{mainBean.can('PlannedSession')}" />-->
+                            
+                            <p:menuitem value="School Class" outcome="/schoolClass/List.xhtml" 
+                                        rendered="#{mainBean.can('SchoolClass')}" />
                             <p:menuitem value="Absence" outcome="/absence/List.xhtml" 
                                         rendered="#{mainBean.can('Absence')}" />
                             <p:menuitem value="Assignment" outcome="/assignment/List.xhtml" 
@@ -55,14 +64,10 @@
                                         rendered="#{mainBean.can('Grades')}" />-->
                             <p:menuitem value="ParentInfo" outcome="/parentInfo/List.xhtml" 
                                         rendered="#{mainBean.can('ParentInfo')}" />
-                            <p:menuitem value="Planned Session" outcome="/plannedSession/List.xhtml" 
-                                        rendered="#{mainBean.can('PlannedSession')}" />
+                            
                            <!-- <p:menuitem value="Role" outcome="/role/List.xhtml" 
                                         rendered="#{mainBean.can('Role')}" />-->
-                            <p:menuitem value="School" outcome="/school/List.xhtml" 
-                                        rendered="#{mainBean.can('School')}" />
-                            <p:menuitem value="School Class" outcome="/schoolClass/List.xhtml" 
-                                        rendered="#{mainBean.can('SchoolClass')}" />
+                            
                             <!--<p:menuitem value="School Type Grades" outcome="/schoolTypeGrades/List.xhtml" 
                                         rendered="#{mainBean.can('SchoolTypeGrades')}" />-->
                             
@@ -72,8 +77,7 @@
                                         rendered="#{mainBean.can('Sessions')}" />
                             <!--<p:menuitem value="Subject" outcome="/subject/List.xhtml" 
                                         rendered="#{mainBean.can('Subject')}" />-->
-                            <p:menuitem value="Teaching Plan" outcome="/teachingPlan/List.xhtml" 
-                                        rendered="#{mainBean.can('TeachingPlan')}" />
+                            
                             <p:menuitem value="User Classes" outcome="/userClasses/List.xhtml" 
                                         rendered="#{mainBean.can('UserClasses')}" />
                             <!--<p:menuitem value="User Roles" outcome="/userRoles/List.xhtml" 
