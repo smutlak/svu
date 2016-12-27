@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.EditSubjectLabel_active}" for="active" />
                         <p:selectBooleanCheckbox id="active" value="#{subjectController.selected.active}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_active}"/>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{subjectController.update}" value="#{bundle.Save}" update="display,:SubjectListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectEditDialog');"/>
+                    <p:commandButton actionListener="#{subjectController.update}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SubjectEditDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

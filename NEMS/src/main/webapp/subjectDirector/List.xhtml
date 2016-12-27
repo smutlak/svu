@@ -16,8 +16,8 @@
         <ui:define name="body">
             <h:form id="SubjecDirectortListForm">
                 <p:panel header="Subject Directors" styleClass="ListPanel">
-                    <p:dataTable id="datalist" value="#{subjectController.items}" var="item"
-                                 selectionMode="single" selection="#{subjectController.selected}"
+                    <p:dataTable id="datalist" value="#{subjectDirectorController.items}" var="item"
+                                 selectionMode="single" selection="#{subjectDirectorController.selected}"
                                  paginator="true" paginatorPosition="bottom"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -30,15 +30,21 @@
                         
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSubjectTitle_name}"/>
+                                <h:outputText value="District"/>
                             </f:facet>
-                            <h:outputText value="#{item.name}"/>
+                            <h:outputText value="#{item.districtId.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSubjectTitle_active}"/>
+                                <h:outputText value="Subject"/>
                             </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
+                            <p:selectBooleanCheckbox value="#{item.subjectId.name}" disabled="true"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Director"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.directorId.fullName}" disabled="true"/>
                         </p:column>
                         
                         <f:facet name="footer">
