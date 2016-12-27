@@ -9,13 +9,13 @@
     <ui:composition>
 
         <p:dialog id="SubjectDirectorCreateDlg" widgetVar="SubjectDirectorCreateDialog" modal="true" 
-                  resizable="false" appendTo="@(body)" header="#{bundle.CreateSubjectTitle}">
+                  resizable="false" appendTo="@(body)" header="Create Subject Director">
             <h:form id="SubjectDirectorCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{subjectDirectorController.selected != null}">
                         <p:outputLabel value="Distict" for="districtName" />
                         <p:selectOneMenu id="districtName" value="#{subjectDirectorController.selected.districtId}" 
-                                         required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
+                                         required="true" requiredMessage="Select a district" >
                             <f:selectItems value="#{districtController.itemsAvailableSelectOne}"
                                            var="districtIdItem"
                                            itemValue="#{districtIdItem}"
@@ -23,9 +23,9 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Grade" for="gradeName" />
                         <p:selectOneMenu id="gradeName" value="#{subjectDirectorController.selectedGrade}" 
-                                         required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
+                                         required="true" requiredMessage="select a grade." >
                             <p:ajax event="valueChange" process="@this" 
-                                        update="subjectName"/>
+                                    update="subjectName"/>
                             <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
                                            var="gradeIdItem"
                                            itemValue="#{gradeIdItem}"
@@ -33,21 +33,22 @@
                         </p:selectOneMenu>
                         <p:outputLabel value="Subject" for="subjectName" />
                         <p:selectOneMenu id="subjectName" value="#{subjectDirectorController.selected.subjectId}" 
-                                         required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
-                            
+                                         required="true" requiredMessage="select a subject" >
+
                             <f:selectItems value="#{subjectDirectorController.selectedGrade.subjectCollection}"
                                            var="subjectIdItem"
                                            itemValue="#{subjectIdItem}"
                                            itemLabel="#{subjectIdItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Director" for="directorName" />
-                        <p:selectOneMenu id="directorName" value="#{subjectDirectorController.selected.directorId}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
+                        <p:selectOneMenu id="directorName" value="#{subjectDirectorController.selected.directorId}" required="true" 
+                                         requiredMessage="select a director">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="directorIdItem"
                                            itemValue="#{directorIdItem}"
                                            itemLabel="#{directorIdItem.fullName}"/>
                         </p:selectOneMenu>
-                        
+
                     </p:panelGrid>
                     <p:commandButton actionListener="#{subjectDirectorController.create}" value="#{bundle.Save}" 
                                      update="display,:SubjecDirectortListForm:datalist,:growl" 

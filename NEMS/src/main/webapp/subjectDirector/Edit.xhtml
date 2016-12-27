@@ -8,17 +8,49 @@
 
     <ui:composition>
 
-        <p:dialog id="SubjectEditDlg" widgetVar="SubjectEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSubjectTitle}">
-            <h:form id="SubjectEditForm">
+        <p:dialog id="SubjectDirectorEditDlg" widgetVar="SubjectDirectorEditDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="Edit Subject Director">
+            <h:form id="SubjectDirectorEditForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{subjectController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSubjectLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{subjectController.selected.name}" title="#{bundle.EditSubjectTitle_name}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_name}"/>
-                        <p:outputLabel value="#{bundle.EditSubjectLabel_active}" for="active" />
-                        <p:selectBooleanCheckbox id="active" value="#{subjectController.selected.active}" required="true" requiredMessage="#{bundle.EditSubjectRequiredMessage_active}"/>
+                    <p:panelGrid columns="2" rendered="#{subjectDirectorController.selected != null}">
+                        <p:outputLabel value="Distict" for="districtName" />
+                        <p:selectOneMenu id="districtName" value="#{subjectDirectorController.selected.districtId}" 
+                                         required="true" requiredMessage="select a district">
+                            <f:selectItems value="#{districtController.itemsAvailableSelectOne}"
+                                           var="districtIdItem"
+                                           itemValue="#{districtIdItem}"
+                                           itemLabel="#{districtIdItem.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Grade" for="gradeName" />
+                        <p:selectOneMenu id="gradeName" value="#{subjectDirectorController.selectedGrade}" 
+                                         required="true" requiredMessage="select a grade.">
+                            <p:ajax event="valueChange" process="@this" 
+                                    update="subjectName"/>
+                            <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
+                                           var="gradeIdItem"
+                                           itemValue="#{gradeIdItem}"
+                                           itemLabel="#{gradeIdItem.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Subject" for="subjectName" />
+                        <p:selectOneMenu id="subjectName" value="#{subjectDirectorController.selected.subjectId}" 
+                                         required="true" requiredMessage="select a subject">
+
+                            <f:selectItems value="#{subjectDirectorController.selectedGrade.subjectCollection}"
+                                           var="subjectIdItem"
+                                           itemValue="#{subjectIdItem}"
+                                           itemLabel="#{subjectIdItem.name}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Director" for="directorName" />
+                        <p:selectOneMenu id="directorName" value="#{subjectDirectorController.selected.directorId}" required="true" 
+                                         requiredMessage="select a director">
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="directorIdItem"
+                                           itemValue="#{directorIdItem}"
+                                           itemLabel="#{directorIdItem.fullName}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{subjectController.update}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SubjectEditDialog.hide()"/>
+                    <p:commandButton actionListener="#{subjectDirectorController.update}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectDirectorEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SubjectDirectorEditDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

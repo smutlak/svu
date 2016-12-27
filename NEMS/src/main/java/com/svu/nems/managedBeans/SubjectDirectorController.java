@@ -41,6 +41,7 @@ public class SubjectDirectorController implements Serializable {
 
     public void setSelected(SubjectDirector selected) {
         this.selected = selected;
+        this.selectedGrade = this.selected.getSubjectId().getGradeId();
     }
 
     protected void setEmbeddableKeys() {

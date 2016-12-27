@@ -56,8 +56,8 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{subjectDirectorController.prepareCreate}" update=":SubjectDirectorCreateForm" oncomplete="PF('SubjectDirectorCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SubjectViewForm" oncomplete="PF('SubjectViewDialog').show()" disabled="#{empty subjectDirectorController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SubjectEditForm" oncomplete="PF('SubjectEditDialog').show()" disabled="#{empty subjectDirectorController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{subjectController.destroy}" update=":growl,datalist" disabled="#{empty subjectDirectorController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SubjectDirectorEditForm" oncomplete="PF('SubjectDirectorEditDialog').show()" disabled="#{empty subjectDirectorController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{subjectDirectorController.destroy}" update=":growl,datalist" disabled="#{empty subjectDirectorController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
