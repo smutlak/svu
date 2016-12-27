@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -37,14 +39,19 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "School.findByActive", query = "SELECT s FROM School s WHERE s.active = :active")})
 public class School implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 256)
+    @Column(name = "name")
+    private String name;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 256)
     @Column(name = "abbreviation")
     private String abbreviation;
@@ -157,6 +164,14 @@ public class School implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.School[ id=" + id + " ]";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }
