@@ -38,20 +38,20 @@
                             <f:facet name="header">
                                 <h:outputText value="Subject"/>
                             </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.subjectId.name}" disabled="true"/>
+                            <h:outputText value="#{item.subjectId.name}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="Director"/>
                             </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.directorId.fullName}" disabled="true"/>
+                            <h:outputText value="#{item.directorId.fullName}"/>
                         </p:column>
                         
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{subjectDirectorController.prepareCreate}" update=":SubjectDirectorCreateForm" oncomplete="PF('SubjectDirectorCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SubjectViewForm" oncomplete="PF('SubjectViewDialog').show()" disabled="#{empty subjectController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SubjectEditForm" oncomplete="PF('SubjectEditDialog').show()" disabled="#{empty subjectController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{subjectController.destroy}" update=":growl,datalist" disabled="#{empty subjectController.selected}"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SubjectViewForm" oncomplete="PF('SubjectViewDialog').show()" disabled="#{empty subjectDirectorController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SubjectEditForm" oncomplete="PF('SubjectEditDialog').show()" disabled="#{empty subjectDirectorController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{subjectController.destroy}" update=":growl,datalist" disabled="#{empty subjectDirectorController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

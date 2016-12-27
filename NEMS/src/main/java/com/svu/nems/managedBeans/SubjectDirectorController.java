@@ -1,5 +1,6 @@
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.Grades;
 import com.svu.nems.entities.Subject;
 import com.svu.nems.entities.SubjectDirector;
 import com.svu.nems.managedBeans.util.JsfUtil;
@@ -27,6 +28,7 @@ public class SubjectDirectorController implements Serializable {
     @EJB
     private com.svu.nems.sessionBeans.SubjectDirectorFacade ejbFacade;
     
+    private Grades selectedGrade;
     private List<SubjectDirector> items = null;
     private SubjectDirector selected;
 
@@ -164,4 +166,13 @@ public class SubjectDirectorController implements Serializable {
 
     }
 
+    public Grades getSelectedGrade() {
+        return selectedGrade;
+    }
+
+    public void setSelectedGrade(Grades selectedGrade) {
+        this.selectedGrade = selectedGrade;
+    }
+
+    
 }

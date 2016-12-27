@@ -51,7 +51,8 @@
                         <p:panel header="Grades">
                             <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedXGrade}" 
                                                 style=" height: 200px;"  >
-                                <p:ajax event="valueChange" process="@this" update="gradeDeleteButton,subjectsListBox,subjectAddButton,subjectDeleteButton"/>
+                                <p:ajax event="valueChange" process="@this" 
+                                        update="gradeDeleteButton,subjectsListBox,subjectAddButton,subjectDeleteButton"/>
                                 <f:selectItems  value="#{schoolTypesController.xgrades}"
                                                 var="gradeItem"
                                                 itemValue="#{gradeItem}"
