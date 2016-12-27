@@ -12,18 +12,16 @@
             <h:form id="SchoolViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{schoolController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSchoolLabel_id}"/>
-                        <h:outputText value="#{schoolController.selected.id}" title="#{bundle.ViewSchoolTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewSchoolLabel_abbreviation}"/>
-                        <h:outputText value="#{schoolController.selected.abbreviation}" title="#{bundle.ViewSchoolTitle_abbreviation}"/>
-                        <h:outputText value="#{bundle.ViewSchoolLabel_active}"/>
-                        <p:selectBooleanCheckbox value="#{schoolController.selected.active}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewSchoolLabel_name}"/>
+                        <h:outputText value="#{schoolController.selected.name}" title="#{bundle.ViewSchoolTitle_abbreviation}"/>
+                        <!--<h:outputText value="#{bundle.ViewSchoolLabel_active}"/>
+                        <p:selectBooleanCheckbox value="#{schoolController.selected.active}" disabled="true"/>-->
                         <h:outputText value="#{bundle.ViewSchoolLabel_districtId}"/>
-                        <h:outputText value="#{schoolController.selected.districtId}" title="#{bundle.ViewSchoolTitle_districtId}"/>
+                        <h:outputText value="#{schoolController.selected.districtId.name}" title="#{bundle.ViewSchoolTitle_districtId}"/>
                         <h:outputText value="#{bundle.ViewSchoolLabel_typeId}"/>
-                        <h:outputText value="#{schoolController.selected.typeId}" title="#{bundle.ViewSchoolTitle_typeId}"/>
+                        <h:outputText value="#{schoolController.selected.typeId.name}" title="#{bundle.ViewSchoolTitle_typeId}"/>
                         <h:outputText value="#{bundle.ViewSchoolLabel_principalId}"/>
-                        <h:outputText value="#{schoolController.selected.principalId}" title="#{bundle.ViewSchoolTitle_principalId}"/>
+                        <h:outputText value="#{schoolController.selected.principalId.fullName}" title="#{bundle.ViewSchoolTitle_principalId}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SchoolViewDialog.hide()"/>
                 </h:panelGroup>

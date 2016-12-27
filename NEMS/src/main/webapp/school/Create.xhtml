@@ -12,33 +12,35 @@
             <h:form id="SchoolCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{schoolController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSchoolLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{schoolController.selected.id}" title="#{bundle.CreateSchoolTitle_id}" required="true" requiredMessage="#{bundle.CreateSchoolRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.CreateSchoolLabel_abbreviation}" for="abbreviation" />
-                        <p:inputText id="abbreviation" value="#{schoolController.selected.abbreviation}" title="#{bundle.CreateSchoolTitle_abbreviation}" required="true" requiredMessage="#{bundle.CreateSchoolRequiredMessage_abbreviation}"/>
-                        <p:outputLabel value="#{bundle.CreateSchoolLabel_active}" for="active" />
-                        <p:selectBooleanCheckbox id="active" value="#{schoolController.selected.active}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_active}"/>
+                        <p:outputLabel value="#{bundle.CreateSchoolLabel_name}" for="abbreviation" />
+                        <p:inputText id="abbreviation" value="#{schoolController.selected.name}" title="#{bundle.CreateSchoolTitle_name}" required="true" 
+                                     requiredMessage="#{bundle.CreateSchoolRequiredMessage_abbreviation}"/>
                         <p:outputLabel value="#{bundle.CreateSchoolLabel_districtId}" for="districtId" />
                         <p:selectOneMenu id="districtId" value="#{schoolController.selected.districtId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_districtId}">
                             <f:selectItems value="#{districtController.itemsAvailableSelectOne}"
                                            var="districtIdItem"
-                                           itemValue="#{districtIdItem}"/>
+                                           itemValue="#{districtIdItem}"
+                                           itemLabel="#{districtIdItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateSchoolLabel_typeId}" for="typeId" />
                         <p:selectOneMenu id="typeId" value="#{schoolController.selected.typeId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_typeId}">
                             <f:selectItems value="#{schoolTypesController.itemsAvailableSelectOne}"
                                            var="typeIdItem"
-                                           itemValue="#{typeIdItem}"/>
+                                           itemValue="#{typeIdItem}"
+                                           itemLabel="#{typeIdItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateSchoolLabel_principalId}" for="principalId" />
                         <p:selectOneMenu id="principalId" value="#{schoolController.selected.principalId}" required="true" requiredMessage="#{bundle.EditSchoolRequiredMessage_principalId}">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="principalIdItem"
-                                           itemValue="#{principalIdItem}"/>
+                                           itemValue="#{principalIdItem}"
+                                           itemLabel="#{principalIdItem.fullName}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{schoolController.create}" value="#{bundle.Save}" update="display,:SchoolListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{schoolController.create}" value="#{bundle.Save}" 
+                                     update="display,:SchoolListForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'SchoolCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolCreateDialog.hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
