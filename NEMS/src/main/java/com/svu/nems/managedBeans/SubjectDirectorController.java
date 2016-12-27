@@ -26,6 +26,7 @@ public class SubjectDirectorController implements Serializable {
 
     @EJB
     private com.svu.nems.sessionBeans.SubjectDirectorFacade ejbFacade;
+    
     private List<SubjectDirector> items = null;
     private SubjectDirector selected;
 

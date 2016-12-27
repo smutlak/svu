@@ -16,28 +16,28 @@
                         <p:outputLabel value="Distict" for="districtName" />
                         <p:selectOneMenu id="districtName" value="#{subjectDirectorController.selected.districtId}" 
                                          required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
-                            <f:selectItems value="#{subjectDirectorController.districtsAvailable}"
-                                           var="managerIdItem"
-                                           itemValue="#{managerIdItem}"
-                                           itemLabel="#{managerIdItem.fullName}"/>
+                            <f:selectItems value="#{districtController.itemsAvailableSelectOne}"
+                                           var="districtIdItem"
+                                           itemValue="#{districtIdItem}"
+                                           itemLabel="#{districtIdItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Subject" for="subjectName" />
                         <p:selectOneMenu id="subjectName" value="#{subjectDirectorController.selected.subjectId}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
-                            <f:selectItems value="#{subjectDirectorController.subjectsAvailable}"
-                                           var="managerIdItem"
-                                           itemValue="#{managerIdItem}"
-                                           itemLabel="#{managerIdItem.fullName}"/>
+                            <f:selectItems value="#{subjectController.itemsAvailableSelectOne}"
+                                           var="subjectIdItem"
+                                           itemValue="#{subjectIdItem}"
+                                           itemLabel="#{subjectIdItem.name}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="Director" for="directorName" />
                         <p:selectOneMenu id="directorName" value="#{subjectDirectorController.selected.directorId}" required="true" requiredMessage="#{bundle.EditDistrictRequiredMessage_managerId}">
-                            <f:selectItems value="#{subjectDirectorController.usersAvailable}"
-                                           var="managerIdItem"
-                                           itemValue="#{managerIdItem}"
-                                           itemLabel="#{managerIdItem.fullName}"/>
+                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                           var="directorIdItem"
+                                           itemValue="#{directorIdItem}"
+                                           itemLabel="#{directorIdItem.fullName}"/>
                         </p:selectOneMenu>
                         
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{subjectDirectorController.create}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args,'SubjectCreateDialog');"/>
+                    <p:commandButton actionListener="#{subjectDirectorController.create}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args,'SubjectDirectorCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SubjectDirectorCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
