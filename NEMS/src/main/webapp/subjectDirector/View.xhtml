@@ -11,13 +11,15 @@
         <p:dialog id="SubjectViewDlg" widgetVar="SubjectViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSubjectTitle}">
             <h:form id="SubjectViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{subjectController.selected != null}">
-                        
-                        <h:outputText value="#{bundle.ViewSubjectLabel_name}"/>
-                        <h:outputText value="#{subjectController.selected.name}" title="#{bundle.ViewSubjectTitle_name}"/>
-                        <h:outputText value="#{bundle.ViewSubjectLabel_active}"/>
-                        <p:selectBooleanCheckbox value="#{subjectController.selected.active}" disabled="true"/>
-                        
+                    <p:panelGrid columns="2" rendered="#{subjectDirectorController.selected != null}">
+                        <h:outputText value="District"/>
+                        <h:outputText value="#{subjectDirectorController.selected.districtId.name}"/>
+                        <h:outputText value="Grade" />
+                        <h:outputText value="#{subjectDirectorController.selected.subjectId.gradeId.name}"/>
+                        <h:outputText value="Subject" />
+                        <h:outputText value="#{subjectDirectorController.selected.subjectId.name}"/>
+                        <h:outputText value="Director" />
+                        <h:outputText value="#{subjectDirectorController.selected.directorId.fullName}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SubjectViewDialog.hide()"/>
                 </h:panelGroup>

@@ -36,6 +36,12 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="Grade"/>
+                            </f:facet>
+                            <h:outputText value="#{item.subjectId.gradeId.name}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="Subject"/>
                             </f:facet>
                             <h:outputText value="#{item.subjectId.name}"/>
