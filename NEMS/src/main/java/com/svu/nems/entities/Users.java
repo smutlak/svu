@@ -118,7 +118,7 @@ public class Users implements Serializable {
     private Collection<Absence> absenceCollection;
     /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dirictorId")
-    private Collection<Subject> subjectCollection;
+    private Collection<Subject> subjectCollection;f
 */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
     private Collection<SchoolClass> schoolClassCollection;

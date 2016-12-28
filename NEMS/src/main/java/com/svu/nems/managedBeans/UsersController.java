@@ -81,6 +81,9 @@ public class UsersController implements Serializable {
         return selected;
     }
 
+    public void resetSelected(){
+        this.selected = null;
+    }
     public void create() throws IOException {
         UserRoles r = new UserRoles();
         r.setRoleId(selectedRole);
