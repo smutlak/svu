@@ -8,12 +8,14 @@ package com.svu.nems.managedBeans;
 import com.svu.nems.entities.Role;
 import com.svu.nems.entities.UserRoles;
 import com.svu.nems.entities.Users;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -138,7 +140,13 @@ public class mainBean implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public boolean can(String type) {
+    public boolean can(String type) throws IOException {
+        if (role == null) {
+            // FacesContext.getCurrentInstance().getExternalContext().redirect("/index.xhtml");
+          /*  ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            ec.redirect(ec.getRequestContextPath() + "/index.xhtml");*/
+            return false;
+        }
         if (role.equals(Role.ADMIN)) {
             return true;
         }
@@ -151,7 +159,7 @@ public class mainBean implements Serializable {
                 if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
                     return true;
                 }
-                case "Users":
+            case "Users":
                 if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
                     return true;
                 }

@@ -116,6 +116,10 @@ public class SchoolTypesController implements Serializable {
         return selected;
     }
 
+    public void resetSelected(){
+        this.selected = null;
+    }
+    
     public void create() {
         this.selected.setName(newSchoolTypeName);
         List<Grades> gradesCollection = new ArrayList();

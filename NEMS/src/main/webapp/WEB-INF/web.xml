@@ -25,4 +25,8 @@
         <param-name>facelets.SKIP_COMMENTS</param-name>
         <param-value>true</param-value>
     </context-param>
+    <error-page> 
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type> 
+        <location>/index.xhtml</location> 
+    </error-page>
 </web-app>
