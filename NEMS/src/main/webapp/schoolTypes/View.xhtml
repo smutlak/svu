@@ -11,14 +11,38 @@
         <p:dialog id="SchoolTypesViewDlg" widgetVar="SchoolTypesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSchoolTypesTitle}">
             <h:form id="SchoolTypesViewForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{schoolTypesController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSchoolTypesLabel_id}"/>
-                        <h:outputText value="#{schoolTypesController.selected.id}" title="#{bundle.ViewSchoolTypesTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewSchoolTypesLabel_name}"/>
-                        <h:outputText value="#{schoolTypesController.selected.name}" title="#{bundle.ViewSchoolTypesTitle_name}"/>
-                        <h:outputText value="#{bundle.ViewSchoolTypesLabel_active}"/>
-                        <p:selectBooleanCheckbox value="#{schoolTypesController.selected.active}" disabled="true"/>
-                    </p:panelGrid>
+                    <h:panelGrid columns="3" rendered="#{schoolTypesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSchoolTypesLabel_name}" for="DDname" />
+                        <p:spacer/>
+                        <p:outputLabel id="DDname" value="#{schoolTypesController.selected.name}"/>
+
+                        <p:spacer/>
+                        <p:spacer/>
+                        <p:spacer/>
+                        <p:panel header="Grades">
+                            <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedXGrade}" 
+                                                style=" height: 200px;"  >
+                                <p:ajax event="valueChange" process="@this" 
+                                        update="subjectsListBox"/>
+                                <f:selectItems  value="#{schoolTypesController.selected.gradesCollection}"
+                                                var="gradeItem"
+                                                itemValue="#{gradeItem}"
+                                                itemLabel="#{gradeItem.name}"/>
+                            </p:selectOneListbox>
+                            
+                        </p:panel>
+                        <p:spacer/>
+                        <p:panel header="Subjects" id="subjectsPanel">
+                            <p:selectOneListbox id="subjectsListBox" 
+                                                style=" height: 200px;"  >
+                                
+                                <f:selectItems  value="#{schoolTypesController.selectedXGrade.subject}"
+                                                var="subjectItem"
+                                                itemValue="#{subjectItem}"
+                                                itemLabel="#{subjectItem.name}"/>
+                            </p:selectOneListbox>
+                        </p:panel>
+                    </h:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SchoolTypesViewDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
