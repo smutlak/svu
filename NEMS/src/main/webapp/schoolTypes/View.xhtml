@@ -20,7 +20,7 @@
                         <p:spacer/>
                         <p:spacer/>
                         <p:panel header="Grades">
-                            <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedXGrade}" 
+                            <p:selectOneListbox id="gradesListBox" value="#{schoolTypesController.selectedViewGrade}" 
                                                 style=" height: 200px;"  >
                                 <p:ajax event="valueChange" process="@this" 
                                         update="subjectsListBox"/>
@@ -36,7 +36,7 @@
                             <p:selectOneListbox id="subjectsListBox" 
                                                 style=" height: 200px;"  >
                                 
-                                <f:selectItems  value="#{schoolTypesController.selectedXGrade.subject}"
+                                <f:selectItems  value="#{schoolTypesController.selectedViewGrade.subjectCollection}"
                                                 var="subjectItem"
                                                 itemValue="#{subjectItem}"
                                                 itemLabel="#{subjectItem.name}"/>

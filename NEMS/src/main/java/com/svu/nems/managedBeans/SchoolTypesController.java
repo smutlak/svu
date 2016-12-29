@@ -39,6 +39,7 @@ public class SchoolTypesController implements Serializable {
     private String newGradeName;
     private String newSubjectName;
     private String newSchoolTypeName;
+    private Grades selectedViewGrade;
 
     public String getNewGradeName() {
         return newGradeName;
@@ -386,4 +387,14 @@ public class SchoolTypesController implements Serializable {
             }
         }
     }
+
+    public Grades getSelectedViewGrade() {
+        return selectedViewGrade;
+    }
+
+    public void setSelectedViewGrade(Grades selectedViewGrade) {
+        this.selectedViewGrade = selectedViewGrade;
+    }
+    
+    
 }
