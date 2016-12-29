@@ -115,7 +115,7 @@ public class SchoolTypesController implements Serializable {
     public SchoolTypes prepareEdit() {
         this.newSchoolTypeName = this.selected.getName();
         Iterator<Grades> itGrades = this.selected.getGradesCollection().iterator();
-        xgrades =  new ArrayList();
+        xgrades = new ArrayList();
         while (itGrades.hasNext()) {
             Grades grade = itGrades.next();
             XGrade xgrade = new XGrade(grade.getName());
@@ -125,6 +125,9 @@ public class SchoolTypesController implements Serializable {
                 xgrade.getSubject().add(new XSubject(itSubjects.next().getName()));
             }
             xgrades.add(xgrade);
+        }
+        if (!xgrades.isEmpty()) {
+            this.selectedXGrade = xgrades.get(0);
         }
         return selected;
     }
@@ -167,42 +170,7 @@ public class SchoolTypesController implements Serializable {
             this.selected.setGradesCollection(gradesCollection);
         }
 
-        /* this.selected.setName(newSchoolTypeName);
-        Collection<SchoolTypeGrades> schoolTypeGradesCollection = new ArrayList();
-        for (XGrade xgrade : xgrades) {
-            Grades grade = new Grades();
-            grade.setName(xgrade.getName());
-
-            SchoolTypeGrades schoolTypeGrades = new SchoolTypeGrades();
-            schoolTypeGrades.setGradeId(grade);
-            schoolTypeGrades.setTypeId(selected);
-
-            Collection<GradeSubjects> gradeSubjectsCollection = new ArrayList();
-            for (XSubject xSubject : xgrade.getSubject()) {
-                
-                Subject subject = new Subject();
-                subject.setName(xSubject.getName());
-                //subject.setGradeSubjectsCollection(gradeSubjectsCollection);
-                GradeSubjects gradeSubjects = new GradeSubjects();
-                gradeSubjects.setGradeId(grade);
-                gradeSubjects.setSubjectId(subjectId);
-                
-            }
-            if (!gradeSubjectsCollection.isEmpty()) {
-                grade.setGradeSubjectsCollection(gradeSubjectsCollection);
-            }
-
-            Collection<SchoolTypeGrades> arr2 = new ArrayList();
-            arr2.add(schoolTypeGrades);
-            grade.setSchoolTypeGradesCollection(arr2);
-
-            schoolTypeGradesCollection.add(schoolTypeGrades);
-
-        }
-        if (!schoolTypeGradesCollection.isEmpty()) {
-            this.selected.setSchoolTypeGradesCollection(schoolTypeGradesCollection);
-        }
-         */
+       
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SchoolTypesCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -210,6 +178,33 @@ public class SchoolTypesController implements Serializable {
     }
 
     public void update() {
+        //We have Problem here
+        this.selected.setName(newSchoolTypeName);
+        List<Grades> gradesCollection = new ArrayList();
+        for (XGrade xgrade : xgrades) {
+            Grades grade = new Grades();
+            grade.setName(xgrade.getName());
+            grade.setSchoolTypeId(selected);
+            gradesCollection.add(grade);
+
+            if (xgrade.getSubject() != null) {
+                List<Subject> subjectCollection = new ArrayList();
+                for (XSubject xSubject : xgrade.getSubject()) {
+
+                    Subject subject = new Subject();
+                    subject.setName(xSubject.getName());
+                    subject.setGradeId(grade);
+                    subjectCollection.add(subject);
+
+                }
+                if (!subjectCollection.isEmpty()) {
+                    grade.setSubjectCollection(subjectCollection);
+                }
+            }
+        }
+        if (!gradesCollection.isEmpty()) {
+            this.selected.setGradesCollection(gradesCollection);
+        }
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("SchoolTypesUpdated"));
     }
 
