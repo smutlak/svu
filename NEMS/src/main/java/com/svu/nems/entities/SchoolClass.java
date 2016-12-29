@@ -33,10 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SchoolClass.findAll", query = "SELECT s FROM SchoolClass s")
     , @NamedQuery(name = "SchoolClass.findById", query = "SELECT s FROM SchoolClass s WHERE s.id = :id")
-    , @NamedQuery(name = "SchoolClass.findByName", query = "SELECT s FROM SchoolClass s WHERE s.name = :name")
     , @NamedQuery(name = "SchoolClass.findBySeq", query = "SELECT s FROM SchoolClass s WHERE s.seq = :seq")
-    , @NamedQuery(name = "SchoolClass.findByAcaemicYear", query = "SELECT s FROM SchoolClass s WHERE s.acaemicYear = :acaemicYear")
-    , @NamedQuery(name = "SchoolClass.findBySemester", query = "SELECT s FROM SchoolClass s WHERE s.semester = :semester")
+    , @NamedQuery(name = "SchoolClass.findByAcademicYear", query = "SELECT s FROM SchoolClass s WHERE s.AcademicYear = :AcademicYear")
     , @NamedQuery(name = "SchoolClass.findByActive", query = "SELECT s FROM SchoolClass s WHERE s.active = :active")})
 public class SchoolClass implements Serializable {
 
@@ -46,23 +44,16 @@ public class SchoolClass implements Serializable {
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 256)
-    @Column(name = "name")
-    private String name;
+  
     @Basic(optional = false)
     @NotNull
     @Column(name = "seq")
     private int seq;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "acaemicYear")
-    private int acaemicYear;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "semester")
-    private int semester;
+    @Column(name = "AcademicYear")
+    private int AcademicYear;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -88,12 +79,10 @@ public class SchoolClass implements Serializable {
         this.id = id;
     }
 
-    public SchoolClass(Integer id, String name, int seq, int acaemicYear, int semester, boolean active) {
+    public SchoolClass(Integer id, int seq, int AcademicYear, boolean active) {
         this.id = id;
-        this.name = name;
         this.seq = seq;
-        this.acaemicYear = acaemicYear;
-        this.semester = semester;
+        this.AcademicYear = AcademicYear;
         this.active = active;
     }
 
@@ -105,14 +94,6 @@ public class SchoolClass implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getSeq() {
         return seq;
     }
@@ -121,20 +102,12 @@ public class SchoolClass implements Serializable {
         this.seq = seq;
     }
 
-    public int getAcaemicYear() {
-        return acaemicYear;
+    public int getAcademicYear() {
+        return AcademicYear;
     }
 
-    public void setAcaemicYear(int acaemicYear) {
-        this.acaemicYear = acaemicYear;
-    }
-
-    public int getSemester() {
-        return semester;
-    }
-
-    public void setSemester(int semester) {
-        this.semester = semester;
+    public void setAcademicYear(int AcademicYear) {
+        this.AcademicYear = AcademicYear;
     }
 
     public boolean getActive() {
