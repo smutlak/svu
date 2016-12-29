@@ -12,16 +12,12 @@
             <h:form id="SchoolClassEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{schoolClassController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{schoolClassController.selected.id}" title="#{bundle.EditSchoolClassTitle_id}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_id}"/>
-                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{schoolClassController.selected.name}" title="#{bundle.EditSchoolClassTitle_name}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_name}"/>
+                        
                         <p:outputLabel value="#{bundle.EditSchoolClassLabel_order}" for="seq" />
                         <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.EditSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_order}"/>
                         <p:outputLabel value="#{bundle.EditSchoolClassLabel_AcademicYear}" for="AcademicYear" />
-                        <p:inputText id="AcademicYear" value="#{schoolClassController.selected.AcademicYear}" title="#{bundle.EditSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_AcademicYear}"/>
-                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_semester}" for="semester" />
-                        <p:inputText id="semester" value="#{schoolClassController.selected.semester}" title="#{bundle.EditSchoolClassTitle_semester}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_semester}"/>
+                        <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.EditSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_AcademicYear}"/>
+                        
                         <p:outputLabel value="#{bundle.EditSchoolClassLabel_active}" for="active" />
                         <p:selectBooleanCheckbox id="active" value="#{schoolClassController.selected.active}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_active}"/>
                         <p:outputLabel value="#{bundle.EditSchoolClassLabel_gradeId}" for="gradeId" />

@@ -12,16 +12,12 @@
             <h:form id="SchoolClassViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{schoolClassController.selected != null}">
-                        <h:outputText value="#{bundle.ViewSchoolClassLabel_id}"/>
-                        <h:outputText value="#{schoolClassController.selected.id}" title="#{bundle.ViewSchoolClassTitle_id}"/>
-                        <h:outputText value="#{bundle.ViewSchoolClassLabel_name}"/>
-                        <h:outputText value="#{schoolClassController.selected.name}" title="#{bundle.ViewSchoolClassTitle_name}"/>
+                        
                         <h:outputText value="#{bundle.ViewSchoolClassLabel_order}"/>
                         <h:outputText value="#{schoolClassController.selected.seq}" title="#{bundle.ViewSchoolClassTitle_order}"/>
                         <h:outputText value="#{bundle.ViewSchoolClassLabel_AcademicYear}"/>
-                        <h:outputText value="#{schoolClassController.selected.AcademicYear}" title="#{bundle.ViewSchoolClassTitle_AcademicYear}"/>
-                        <h:outputText value="#{bundle.ViewSchoolClassLabel_semester}"/>
-                        <h:outputText value="#{schoolClassController.selected.semester}" title="#{bundle.ViewSchoolClassTitle_semester}"/>
+                        <h:outputText value="#{schoolClassController.selected.academicYear}" title="#{bundle.ViewSchoolClassTitle_AcademicYear}"/>
+                        
                         <h:outputText value="#{bundle.ViewSchoolClassLabel_active}"/>
                         <p:selectBooleanCheckbox value="#{schoolClassController.selected.active}" disabled="true"/>
                         <h:outputText value="#{bundle.ViewSchoolClassLabel_gradeId}"/>
