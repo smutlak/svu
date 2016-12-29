@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "SchoolClass.findAll", query = "SELECT s FROM SchoolClass s")
     , @NamedQuery(name = "SchoolClass.findById", query = "SELECT s FROM SchoolClass s WHERE s.id = :id")
     , @NamedQuery(name = "SchoolClass.findBySeq", query = "SELECT s FROM SchoolClass s WHERE s.seq = :seq")
-    , @NamedQuery(name = "SchoolClass.findByAcademicYear", query = "SELECT s FROM SchoolClass s WHERE s.AcademicYear = :AcademicYear")
+    , @NamedQuery(name = "SchoolClass.findByAcademicYear", query = "SELECT s FROM SchoolClass s WHERE s.academicYear = :academicYear")
     , @NamedQuery(name = "SchoolClass.findByActive", query = "SELECT s FROM SchoolClass s WHERE s.active = :active")})
 public class SchoolClass implements Serializable {
 
@@ -52,7 +52,7 @@ public class SchoolClass implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "AcademicYear")
-    private int AcademicYear;
+    private int academicYear;
     
     @Basic(optional = false)
     @NotNull
@@ -79,10 +79,10 @@ public class SchoolClass implements Serializable {
         this.id = id;
     }
 
-    public SchoolClass(Integer id, int seq, int AcademicYear, boolean active) {
+    public SchoolClass(Integer id, int seq, int academicYear, boolean active) {
         this.id = id;
         this.seq = seq;
-        this.AcademicYear = AcademicYear;
+        this.academicYear = academicYear;
         this.active = active;
     }
 
@@ -103,11 +103,11 @@ public class SchoolClass implements Serializable {
     }
 
     public int getAcademicYear() {
-        return AcademicYear;
+        return academicYear;
     }
 
-    public void setAcademicYear(int AcademicYear) {
-        this.AcademicYear = AcademicYear;
+    public void setAcademicYear(int academicYear) {
+        this.academicYear = academicYear;
     }
 
     public boolean getActive() {

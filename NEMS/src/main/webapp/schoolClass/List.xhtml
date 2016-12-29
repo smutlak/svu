@@ -29,45 +29,9 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_name}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.name}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_order}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.seq}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSchoolClassTitle_AcademicYear}"/>
                             </f:facet>
-                            <h:outputText value="#{item.AcademicYear}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_semester}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.semester}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_active}"/>
-                            </f:facet>
-                            <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSchoolClassTitle_gradeId}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.gradeId}"/>
+                            <h:outputText value="#{item.academicYear}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -77,10 +41,35 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSchoolClassTitle_gradeId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.gradeId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSchoolClassTitle_order}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seq}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSchoolClassTitle_teacherId}"/>
                             </f:facet>
                             <h:outputText value="#{item.teacherId}"/>
                         </p:column>
+                        
+                        
+                        
+                        
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSchoolClassTitle_active}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.active}" disabled="true"/>
+                        </p:column>
+                  
+                        
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{schoolClassController.prepareCreate}" update=":SchoolClassCreateForm" oncomplete="PF('SchoolClassCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SchoolClassViewForm" oncomplete="PF('SchoolClassViewDialog').show()" disabled="#{empty schoolClassController.selected}"/>
@@ -92,8 +81,8 @@
             </h:form>
 
             <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
-            <ui:include src="View.xhtml"/>
+           <!-- <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>-->
         </ui:define>
     </ui:composition>
 

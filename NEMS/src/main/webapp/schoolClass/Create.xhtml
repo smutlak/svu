@@ -33,19 +33,10 @@
                                            itemValue="#{teacherIdItem}"
                                            itemLabel="#{teacherIdItem.fullName}"/>
                         </p:selectOneMenu>
-                        <!--<p:outputLabel value="#{bundle.CreateSchoolClassLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{schoolClassController.selected.name}" title="#{bundle.CreateSchoolClassTitle_name}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_name}"/>
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
-                        <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.CreateSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}"/>-->
                         <p:outputLabel value="#{bundle.CreateSchoolClassLabel_AcademicYear}" for="AcademicYear" />
-                        <p:inputText id="AcademicYear" value="#{schoolClassController.selected.AcademicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
-                        <!--<p:outputLabel value="#{bundle.CreateSchoolClassLabel_semester}" for="semester" />
-                        <p:inputText id="semester" value="#{schoolClassController.selected.semester}" title="#{bundle.CreateSchoolClassTitle_semester}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_semester}"/>
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_active}" for="active" />
-                        <p:selectBooleanCheckbox id="active" value="#{schoolClassController.selected.active}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_active}"/>-->
-                        
-                        
-                        
+                        <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
+                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
+                        <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.CreateSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schoolClassController.create}" value="#{bundle.Save}" update="display,:SchoolClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolClassCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassCreateDialog.hide()"/>
