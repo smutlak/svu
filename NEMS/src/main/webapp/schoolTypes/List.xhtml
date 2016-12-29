@@ -43,7 +43,7 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{schoolTypesController.prepareCreate}" update=":SchoolTypesCreateForm" oncomplete="PF('SchoolTypesCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SchoolTypesViewForm" oncomplete="PF('SchoolTypesViewDialog').show()" disabled="#{empty schoolTypesController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SchoolTypesEditForm" oncomplete="PF('SchoolTypesEditDialog').show()" disabled="#{empty schoolTypesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{schoolTypesController.prepareEdit}" update=":SchoolTypesEditForm" oncomplete="PF('SchoolTypesEditDialog').show()" disabled="#{empty schoolTypesController.selected}"/>
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{schoolTypesController.destroy}" update=":growl,datalist" disabled="#{empty schoolTypesController.selected}"/>
                         </f:facet>
                     </p:dataTable>

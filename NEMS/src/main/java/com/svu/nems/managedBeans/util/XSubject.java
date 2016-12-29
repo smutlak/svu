@@ -15,6 +15,13 @@ public class XSubject implements Serializable{
     
     private String name;
 
+    public XSubject() {
+    }
+
+    public XSubject(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }

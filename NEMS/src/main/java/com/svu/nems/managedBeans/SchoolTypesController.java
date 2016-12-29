@@ -11,6 +11,7 @@ import com.svu.nems.sessionBeans.SchoolTypesFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -111,16 +112,33 @@ public class SchoolTypesController implements Serializable {
         return ejbFacade;
     }
 
+    public SchoolTypes prepareEdit() {
+        this.newSchoolTypeName = this.selected.getName();
+        Iterator<Grades> itGrades = this.selected.getGradesCollection().iterator();
+        xgrades =  new ArrayList();
+        while (itGrades.hasNext()) {
+            Grades grade = itGrades.next();
+            XGrade xgrade = new XGrade(grade.getName());
+            xgrade.setSubject(new ArrayList());
+            Iterator<Subject> itSubjects = grade.getSubjectCollection().iterator();
+            while (itSubjects.hasNext()) {
+                xgrade.getSubject().add(new XSubject(itSubjects.next().getName()));
+            }
+            xgrades.add(xgrade);
+        }
+        return selected;
+    }
+
     public SchoolTypes prepareCreate() {
         selected = new SchoolTypes();
         initializeEmbeddableKey();
         return selected;
     }
 
-    public void resetSelected(){
+    public void resetSelected() {
         this.selected = null;
     }
-    
+
     public void create() {
         this.selected.setName(newSchoolTypeName);
         List<Grades> gradesCollection = new ArrayList();
@@ -395,6 +413,5 @@ public class SchoolTypesController implements Serializable {
     public void setSelectedViewGrade(Grades selectedViewGrade) {
         this.selectedViewGrade = selectedViewGrade;
     }
-    
-    
+
 }

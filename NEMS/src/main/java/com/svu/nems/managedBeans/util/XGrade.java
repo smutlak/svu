@@ -17,6 +17,13 @@ public class XGrade implements Serializable {
     private String name;
     private List<XSubject> subject;
 
+    public XGrade() {
+    }
+
+    public XGrade(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
