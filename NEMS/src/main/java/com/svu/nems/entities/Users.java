@@ -120,8 +120,7 @@ public class Users implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dirictorId")
     private Collection<Subject> subjectCollection;f
 */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
-    private Collection<SchoolClass> schoolClassCollection;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private Collection<UserRoles> userRolesCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "principalId")
@@ -288,14 +287,7 @@ public class Users implements Serializable {
         this.subjectCollection = subjectCollection;
     }
 */
-    @XmlTransient
-    public Collection<SchoolClass> getSchoolClassCollection() {
-        return schoolClassCollection;
-    }
-
-    public void setSchoolClassCollection(Collection<SchoolClass> schoolClassCollection) {
-        this.schoolClassCollection = schoolClassCollection;
-    }
+   
 
     @XmlTransient
     public Collection<UserRoles> getUserRolesCollection() {

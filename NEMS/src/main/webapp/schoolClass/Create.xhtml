@@ -8,24 +8,34 @@
 
     <ui:composition>
 
-        <p:dialog id="SchoolClassCreateDlg" widgetVar="SchoolClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSchoolClassTitle}">
+        <p:dialog id="SchoolClassCreateDlg" width="600px" widgetVar="SchoolClassCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSchoolClassTitle}">
             <h:form id="SchoolClassCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{schoolClassController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_schoolId}" for="schoolId" />
-                        <p:selectOneMenu id="schoolId" value="#{schoolClassController.selected.schoolId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_schoolId}">
-                            <f:selectItems value="#{schoolController.itemsAvailableSelectOne}"
-                                           var="schoolIdItem"
-                                           itemValue="#{schoolIdItem}"
-                                           itemLabel="#{schoolIdItem.name}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_gradeId}" for="gradeId" />
-                        <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
-                            <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
-                                           var="gradeIdItem"
-                                           itemValue="#{gradeIdItem}"
-                                           itemLabel="#{gradeIdItem.name}"/>
-                        </p:selectOneMenu>
+                    <p:panelGrid  rendered="#{schoolClassController.selected != null}">
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_schoolId}" for="schoolId" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="schoolId" value="#{schoolClassController.selected.schoolId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_schoolId}">
+                                    <f:selectItems value="#{schoolController.itemsAvailableSelectOne}"
+                                                   var="schoolIdItem"
+                                                   itemValue="#{schoolIdItem}"
+                                                   itemLabel="#{schoolIdItem.name}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_gradeId}" for="gradeId" />
+                            </p:column>
+                            <p:column>
+                                <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
+                                    <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
+                                                   var="gradeIdItem"
+                                                   itemValue="#{gradeIdItem}"
+                                                   itemLabel="#{gradeIdItem.name}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
                         <!--<p:outputLabel value="#{bundle.CreateSchoolClassLabel_teacherId}" for="teacherId" />
                         <p:selectOneMenu id="teacherId" value="#{schoolClassController.selected.teacherId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_teacherId}">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
@@ -33,10 +43,41 @@
                                            itemValue="#{teacherIdItem}"
                                            itemLabel="#{teacherIdItem.fullName}"/>
                         </p:selectOneMenu>-->
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_AcademicYear}" for="AcademicYear" />
-                        <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
-                        <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.CreateSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}"/>
+                        <p:row>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_AcademicYear}" for="AcademicYear" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
+                            </p:column>
+                            <p:column>
+                                <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.CreateSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}"/>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column colspan="4">
+                                <p:dataTable>
+                                    <p:column headerText="Id">
+                                        <h:outputText  />
+                                    </p:column>
+
+                                    <p:column headerText="Year">
+                                        <h:outputText  />
+                                    </p:column>
+
+                                    <p:column headerText="Brand">
+                                        <h:outputText/>
+                                    </p:column>
+
+                                    <p:column headerText="Color">
+                                        <h:outputText  />
+                                    </p:column>
+                                </p:dataTable>
+                            </p:column>
+                        </p:row>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schoolClassController.create}" value="#{bundle.Save}" update="display,:SchoolClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolClassCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassCreateDialog.hide()"/>

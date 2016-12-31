@@ -68,11 +68,8 @@ public class SchoolClass implements Serializable {
     @JoinColumn(name = "schoolId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private School schoolId;
-    @JoinColumn(name = "teacherId", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Users teacherId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classId")
-    private Collection<UserClasses> userClassesCollection;
+    
+    
 
     public SchoolClass() {
     }
@@ -145,23 +142,7 @@ public class SchoolClass implements Serializable {
         this.schoolId = schoolId;
     }
 
-    public Users getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(Users teacherId) {
-        this.teacherId = teacherId;
-    }
-
-    @XmlTransient
-    public Collection<UserClasses> getUserClassesCollection() {
-        return userClassesCollection;
-    }
-
-    public void setUserClassesCollection(Collection<UserClasses> userClassesCollection) {
-        this.userClassesCollection = userClassesCollection;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
