@@ -34,13 +34,13 @@
                                            var="schoolIdItem"
                                            itemValue="#{schoolIdItem}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditSchoolClassLabel_teacherId}" for="teacherId" />
+                        <!--<p:outputLabel value="#{bundle.EditSchoolClassLabel_teacherId}" for="teacherId" />
                         <p:selectOneMenu id="teacherId" value="#{schoolClassController.selected.teacherId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_teacherId}">
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="teacherIdItem"
                                            itemValue="#{teacherIdItem}"/>
-                        </p:selectOneMenu>
+                        </p:selectOneMenu>-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schoolClassController.update}" value="#{bundle.Save}" update="display,:SchoolClassListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchoolClassEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassEditDialog.hide()"/>

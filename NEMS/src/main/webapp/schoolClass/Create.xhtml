@@ -26,13 +26,13 @@
                                            itemValue="#{gradeIdItem}"
                                            itemLabel="#{gradeIdItem.name}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSchoolClassLabel_teacherId}" for="teacherId" />
+                        <!--<p:outputLabel value="#{bundle.CreateSchoolClassLabel_teacherId}" for="teacherId" />
                         <p:selectOneMenu id="teacherId" value="#{schoolClassController.selected.teacherId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_teacherId}">
                             <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
                                            var="teacherIdItem"
                                            itemValue="#{teacherIdItem}"
                                            itemLabel="#{teacherIdItem.fullName}"/>
-                        </p:selectOneMenu>
+                        </p:selectOneMenu>-->
                         <p:outputLabel value="#{bundle.CreateSchoolClassLabel_AcademicYear}" for="AcademicYear" />
                         <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
                         <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
