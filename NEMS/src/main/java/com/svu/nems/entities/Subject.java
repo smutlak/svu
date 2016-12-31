@@ -39,6 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Subject.findByActive", query = "SELECT s FROM Subject s WHERE s.active = :active")})
 public class Subject implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
+    private Collection<ClassSubjects> classSubjectsCollection;
+
     @JoinColumn(name = "gradeId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Grades gradeId;
@@ -178,6 +181,15 @@ public class Subject implements Serializable {
 
     public void setGradeId(Grades gradeId) {
         this.gradeId = gradeId;
+    }
+
+    @XmlTransient
+    public Collection<ClassSubjects> getClassSubjectsCollection() {
+        return classSubjectsCollection;
+    }
+
+    public void setClassSubjectsCollection(Collection<ClassSubjects> classSubjectsCollection) {
+        this.classSubjectsCollection = classSubjectsCollection;
     }
 
 }

@@ -19,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -38,6 +37,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SchoolClass.findByActive", query = "SELECT s FROM SchoolClass s WHERE s.active = :active")})
 public class SchoolClass implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "academicYear")
+    private int academicYear;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "schoolClassId")
+    private Collection<ClassSubjects> classSubjectsCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -49,10 +55,6 @@ public class SchoolClass implements Serializable {
     @NotNull
     @Column(name = "seq")
     private int seq;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "AcademicYear")
-    private int academicYear;
     
     @Basic(optional = false)
     @NotNull
@@ -183,6 +185,16 @@ public class SchoolClass implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.SchoolClass[ id=" + id + " ]";
+    }
+
+    
+    @XmlTransient
+    public Collection<ClassSubjects> getClassSubjectsCollection() {
+        return classSubjectsCollection;
+    }
+
+    public void setClassSubjectsCollection(Collection<ClassSubjects> classSubjectsCollection) {
+        this.classSubjectsCollection = classSubjectsCollection;
     }
     
 }
