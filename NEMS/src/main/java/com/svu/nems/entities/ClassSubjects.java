@@ -31,16 +31,17 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ClassSubjects.findByTeacherId", query = "SELECT c FROM ClassSubjects c WHERE c.teacherId = :teacherId")})
 public class ClassSubjects implements Serializable {
 
+    @JoinColumn(name = "teacherId", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Users teacherId;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "teacherId")
-    private int teacherId;
+    
     @JoinColumn(name = "schoolClassId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SchoolClass schoolClassId;
@@ -55,10 +56,7 @@ public class ClassSubjects implements Serializable {
         this.id = id;
     }
 
-    public ClassSubjects(Integer id, int teacherId) {
-        this.id = id;
-        this.teacherId = teacherId;
-    }
+    
 
     public Integer getId() {
         return id;
@@ -68,13 +66,7 @@ public class ClassSubjects implements Serializable {
         this.id = id;
     }
 
-    public int getTeacherId() {
-        return teacherId;
-    }
-
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
-    }
+    
 
     public SchoolClass getSchoolClassId() {
         return schoolClassId;
@@ -115,6 +107,14 @@ public class ClassSubjects implements Serializable {
     @Override
     public String toString() {
         return "com.svu.nems.entities.ClassSubjects[ id=" + id + " ]";
+    }
+
+    public Users getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(Users teacherId) {
+        this.teacherId = teacherId;
     }
     
 }

@@ -28,7 +28,12 @@
                                 <p:outputLabel value="#{bundle.CreateSchoolClassLabel_gradeId}" for="gradeId" />
                             </p:column>
                             <p:column>
-                                <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
+                                <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" 
+                                                 required="true" 
+                                                 requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
+                                    <p:ajax event="valueChange" process="@this" 
+                                            listener="#{schoolClassController.prepareClassSubjects}"
+                                            update="subjectsTable"/>
                                     <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
                                                    var="gradeIdItem"
                                                    itemValue="#{gradeIdItem}"
@@ -59,28 +64,29 @@
                         </p:row>
                         <p:row>
                             <p:column colspan="4">
-                                <p:dataTable>
-                                    <p:column headerText="Id">
-                                        <h:outputText  />
+                                <p:dataTable id="subjectsTable" 
+                                             value="#{schoolClassController.selected.classSubjectsCollection}"
+                                             var="clsSubject">
+                                    <p:column headerText="Subject">
+                                        <h:outputText value="#{clsSubject.subjectId.name}"  />
                                     </p:column>
 
-                                    <p:column headerText="Year">
-                                        <h:outputText  />
+                                    <p:column headerText="Teacher">
+                                        <p:selectOneMenu id="gradeId" value="#{clsSubject.teacherId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
+                                            <f:selectItems value="#{usersController.itemsAvailableSelectOne}"
+                                                           var="userItem"
+                                                           itemValue="#{userItem}"
+                                                           itemLabel="#{userItem.fullName}"/>
+                                        </p:selectOneMenu>
                                     </p:column>
 
-                                    <p:column headerText="Brand">
-                                        <h:outputText/>
-                                    </p:column>
-
-                                    <p:column headerText="Color">
-                                        <h:outputText  />
-                                    </p:column>
                                 </p:dataTable>
                             </p:column>
                         </p:row>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schoolClassController.create}" value="#{bundle.Save}" update="display,:SchoolClassListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolClassCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolClassCreateDialog.hide()"
+                                     immediate="true" />
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -53,6 +53,8 @@ public class Users implements Serializable {
     @Lob
     @Column(name = "photo")
     private byte[] photo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacherId")
+    private Collection<ClassSubjects> classSubjectsCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -414,6 +416,16 @@ public class Users implements Serializable {
 
     public void setSubjectDirectorCollection(Collection<SubjectDirector> subjectDirectorCollection) {
         this.subjectDirectorCollection = subjectDirectorCollection;
+    }
+
+
+    @XmlTransient
+    public Collection<ClassSubjects> getClassSubjectsCollection() {
+        return classSubjectsCollection;
+    }
+
+    public void setClassSubjectsCollection(Collection<ClassSubjects> classSubjectsCollection) {
+        this.classSubjectsCollection = classSubjectsCollection;
     }
 
     public byte[] getPhoto() {

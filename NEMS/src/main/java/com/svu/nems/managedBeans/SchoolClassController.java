@@ -1,11 +1,14 @@
 package com.svu.nems.managedBeans;
 
+import com.svu.nems.entities.ClassSubjects;
 import com.svu.nems.entities.SchoolClass;
+import com.svu.nems.entities.Subject;
 import com.svu.nems.managedBeans.util.JsfUtil;
 import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.sessionBeans.SchoolClassFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -162,4 +165,15 @@ public class SchoolClassController implements Serializable {
 
     }
 
+    public void prepareClassSubjects(){
+        List<ClassSubjects> classSubjectsCollection = new ArrayList();
+        if(selected.getGradeId() != null){
+           for (Subject sub :selected.getGradeId().getSubjectCollection()){
+               ClassSubjects classSubject = new ClassSubjects();
+               classSubject.setSubjectId(sub);
+               classSubjectsCollection.add(classSubject);
+           }
+        }
+        selected.setClassSubjectsCollection(classSubjectsCollection);
+    }
 }
