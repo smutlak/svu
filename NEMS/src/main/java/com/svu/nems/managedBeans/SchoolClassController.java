@@ -9,6 +9,7 @@ import com.svu.nems.sessionBeans.SchoolClassFacade;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -176,4 +177,17 @@ public class SchoolClassController implements Serializable {
         }
         selected.setClassSubjectsCollection(classSubjectsCollection);
     }
+    
+    public String getCurrentAcademicYear(){
+        String ret;
+        Calendar cal = Calendar.getInstance();
+        boolean nextYear = cal.get(Calendar.MONTH)>4;
+        int year = cal.get(Calendar.YEAR);
+        if(nextYear)
+        {    ret = year+"-"+(year+1);
+        }else{
+            ret = (year-1)+"-"+year;
+        }
+        return ret;
+    } 
 }

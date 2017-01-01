@@ -53,13 +53,17 @@
                                 <p:outputLabel value="#{bundle.CreateSchoolClassLabel_AcademicYear}" for="AcademicYear" />
                             </p:column>
                             <p:column>
-                                <p:inputText id="AcademicYear" value="#{schoolClassController.selected.academicYear}" title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}"/>
+                                <p:inputText id="AcademicYear" value="#{schoolClassController.getCurrentAcademicYear()}"
+                                             title="#{bundle.CreateSchoolClassTitle_AcademicYear}" required="true" 
+                                             requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_AcademicYear}" readonly="true"/>
                             </p:column>
                             <p:column>
-                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq" />
+                                <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq"/>
                             </p:column>
                             <p:column>
-                                <p:inputText id="seq" value="#{schoolClassController.selected.seq}" title="#{bundle.CreateSchoolClassTitle_order}" required="true" requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}"/>
+                                <p:inputText id="seq" value="#{schoolClassController.selected.seq}" 
+                                             title="#{bundle.CreateSchoolClassTitle_order}" required="true" 
+                                             requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}" readonly="true"/>
                             </p:column>
                         </p:row>
                         <p:row>
