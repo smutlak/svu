@@ -18,7 +18,7 @@
                         <p:inputText id="seq" value="#{gradesController.selected.seq}" title="#{bundle.EditGradesTitle_order}" required="true" requiredMessage="#{bundle.EditGradesRequiredMessage_order}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{gradesController.update}" value="#{bundle.Save}" update="display,:GradesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'GradesEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="GradesEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('GradesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

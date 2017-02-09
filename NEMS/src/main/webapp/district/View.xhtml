@@ -21,7 +21,7 @@
                         <h:outputText value="#{bundle.ViewDistrictLabel_managerId}"/>
                         <h:outputText value="#{districtController.selected.managerId.fullName}" title="#{bundle.ViewDistrictTitle_managerId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="DistrictViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('DistrictViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

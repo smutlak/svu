@@ -40,7 +40,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{parentInfoController.create}" value="#{bundle.Save}" update="display,:ParentInfoListForm:datalist,:growl" oncomplete="handleSubmit(args,'ParentInfoCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ParentInfoCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('ParentInfoCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

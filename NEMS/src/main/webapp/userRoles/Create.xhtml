@@ -28,7 +28,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userRolesController.create}" value="#{bundle.Save}" update="display,:UserRolesListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserRolesCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserRolesCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserRolesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

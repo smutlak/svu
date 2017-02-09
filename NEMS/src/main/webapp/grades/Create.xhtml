@@ -21,7 +21,7 @@
                         <p:selectBooleanCheckbox id="active" value="#{gradesController.selected.active}" required="true" requiredMessage="#{bundle.EditGradesRequiredMessage_active}"/>-->
                     </p:panelGrid>
                     <p:commandButton actionListener="#{gradesController.create}" value="#{bundle.Save}" update="display,:GradesListForm:datalist,:growl" oncomplete="handleSubmit(args,'GradesCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="GradesCreateDialog.hide()" immediate="true"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('GradesCreateDialog').hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

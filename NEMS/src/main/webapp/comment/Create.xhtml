@@ -46,7 +46,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{commentController.create}" value="#{bundle.Save}" update="display,:CommentListForm:datalist,:growl" oncomplete="handleSubmit(args,'CommentCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="CommentCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('CommentCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

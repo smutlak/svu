@@ -25,7 +25,7 @@
                         <h:outputText value="#{bundle.ViewTeachingPlanLabel_subjectId}"/>
                         <h:outputText value="#{teachingPlanController.selected.subjectId}" title="#{bundle.ViewTeachingPlanTitle_subjectId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="TeachingPlanViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('TeachingPlanViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -18,7 +18,7 @@
                         <p:inputText id="roleName" value="#{roleController.selected.roleName}" title="#{bundle.CreateRoleTitle_roleName}" required="true" requiredMessage="#{bundle.CreateRoleRequiredMessage_roleName}"/>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{roleController.create}" value="#{bundle.Save}" update="display,:RoleListForm:datalist,:growl" oncomplete="handleSubmit(args,'RoleCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="RoleCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('RoleCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

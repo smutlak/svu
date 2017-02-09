@@ -43,7 +43,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{sessionsController.update}" value="#{bundle.Save}" update="display,:SessionsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SessionsEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SessionsEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SessionsEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

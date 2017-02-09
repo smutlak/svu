@@ -29,7 +29,7 @@
                         <h:outputText value="#{bundle.ViewSessionMediaLabel_sessionId}"/>
                         <h:outputText value="#{sessionMediaController.selected.sessionId}" title="#{bundle.ViewSessionMediaTitle_sessionId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SessionMediaViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SessionMediaViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -34,7 +34,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{assignmentController.create}" value="#{bundle.Save}" update="display,:AssignmentListForm:datalist,:growl" oncomplete="handleSubmit(args,'AssignmentCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AssignmentCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('AssignmentCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -95,7 +95,7 @@
                                      oncomplete="handleSubmit(args,'SchoolTypesCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" 
                                      actionListener="#{schoolTypesController.resetSelected}" 
-                                     onclick="SchoolTypesCreateDialog.hide()"  immediate="true"/>
+                                     onclick="PF('SchoolTypesCreateDialog').hide()"  immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

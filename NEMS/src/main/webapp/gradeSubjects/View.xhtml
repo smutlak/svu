@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewGradeSubjectsLabel_subjectId}"/>
                         <h:outputText value="#{gradeSubjectsController.selected.subjectId}" title="#{bundle.ViewGradeSubjectsTitle_subjectId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="GradeSubjectsViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('GradeSubjectsViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

@@ -62,7 +62,7 @@
 
                     </h:panelGrid>
                     <p:commandButton actionListener="#{schoolTypesController.update}" value="#{bundle.Save}" update="display,:SchoolTypesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SchoolTypesEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolTypesEditDialog.hide()" immediate="true"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SchoolTypesEditDialog').hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

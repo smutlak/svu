@@ -19,7 +19,7 @@
                         <h:outputText value="#{bundle.ViewAbsenceLabel_studentId}"/>
                         <h:outputText value="#{absenceController.selected.studentId}" title="#{bundle.ViewAbsenceTitle_studentId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="AbsenceViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('AbsenceViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

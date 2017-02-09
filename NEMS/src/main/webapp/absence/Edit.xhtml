@@ -30,7 +30,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{absenceController.update}" value="#{bundle.Save}" update="display,:AbsenceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'AbsenceEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="AbsenceEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('AbsenceEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

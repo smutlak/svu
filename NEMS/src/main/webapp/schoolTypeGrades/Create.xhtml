@@ -28,7 +28,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{schoolTypeGradesController.create}" value="#{bundle.Save}" update="display,:SchoolTypeGradesListForm:datalist,:growl" oncomplete="handleSubmit(args,'SchoolTypeGradesCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SchoolTypeGradesCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SchoolTypeGradesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

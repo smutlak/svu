@@ -36,7 +36,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userClassesController.create}" value="#{bundle.Save}" update="display,:UserClassesListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserClassesCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserClassesCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UserClassesCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

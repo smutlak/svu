@@ -21,7 +21,7 @@
                         <h:outputText value="#{bundle.ViewAssignmentMarkLabel_studentId}"/>
                         <h:outputText value="#{assignmentMarkController.selected.studentId}" title="#{bundle.ViewAssignmentMarkTitle_studentId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="AssignmentMarkViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('AssignmentMarkViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

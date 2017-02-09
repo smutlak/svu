@@ -30,7 +30,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{plannedSessionController.create}" value="#{bundle.Save}" update="display,:PlannedSessionListForm:datalist,:growl" oncomplete="handleSubmit(args,'PlannedSessionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="PlannedSessionCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('PlannedSessionCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

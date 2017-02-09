@@ -50,7 +50,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{subjectDirectorController.update}" value="#{bundle.Save}" update="display,:SubjecDirectortListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubjectDirectorEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SubjectDirectorEditDialog.hide()" immediate="true"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('SubjectDirectorEditDialog').hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

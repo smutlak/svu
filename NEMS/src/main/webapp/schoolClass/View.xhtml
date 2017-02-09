@@ -25,7 +25,7 @@
                         <h:outputText value="#{bundle.ViewSchoolClassLabel_schoolId}"/>
                         <h:outputText value="#{schoolClassController.selected.schoolId}" title="#{bundle.ViewSchoolClassTitle_schoolId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SchoolClassViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SchoolClassViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

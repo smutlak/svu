@@ -35,7 +35,7 @@
                         <h:outputText value="#{bundle.ViewParentInfoLabel_userId}"/>
                         <h:outputText value="#{parentInfoController.selected.userId}" title="#{bundle.ViewParentInfoTitle_userId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="ParentInfoViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('ParentInfoViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

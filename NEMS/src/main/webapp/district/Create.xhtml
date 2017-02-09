@@ -27,7 +27,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{districtController.create}" value="#{bundle.Save}" update="display,:DistrictListForm:datalist,:growl" oncomplete="handleSubmit(args,'DistrictCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="DistrictCreateDialog.hide()" immediate="true"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('DistrictCreateDialog').hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

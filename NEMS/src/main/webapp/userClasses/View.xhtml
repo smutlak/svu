@@ -23,7 +23,7 @@
                         <h:outputText value="#{bundle.ViewUserClassesLabel_userId}"/>
                         <h:outputText value="#{userClassesController.selected.userId}" title="#{bundle.ViewUserClassesTitle_userId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UserClassesViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UserClassesViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

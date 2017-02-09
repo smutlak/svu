@@ -28,7 +28,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userSessionController.create}" value="#{bundle.Save}" update="display,:UserSessionListForm:datalist,:growl" oncomplete="handleSubmit(args,'UserSessionCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserSessionCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserSessionCreateDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

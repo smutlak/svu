@@ -71,7 +71,7 @@
                     </p:panelGrid>
                     
                     <h:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}"></h:commandButton> <!--update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>-->
-                    <p:commandButton actionListener="#{usersController.resetSelected}" value="#{bundle.Cancel}" onclick="UsersCreateDialog.hide()" immediate="true"/>
+                    <p:commandButton actionListener="#{usersController.resetSelected}" value="#{bundle.Cancel}" onclick="PF('UsersCreateDialog').hide()" immediate="true"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

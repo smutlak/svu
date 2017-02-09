@@ -38,7 +38,7 @@
                         <h:outputText value="#{bundle.ViewUsersLabel_active}"/>
                         <p:selectBooleanCheckbox value="#{usersController.selected.active}" disabled="true"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UsersViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UsersViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

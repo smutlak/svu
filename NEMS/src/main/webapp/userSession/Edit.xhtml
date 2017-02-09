@@ -29,7 +29,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userSessionController.update}" value="#{bundle.Save}" update="display,:UserSessionListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserSessionEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserSessionEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserSessionEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

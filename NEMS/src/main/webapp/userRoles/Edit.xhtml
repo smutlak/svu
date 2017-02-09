@@ -30,7 +30,7 @@
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{userRolesController.update}" value="#{bundle.Save}" update="display,:UserRolesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UserRolesEditDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="UserRolesEditDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PF('UserRolesEditDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

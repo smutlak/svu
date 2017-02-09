@@ -29,7 +29,7 @@
                         <h:outputText value="#{bundle.ViewAssignmentLabel_sessionId}"/>
                         <h:outputText value="#{assignmentController.selected.sessionId}" title="#{bundle.ViewAssignmentTitle_sessionId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="AssignmentViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('AssignmentViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

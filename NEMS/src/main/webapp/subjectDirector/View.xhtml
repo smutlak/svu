@@ -21,7 +21,7 @@
                         <h:outputText value="Director" />
                         <h:outputText value="#{subjectDirectorController.selected.directorId.fullName}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="SubjectViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('SubjectViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

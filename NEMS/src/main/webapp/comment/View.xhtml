@@ -29,7 +29,7 @@
                         <h:outputText value="#{bundle.ViewCommentLabel_userId}"/>
                         <h:outputText value="#{commentController.selected.userId}" title="#{bundle.ViewCommentTitle_userId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="CommentViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('CommentViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

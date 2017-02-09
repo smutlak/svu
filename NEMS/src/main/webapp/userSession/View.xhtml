@@ -27,7 +27,7 @@
                         <h:outputText value="#{bundle.ViewUserSessionLabel_userId}"/>
                         <h:outputText value="#{userSessionController.selected.userId}" title="#{bundle.ViewUserSessionTitle_userId}"/>
                     </p:panelGrid>
-                    <p:commandButton value="#{bundle.Close}" onclick="UserSessionViewDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Close}" onclick="PF('UserSessionViewDialog').hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>
