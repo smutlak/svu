@@ -137,6 +137,7 @@ public class mainBean implements Serializable {
     public String logout() {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
+         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/index.xhtml?faces-redirect=true";
     }
 
