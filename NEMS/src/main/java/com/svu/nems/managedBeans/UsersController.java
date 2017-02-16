@@ -82,9 +82,10 @@ public class UsersController implements Serializable {
         return selected;
     }
 
-    public void resetSelected(){
+    public void resetSelected() {
         this.selected = null;
     }
+
     public void create() throws IOException {
         UserRoles r = new UserRoles();
         r.setRoleId(selectedRole);
@@ -125,7 +126,7 @@ public class UsersController implements Serializable {
             stream.close();
             selected.setPhoto(buffer);
         }
-        
+
         persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
         photo = null;
     }
@@ -294,5 +295,53 @@ public class UsersController implements Serializable {
     public List<Role> getRoles() {
         List<Role> roles = roleFacade.findAll();
         return roles;
+    }
+
+    public List<Role> getPrivilagedRoles() {
+        List<Role> ret = new ArrayList();
+        List<Role> allRoles = getRoles();
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        mainBean mBean = context.getApplication().evaluateExpressionGet(context, "#{mainBean}", mainBean.class);
+        System.out.println("" + mBean.getRole());
+
+        for (Role role : allRoles) {
+            if (null != mBean.getRole()) {
+                switch (mBean.getRole()) {
+                    case "admin":
+                        ret.addAll(allRoles);
+                        return ret;
+                    case "Deputy Minister of Education":
+                        ret.add(findRole("School District Manager"));
+                        return ret;
+                    /*case "School District Manager":
+                        return false;
+                    case "Subject Director":
+                        return false;
+                    case "School Principal":
+                        return false;
+                    case "Teacher":
+                        return false;
+                    case "Student":
+                        return false;
+                    case "Student Parent":
+                        return false;
+                    default:
+                        break;*/
+                }
+            }
+            System.out.println("" + role.getRoleName());
+        }
+        return ret;
+    }
+
+    private Role findRole(String sRuleName) {
+        List<Role> allRoles = getRoles();
+        for (Role role : allRoles) {
+            if (role.getRoleName().equals(sRuleName)) {
+                return role;
+            }
+        }
+        return null;
     }
 }

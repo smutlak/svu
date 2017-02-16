@@ -32,9 +32,8 @@
                         <p:outputLabel value="#{bundle.CreateUsersLabel_role}" for="role" />
                         <p:selectOneMenu id="role"  value="#{usersController.selectedRole}"
                                          required="true" label="Text 3" >
-                            <f:selectItems value="#{usersController.roles}"  var="role"
+                            <f:selectItems value="#{usersController.getPrivilagedRoles()}"  var="role"
                                            itemLabel="#{role.roleName}" itemValue="#{role}"></f:selectItems>
-                            
                         </p:selectOneMenu>
                         <p:spacer></p:spacer>
                         <p:outputLabel value="#{bundle.CreateUsersLabel_FName}" for="FName" />
