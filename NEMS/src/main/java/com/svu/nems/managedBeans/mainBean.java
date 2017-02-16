@@ -13,6 +13,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -135,10 +137,16 @@ public class mainBean implements Serializable {
     }
 
     public String logout() {
-        HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
+        FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
          FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index.xhtml?faces-redirect=true";
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect(
+                    FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
+        } catch (IOException ex) {
+            Logger.getLogger(mainBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
     }
 
     public boolean can(String type) throws IOException {
