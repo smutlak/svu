@@ -76,6 +76,7 @@ public class UsersController implements Serializable {
     }
 
     public Users prepareCreate() {
+        selected = null;
         selected = new Users();
         initializeEmbeddableKey();
         return selected;

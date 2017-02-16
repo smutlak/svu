@@ -134,6 +134,9 @@ public class SchoolTypesController implements Serializable {
 
     public SchoolTypes prepareCreate() {
         selected = new SchoolTypes();
+        xgrades = null;
+        this.selctedXSubject = null;
+        this.selectedXGrade = null;
         initializeEmbeddableKey();
         return selected;
     }
