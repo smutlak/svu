@@ -137,7 +137,7 @@ public class mainBean implements Serializable {
     public String logout() {
         FacesContext.getCurrentInstance()
                 .getExternalContext().getSession(false);
-         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect(
                     FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath());
@@ -150,7 +150,7 @@ public class mainBean implements Serializable {
     public boolean can(String type) throws IOException {
         if (role == null) {
             // FacesContext.getCurrentInstance().getExternalContext().redirect("/index.xhtml");
-          /*  ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            /*  ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
             ec.redirect(ec.getRequestContextPath() + "/index.xhtml");*/
             return false;
         }
@@ -169,8 +169,9 @@ public class mainBean implements Serializable {
                 }
                 break;
             case "Users":
-                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION) || 
-                        role.equals(Role.SCHOOLDISTRICTMANAGER)) {
+                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)
+                        || role.equals(Role.SCHOOLDISTRICTMANAGER)
+                        || role.equals(Role.SCHOOLPRINCIPAL)) {
                     return true;
                 }
                 break;
@@ -181,6 +182,18 @@ public class mainBean implements Serializable {
                 break;
             case "SubjectDirector":
                 if (role.equals(Role.SCHOOLDISTRICTMANAGER)) {
+                    return true;
+                }
+                break;
+
+            case "SchoolClass":
+                if (role.equals(Role.SCHOOLPRINCIPAL)) {
+                    return true;
+                }
+                break;
+
+            case "TeachingPlan":
+                if (role.equals(Role.SUBJECTDIRECTOR)) {
                     return true;
                 }
                 break;

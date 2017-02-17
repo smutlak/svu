@@ -34,6 +34,7 @@
                                     <p:ajax event="valueChange" process="@this" 
                                             listener="#{schoolClassController.prepareClassSubjects}"
                                             update="subjectsTable"/>
+                                    <f:selectItem itemLabel="" ></f:selectItem>
                                     <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
                                                    var="gradeIdItem"
                                                    itemValue="#{gradeIdItem}"

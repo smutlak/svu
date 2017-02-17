@@ -319,10 +319,13 @@ public class UsersController implements Serializable {
                         ret.add(findRole("School Principal"));
                         return ret;
                     /*case "Subject Director":
-                        return false;
+                        return false;*/
                     case "School Principal":
-                        return false;
-                    case "Teacher":
+                        ret.add(findRole("Teacher"));
+                        ret.add(findRole("Student Parent"));
+                        ret.add(findRole("Student"));
+                        return ret;
+                    /*case "Teacher":
                         return false;
                     case "Student":
                         return false;
