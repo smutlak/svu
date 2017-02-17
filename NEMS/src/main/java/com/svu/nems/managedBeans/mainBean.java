@@ -162,14 +162,28 @@ public class mainBean implements Serializable {
                 if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
                     return true;
                 }
+                break;
             case "SchoolTypes":
                 if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
                     return true;
                 }
+                break;
             case "Users":
-                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION)) {
+                if (role.equals(Role.DEPUTYMINISTEROFEDUCATION) || 
+                        role.equals(Role.SCHOOLDISTRICTMANAGER)) {
                     return true;
                 }
+                break;
+            case "School":
+                if (role.equals(Role.SCHOOLDISTRICTMANAGER)) {
+                    return true;
+                }
+                break;
+            case "SubjectDirector":
+                if (role.equals(Role.SCHOOLDISTRICTMANAGER)) {
+                    return true;
+                }
+                break;
         }
         return false;
     }
