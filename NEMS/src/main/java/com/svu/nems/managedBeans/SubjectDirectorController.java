@@ -27,7 +27,7 @@ public class SubjectDirectorController implements Serializable {
 
     @EJB
     private com.svu.nems.sessionBeans.SubjectDirectorFacade ejbFacade;
-    
+
     private Grades selectedGrade;
     private List<SubjectDirector> items = null;
     private SubjectDirector selected;
@@ -41,7 +41,11 @@ public class SubjectDirectorController implements Serializable {
 
     public void setSelected(SubjectDirector selected) {
         this.selected = selected;
-        this.selectedGrade = this.selected.getSubjectId().getGradeId();
+        if (this.selected != null) {
+            if (this.selected.getSubjectId() != null) {
+                this.selectedGrade = this.selected.getSubjectId().getGradeId();
+            }
+        }
     }
 
     protected void setEmbeddableKeys() {
@@ -175,5 +179,4 @@ public class SubjectDirectorController implements Serializable {
         this.selectedGrade = selectedGrade;
     }
 
-    
 }

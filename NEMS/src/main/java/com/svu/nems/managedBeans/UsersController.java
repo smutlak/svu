@@ -314,9 +314,11 @@ public class UsersController implements Serializable {
                     case "Deputy Minister of Education":
                         ret.add(findRole("School District Manager"));
                         return ret;
-                    /*case "School District Manager":
-                        return false;
-                    case "Subject Director":
+                    case "School District Manager":
+                        ret.add(findRole("Subject Director"));
+                        ret.add(findRole("School Principal"));
+                        return ret;
+                    /*case "Subject Director":
                         return false;
                     case "School Principal":
                         return false;
