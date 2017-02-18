@@ -7,7 +7,14 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
+        <p:dialog id="addScheduledLessonDlg" widgetVar="addScheduledLessonDlgDialog" modal="true" 
+                  resizable="false" appendTo="@(body)" header="Add Scheduled Lesson">
+            <h:form id="SchoolTypesGradeCreateForm">
+                
 
+                <p:commandButton value="#{bundle.Cancel}" onclick="PF('addScheduledLessonDlgDialog').hide()" immediate="true"/>
+            </h:form>
+        </p:dialog>
         <p:dialog id="TeachingPlanCreateDlg" widgetVar="TeachingPlanCreateDialog" modal="true" 
                   resizable="false" appendTo="@(body)" header="#{bundle.CreateTeachingPlanTitle}" width="400" >
             <h:form id="TeachingPlanCreateForm">
@@ -28,6 +35,8 @@
                                            itemValue="#{subjectIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
+                    <p:commandButton value="Add Scheduled lesson" onclick="PF('').show()" />
+                    <p:separator></p:separator>
                     <p:scrollPanel style="width:300px;height:300px">
                         <p:tree value="#{teachingPlanController.fakeRoot}" var="node"
                                 >
