@@ -7,7 +7,6 @@ import com.svu.nems.sessionBeans.TeachingPlanFacade;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -21,9 +20,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import org.primefaces.model.DefaultScheduleEvent;
-import org.primefaces.model.DefaultScheduleModel;
-import org.primefaces.model.ScheduleModel;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 
 @Named("teachingPlanController")
 @SessionScoped
@@ -34,7 +32,17 @@ public class TeachingPlanController implements Serializable {
     private List<TeachingPlan> items = null;
     private TeachingPlan selected;
 
-    private ScheduleModel eventModel;
+    private TreeNode fakeRoot;
+
+    public TreeNode getFakeRoot() {
+        return fakeRoot;
+    }
+
+    public void setFakeRoot(TreeNode fakeRoot) {
+        this.fakeRoot = fakeRoot;
+    }
+
+   
 
     public TeachingPlanController() {
 
@@ -42,17 +50,73 @@ public class TeachingPlanController implements Serializable {
 
     @PostConstruct
     public void init() {
-        eventModel = new DefaultScheduleModel();
-        eventModel.addEvent(new DefaultScheduleEvent("title", new Date(), new Date()));
+        fakeRoot = new DefaultTreeNode("root", null);
+        TreeNode root  = new DefaultTreeNode(this.getCurrentAcademicYear(), fakeRoot);
+        root.setExpanded(true);
+        //TreeNode August = new DefaultTreeNode("August", root);
+        TreeNode September = new DefaultTreeNode("September", root);
+        TreeNode SeptemberWeek1 = new DefaultTreeNode("First Week", September);
+        TreeNode SeptemberWeek2 = new DefaultTreeNode("Second Week", September);
+        TreeNode SeptemberWeek3 = new DefaultTreeNode("Third Week", September);
+        TreeNode SeptemberWeek4 = new DefaultTreeNode("Forth Week", September);
+        
+        TreeNode October = new DefaultTreeNode("October", root);
+        TreeNode OctoberWeek1 = new DefaultTreeNode("First Week", October);
+        TreeNode OctoberWeek2 = new DefaultTreeNode("Second Week", October);
+        TreeNode OctoberWeek3 = new DefaultTreeNode("Third Week", October);
+        TreeNode OctoberWeek4 = new DefaultTreeNode("Forth Week", October);
+        
+        TreeNode November = new DefaultTreeNode("November", root);
+        TreeNode NovemberWeek1 = new DefaultTreeNode("First Week", November);
+        TreeNode NovemberWeek2 = new DefaultTreeNode("Second Week", November);
+        TreeNode NovemberWeek3 = new DefaultTreeNode("Third Week", November);
+        TreeNode NovemberWeek4 = new DefaultTreeNode("Forth Week", November);
+        
+        TreeNode January = new DefaultTreeNode("January", root);
+        TreeNode JanuaryWeek1 = new DefaultTreeNode("First Week", January);
+        TreeNode JanuaryWeek2 = new DefaultTreeNode("Second Week", January);
+        TreeNode JanuaryWeek3 = new DefaultTreeNode("Third Week", January);
+        TreeNode JanuaryWeek4 = new DefaultTreeNode("Forth Week", January);
+        
+        TreeNode February = new DefaultTreeNode("February", root);
+        TreeNode FebruaryWeek1 = new DefaultTreeNode("First Week", February);
+        TreeNode FebruaryWeek2 = new DefaultTreeNode("Second Week", February);
+        TreeNode FebruaryWeek3 = new DefaultTreeNode("Third Week", February);
+        TreeNode FebruaryWeek4 = new DefaultTreeNode("Forth Week", February);
+        
+        TreeNode March = new DefaultTreeNode("March", root);
+        TreeNode MarchWeek1 = new DefaultTreeNode("First Week", March);
+        TreeNode MarchWeek2 = new DefaultTreeNode("Second Week", March);
+        TreeNode MarchWeek3 = new DefaultTreeNode("Third Week", March);
+        TreeNode MarchWeek4 = new DefaultTreeNode("Forth Week", March);
+        
+        TreeNode April = new DefaultTreeNode("April", root);
+        TreeNode AprilWeek1 = new DefaultTreeNode("First Week", April);
+        TreeNode AprilWeek2 = new DefaultTreeNode("Second Week", April);
+        TreeNode AprilWeek3 = new DefaultTreeNode("Third Week", April);
+        TreeNode AprilWeek4 = new DefaultTreeNode("Forth Week", April);
+        
+        TreeNode May = new DefaultTreeNode("May", root);
+        TreeNode MayWeek1 = new DefaultTreeNode("First Week", May);
+        TreeNode MayWeek2 = new DefaultTreeNode("Second Week", May);
+        TreeNode MayWeek3 = new DefaultTreeNode("Third Week", May);
+        TreeNode MayWeek4 = new DefaultTreeNode("Forth Week", May);
+        
+        TreeNode June  = new DefaultTreeNode("June", root);
+        TreeNode JuneWeek1 = new DefaultTreeNode("First Week", June);
+        TreeNode JuneWeek2 = new DefaultTreeNode("Second Week", June);
+        TreeNode JuneWeek3 = new DefaultTreeNode("Third Week", June);
+        TreeNode JuneWeek4 = new DefaultTreeNode("Forth Week", June);
+        
+        expandAll(this.fakeRoot);
     }
 
-    public ScheduleModel getEventModel() {
-        return eventModel;
-    }
-
-    public void setEventModel(ScheduleModel eventModel) {
-        this.eventModel = eventModel;
-    }
+   private void expandAll(TreeNode node){
+       node.setExpanded(true);
+       for(TreeNode n: node.getChildren()){
+           expandAll(n);
+       }
+   }
 
     public TeachingPlan getSelected() {
         return selected;

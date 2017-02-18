@@ -9,7 +9,7 @@
     <ui:composition>
 
         <p:dialog id="TeachingPlanCreateDlg" widgetVar="TeachingPlanCreateDialog" modal="true" 
-                  resizable="false" appendTo="@(body)" header="#{bundle.CreateTeachingPlanTitle}" width="400">
+                  resizable="false" appendTo="@(body)" header="#{bundle.CreateTeachingPlanTitle}" width="400" >
             <h:form id="TeachingPlanCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{teachingPlanController.selected != null}">
@@ -28,13 +28,14 @@
                                            itemValue="#{subjectIdItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
-                    <p:schedule id="schedule" value="#{teachingPlanController.eventModel}" 
-                                widgetVar="myschedule" timeZone="GMT+2" view="month" 
-                                showWeekNumbers="true">
-
-                        
-
-                    </p:schedule>
+                    <p:scrollPanel style="width:300px;height:300px">
+                        <p:tree value="#{teachingPlanController.fakeRoot}" var="node"
+                                >
+                            <p:treeNode>
+                                <h:outputText value="#{node}" />
+                            </p:treeNode>
+                        </p:tree>
+                    </p:scrollPanel>
                     <p:commandButton actionListener="#{teachingPlanController.create}" value="#{bundle.Save}" update="display,:TeachingPlanListForm:datalist,:growl" oncomplete="handleSubmit(args,'TeachingPlanCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PF('TeachingPlanCreateDialog').hide()"/>
                 </h:panelGroup>
