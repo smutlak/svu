@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -60,10 +61,12 @@ public class SchoolClassController implements Serializable {
     }
 
     public void create() {
-        
-        for (ClassSubjects clsSubject: this.selected.getClassSubjectsCollection()){
+
+        for (ClassSubjects clsSubject : this.selected.getClassSubjectsCollection()) {
             clsSubject.setSchoolClassId(selected);
         }
+        this.selected.setSeq(this.getNextSeq());
+        this.selected.setAcademicYear(Integer.parseInt(this.getCurrentAcademicYear().split(Pattern.quote("-"))[0]));
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SchoolClassCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -172,28 +175,35 @@ public class SchoolClassController implements Serializable {
 
     }
 
-    public void prepareClassSubjects(){
+    public void prepareClassSubjects() {
         List<ClassSubjects> classSubjectsCollection = new ArrayList();
-        if(selected.getGradeId() != null){
-           for (Subject sub :selected.getGradeId().getSubjectCollection()){
-               ClassSubjects classSubject = new ClassSubjects();
-               classSubject.setSubjectId(sub);
-               classSubjectsCollection.add(classSubject);
-           }
+        if (selected.getGradeId() != null) {
+            for (Subject sub : selected.getGradeId().getSubjectCollection()) {
+                ClassSubjects classSubject = new ClassSubjects();
+                classSubject.setSubjectId(sub);
+                classSubjectsCollection.add(classSubject);
+            }
         }
         selected.setClassSubjectsCollection(classSubjectsCollection);
     }
-    
-    public String getCurrentAcademicYear(){
+
+    public String getCurrentAcademicYear() {
         String ret;
         Calendar cal = Calendar.getInstance();
-        boolean nextYear = cal.get(Calendar.MONTH)>4;
+        boolean nextYear = cal.get(Calendar.MONTH) > 4;
         int year = cal.get(Calendar.YEAR);
-        if(nextYear)
-        {    ret = year+"-"+(year+1);
-        }else{
-            ret = (year-1)+"-"+year;
+        if (nextYear) {
+            ret = year + "-" + (year + 1);
+        } else {
+            ret = (year - 1) + "-" + year;
         }
         return ret;
-    } 
+    }
+
+    public Integer getNextSeq() {
+        if (this.selected.getSchoolId() != null && this.selected.getGradeId() != null) {
+            return getFacade().findMaxSeq(this.selected.getSchoolId(), this.selected.getGradeId())+1;
+        }
+        return 0;
+    }
 }

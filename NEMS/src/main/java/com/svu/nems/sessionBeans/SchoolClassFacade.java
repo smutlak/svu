@@ -5,10 +5,14 @@
  */
 package com.svu.nems.sessionBeans;
 
+import com.svu.nems.entities.Grades;
+import com.svu.nems.entities.School;
 import com.svu.nems.entities.SchoolClass;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,5 +32,16 @@ public class SchoolClassFacade extends AbstractFacade<SchoolClass> {
     public SchoolClassFacade() {
         super(SchoolClass.class);
     }
-    
+
+    public Integer findMaxSeq(School school, Grades grade) {
+        try {
+            // TypedQuery<SchoolClass> q = em.createQuery("SELECT u FROM Users u WHERE u.userName = :userName and u.encryptedPsw = :encryptedPsw", SchoolClass.class);
+            Query q = em.createNativeQuery("Select max(seq) from schoolClass where schoolId="
+                    + school.getId() + " and gradeId=" + grade.getId());
+            return (Integer)q.getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            return null;
+        }
+    }
+
 }

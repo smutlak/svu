@@ -17,7 +17,12 @@
                                 <p:outputLabel value="#{bundle.CreateSchoolClassLabel_schoolId}" for="schoolId" />
                             </p:column>
                             <p:column>
-                                <p:selectOneMenu id="schoolId" value="#{schoolClassController.selected.schoolId}" required="true" requiredMessage="#{bundle.EditSchoolClassRequiredMessage_schoolId}">
+                                <p:selectOneMenu id="schoolId" value="#{schoolClassController.selected.schoolId}" 
+                                                 required="true" 
+                                                 requiredMessage="#{bundle.EditSchoolClassRequiredMessage_schoolId}">
+                                    <p:ajax event="valueChange" process="@this gradeId" 
+                                            listener="#{schoolClassController.prepareClassSubjects}"
+                                            update="subjectsTable seq"/>
                                     <f:selectItems value="#{schoolController.itemsAvailableSelectOne}"
                                                    var="schoolIdItem"
                                                    itemValue="#{schoolIdItem}"
@@ -31,9 +36,9 @@
                                 <p:selectOneMenu id="gradeId" value="#{schoolClassController.selected.gradeId}" 
                                                  required="true" 
                                                  requiredMessage="#{bundle.EditSchoolClassRequiredMessage_gradeId}">
-                                    <p:ajax event="valueChange" process="@this" 
+                                    <p:ajax event="valueChange" process="@this schoolId" 
                                             listener="#{schoolClassController.prepareClassSubjects}"
-                                            update="subjectsTable"/>
+                                            update="subjectsTable seq"/>
                                     <f:selectItem itemLabel="" ></f:selectItem>
                                     <f:selectItems value="#{gradesController.itemsAvailableSelectOne}"
                                                    var="gradeIdItem"
@@ -62,7 +67,7 @@
                                 <p:outputLabel value="#{bundle.CreateSchoolClassLabel_order}" for="seq"/>
                             </p:column>
                             <p:column>
-                                <p:inputText id="seq" value="#{schoolClassController.selected.seq}" 
+                                <p:inputText id="seq" value="#{schoolClassController.getNextSeq()}" 
                                              title="#{bundle.CreateSchoolClassTitle_order}" required="true" 
                                              requiredMessage="#{bundle.CreateSchoolClassRequiredMessage_order}" readonly="true"/>
                             </p:column>
