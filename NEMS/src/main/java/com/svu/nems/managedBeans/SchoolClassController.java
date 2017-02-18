@@ -202,8 +202,11 @@ public class SchoolClassController implements Serializable {
 
     public Integer getNextSeq() {
         if (this.selected.getSchoolId() != null && this.selected.getGradeId() != null) {
-            return getFacade().findMaxSeq(this.selected.getSchoolId(), this.selected.getGradeId())+1;
+            Integer maxSeq = getFacade().findMaxSeq(this.selected.getSchoolId(), this.selected.getGradeId());
+            if (maxSeq != null) {
+                return maxSeq + 1;
+            }
         }
-        return 0;
+        return 1;
     }
 }
