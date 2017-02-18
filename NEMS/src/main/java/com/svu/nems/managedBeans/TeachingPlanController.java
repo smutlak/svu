@@ -6,10 +6,13 @@ import com.svu.nems.managedBeans.util.JsfUtil.PersistAction;
 import com.svu.nems.sessionBeans.TeachingPlanFacade;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
@@ -18,6 +21,9 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleModel;
 
 @Named("teachingPlanController")
 @SessionScoped
@@ -28,7 +34,24 @@ public class TeachingPlanController implements Serializable {
     private List<TeachingPlan> items = null;
     private TeachingPlan selected;
 
+    private ScheduleModel eventModel;
+
     public TeachingPlanController() {
+
+    }
+
+    @PostConstruct
+    public void init() {
+        eventModel = new DefaultScheduleModel();
+        eventModel.addEvent(new DefaultScheduleEvent("title", new Date(), new Date()));
+    }
+
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
     }
 
     public TeachingPlan getSelected() {
@@ -159,7 +182,19 @@ public class TeachingPlanController implements Serializable {
                 return null;
             }
         }
+    }
 
+    public String getCurrentAcademicYear() {
+        String ret;
+        Calendar cal = Calendar.getInstance();
+        boolean nextYear = cal.get(Calendar.MONTH) > 4;
+        int year = cal.get(Calendar.YEAR);
+        if (nextYear) {
+            ret = year + "-" + (year + 1);
+        } else {
+            ret = (year - 1) + "-" + year;
+        }
+        return ret;
     }
 
 }

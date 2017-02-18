@@ -47,7 +47,8 @@ public class Subject implements Serializable {
     private Grades gradeId;
 
     private static final long serialVersionUID = 1L;
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -60,19 +61,17 @@ public class Subject implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<Sessions> sessionsCollection;
-    
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<TeachingPlan> teachingPlanCollection;
-    
-   /* @JoinColumn(name = "dirictorId", referencedColumnName = "id")
+
+    /* @JoinColumn(name = "dirictorId", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Users dirictorId;
-    */
-    
-    
+     */
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subjectId")
     private Collection<SubjectDirector> subjectDirectorCollection;
 
@@ -130,7 +129,8 @@ public class Subject implements Serializable {
     public void setTeachingPlanCollection(Collection<TeachingPlan> teachingPlanCollection) {
         this.teachingPlanCollection = teachingPlanCollection;
     }
-/*
+
+    /*
     public Users getDirictorId() {
         return dirictorId;
     }
@@ -138,8 +138,7 @@ public class Subject implements Serializable {
     public void setDirictorId(Users dirictorId) {
         this.dirictorId = dirictorId;
     }
-*/
-   
+     */
 
     @Override
     public int hashCode() {
@@ -190,6 +189,10 @@ public class Subject implements Serializable {
 
     public void setClassSubjectsCollection(Collection<ClassSubjects> classSubjectsCollection) {
         this.classSubjectsCollection = classSubjectsCollection;
+    }
+
+    public String getFullName() {
+        return this.getGradeId().getSchoolTypeId().getName() + "-" + this.getGradeId().getName() + "-" + this.getName();
     }
 
 }
